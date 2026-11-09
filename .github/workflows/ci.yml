@@ -15,8 +15,15 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
-    container: mcr.microsoft.com/dotnet/sdk:10.0
+    container:
+      image: mcr.microsoft.com/dotnet/sdk:10.0
+      volumes:
+        - /usr/local/lib/android:/host/android
+        - /opt/hostedtoolcache:/host/toolcache
+        - /opt/ghc:/host/ghc
     steps:
+      - name: Free disk space
+        run: rm -rf /host/android/* /host/toolcache/* /host/ghc/*
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
       - name: sdk
         run: dotnet --version > /dev/null 2>&1 || eng/install-sdk.sh

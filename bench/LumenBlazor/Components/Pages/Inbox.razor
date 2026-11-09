@@ -1,0 +1,21 @@
+@page "/inbox"
+@inject Store Store
+<PageTitle>Inbox · Lumen</PageTitle>
+<TopBar Title="Inbox" IconKind="inbox" />
+<div class="toolbar"><span class="h2">Notifications</span><span class="count">@items.Count(n => n.Unread) unread</span></div>
+@foreach (var n in items)
+{
+  <a class="inbox-row enter" href="@n.Href">
+    <span class="unread" style="@(n.Unread ? null : "visibility:hidden")"></span>
+    <span class="avatar" style="background:@n.Who.Color">@n.Who.Initials</span>
+    <div style="display:flex;flex-direction:column;gap:2px;min-width:0">
+      <div style="display:flex;gap:5px;min-width:0"><b class="trim">@n.Who.Name</b><span class="muted trim">@n.Text</span><span class="muted hide-520">@n.Issue.Id</span></div>
+      <div style="display:flex;gap:6px;align-items:center;min-width:0">@Icons.Inline(n.Issue.StatusIcon, n.Issue.StatusColor, 12)<span class="muted small trim">@n.Issue.Title</span></div>
+    </div>
+    <div style="display:flex;gap:8px;align-items:center"><span class="hide-520">@Icons.Inline(n.Icon, n.Color, 14)</span><span class="faint small nowrap">@n.Time</span></div>
+  </a>
+}
+@code {
+    private Notification[] items = [];
+    protected override void OnInitialized() => items = Store.Notifications();
+}

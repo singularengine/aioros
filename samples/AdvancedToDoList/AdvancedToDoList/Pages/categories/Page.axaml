@@ -1,0 +1,70 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewModels="clr-namespace:AdvancedToDoList.ViewModels"
+             xmlns:a="https://aioros.dev"
+             xmlns:converters="clr-namespace:SharedControls.Converters;assembly=SharedControls"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             a:Page.Title="Manage Categories"
+             x:DataType="viewModels:ManageCategoriesViewModel">
+    
+    <DockPanel VerticalSpacing="5">
+        <Border DockPanel.Dock="Top" Padding="4"
+                Margin="10,5"
+                Background="{DynamicResource CommandBarBackground}"
+                CornerRadius="999"
+                BoxShadow="2 2 5 1 gray">
+            
+            <!-- ToolBar -->
+            <WrapPanel Orientation="Horizontal" ItemSpacing="5">
+                <Button Classes="toolBar"
+                        Command="{Binding RefreshCommand}"
+                        ToolTip.Tip="Refresh the List" >
+                    <PathIcon Data="{DynamicResource PhosphorIcons.ArrowCounterClockwiseLight}" />
+                </Button>
+
+                <Separator VerticalAlignment="Stretch" Width="1" Height="NaN"
+                           Margin="0,5" />
+
+                <Button Classes="toolBar"
+                        ToolTip.Tip="Add"
+                        Command="{Binding AddNewCategoryCommand}" >
+                    <PathIcon Data="{DynamicResource PhosphorIcons.PlusCircleLight}" />
+                </Button>
+                <Button Classes="toolBar"
+                        ToolTip.Tip="Edit"
+                        Command="{Binding EditCategoryCommand}" 
+                        CommandParameter="{Binding SelectedCategory}">
+                    <PathIcon Data="{DynamicResource PhosphorIcons.NotePencilLight}" />
+                </Button>
+                <Button Classes="toolBar"
+                        ToolTip.Tip="Delete"
+                        Command="{Binding DeleteCategoryCommand}" 
+                        CommandParameter="{Binding SelectedCategory}" >
+                    <PathIcon Data="{DynamicResource PhosphorIcons.TrashLight}" />
+                </Button>
+            </WrapPanel>
+        </Border>
+
+        <!-- The Categories -->
+        <ListBox x:Name="CategoriesListBox" 
+                 ItemsSource="{Binding Categories}"
+                 Grid.IsSharedSizeScope="True"
+                 SelectedItem="{Binding SelectedCategory}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid ColumnSpacing="15">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" SharedSizeGroup="BadgeColumn" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <ContentControl Content="{Binding}" />
+                        <TextBlock Grid.Column="1" Text="{Binding Description}" 
+                                   VerticalAlignment="Center" />
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </DockPanel>
+</UserControl>

@@ -1,0 +1,74 @@
+<UserControl xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:a="https://aioros.dev" xmlns:m="using:Showcase.Models" x:DataType="m:CustomerModel">
+  <UserControl.Styles>
+    <Style Selector="TextBlock.label">
+      <Setter Property="FontSize" Value="12" />
+      <Setter Property="FontWeight" Value="SemiBold" />
+      <Setter Property="Foreground" Value="{DynamicResource Muted}" />
+      <Setter Property="Margin" Value="0,0,0,4" />
+    </Style>
+  </UserControl.Styles>
+  <StackPanel Spacing="20">
+    <Border Classes="pager" a:Web.Href="/crm" HorizontalAlignment="Left" Padding="8,5">
+      <StackPanel Orientation="Horizontal" Spacing="4"><a:Icon Kind="chevron-left" Size="16" VerticalAlignment="Center" /><TextBlock Text="Customers" /></StackPanel>
+    </Border>
+
+    <StackPanel Orientation="Horizontal" Spacing="16">
+      <Border Width="56" Height="56" CornerRadius="28" Background="{DynamicResource AccentSoft}">
+        <TextBlock Text="{Binding Initials}" FontSize="20" FontWeight="SemiBold" Foreground="{DynamicResource Accent}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+      </Border>
+      <StackPanel Spacing="4" VerticalAlignment="Center">
+        <TextBlock Classes="h1" Text="{Binding Heading}" />
+        <TextBlock Classes="muted" Text="{Binding Subtitle}" />
+      </StackPanel>
+    </StackPanel>
+
+    <Grid ColumnDefinitions="3*,2*" ColumnSpacing="20" a:Web.StackBelow="900">
+      <Border Classes="card">
+        <StackPanel Spacing="16">
+          <TextBlock Classes="h2" Text="Details" />
+          <StackPanel>
+            <TextBlock Classes="label" Text="Name" />
+            <TextBox Text="{Binding Name}" />
+          </StackPanel>
+          <StackPanel>
+            <TextBlock Classes="label" Text="Email" />
+            <TextBox Text="{Binding Email}" a:Web.InputType="email" />
+          </StackPanel>
+          <StackPanel>
+            <TextBlock Classes="label" Text="Company" />
+            <TextBox Text="{Binding Company}" />
+          </StackPanel>
+          <Grid ColumnDefinitions="*,*" ColumnSpacing="16">
+            <StackPanel>
+              <TextBlock Classes="label" Text="Plan" />
+              <ComboBox ItemsSource="{Binding Plans}" SelectedItem="{Binding Plan}" HorizontalAlignment="Stretch" />
+            </StackPanel>
+            <StackPanel Grid.Column="1">
+              <TextBlock Classes="label" Text="Annual revenue (USD)" />
+              <NumericUpDown Value="{Binding Revenue}" Minimum="0" Maximum="10000000" Increment="1000" FormatString="N0" />
+            </StackPanel>
+          </Grid>
+          <ToggleSwitch IsChecked="{Binding Active}" OnContent="Active account" OffContent="Inactive account" />
+          <StackPanel>
+            <TextBlock Classes="label" Text="Notes" />
+            <TextBox Text="{Binding Notes}" AcceptsReturn="True" TextWrapping="Wrap" Height="90" />
+          </StackPanel>
+          <Button Classes="accent" Content="Save changes" Command="{Binding SaveCommand}" HorizontalAlignment="Left" />
+        </StackPanel>
+      </Border>
+      <Border Grid.Column="1" Classes="card" VerticalAlignment="Top">
+        <StackPanel Spacing="12">
+          <TextBlock Classes="h2" Text="Revenue, last 12 months" />
+          <a:Chart Title="Monthly revenue" Height="220">
+            <a:ChartSeries Kind="Column" ItemsSource="{Binding History}" XPath="Month" YPath="Amount" Fill="#8183F4" />
+          </a:Chart>
+        </StackPanel>
+      </Border>
+    </Grid>
+
+    <Expander Classes="source" Header="View the XAML of this page">
+      <Border Classes="code"><SelectableTextBlock Classes="source" Text="{Binding Xaml}" /></Border>
+    </Expander>
+  </StackPanel>
+</UserControl>

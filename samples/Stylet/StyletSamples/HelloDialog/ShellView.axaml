@@ -1,0 +1,20 @@
+<UserControl
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d"
+    x:Class="Stylet.Samples.HelloDialog.ShellView"
+    x:DataType="local:ShellViewModel"
+    s:View.ActionTarget="{Binding}"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:s="https://github.com/sealoyal2018/stylet.avalonia"
+    xmlns:local="using:Stylet.Samples.HelloDialog"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <DockPanel LastChildFill="False" Margin="10">
+        <DockPanel DockPanel.Dock="Top">
+            <Button Command="{s:Action ShowDialog}" DockPanel.Dock="Right">Show Dialog</Button>
+            <TextBlock DockPanel.Dock="Left" Text="{Binding NameString}" />
+        </DockPanel>
+    </DockPanel>
+</UserControl>

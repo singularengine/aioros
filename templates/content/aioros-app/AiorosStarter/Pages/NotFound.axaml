@@ -1,0 +1,7 @@
+<UserControl xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <StackPanel Spacing="12">
+    <TextBlock Classes="h1" Text="Page not found" />
+    <TextBlock TextWrapping="Wrap" Text="The page you are looking for does not exist." />
+    <HyperlinkButton NavigateUri="/" Content="Go home" />
+  </StackPanel>
+</UserControl>

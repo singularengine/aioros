@@ -1,0 +1,22 @@
+<UserControl xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:m="using:Aioros.Avalonia.Tests.Models" x:DataType="m:ParityModel">
+  <StackPanel>
+    <StackPanel.Resources>
+      <ControlTheme x:Key="{x:Type ToggleButton}" TargetType="ToggleButton">
+        <Setter Property="Background" Value="#EEEEEE" />
+        <Setter Property="Padding" Value="8,4" />
+        <Setter Property="Template">
+          <ControlTemplate>
+            <Border Name="box" Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}"><ContentPresenter Content="{TemplateBinding Content}" /></Border>
+          </ControlTemplate>
+        </Setter>
+        <Style Selector="^:checked /template/ Border#box"><Setter Property="Background" Value="#C2185B" /></Style>
+      </ControlTheme>
+    </StackPanel.Resources>
+    <StackPanel.Styles>
+      <Style Selector="TextBox[Text=x]"><Setter Property="FontWeight" Value="Bold" /></Style>
+    </StackPanel.Styles>
+    <ToggleButton Content="Bold" />
+    <TextBox Text="demo" Width="200" AutomationProperties.Name="Code" />
+  </StackPanel>
+</UserControl>

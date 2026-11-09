@@ -1,0 +1,404 @@
+package main
+
+import "strconv"
+
+// The same markup as bench/LumenBlazor in static SSR: without client-side state, the avatar menu is a native popover,
+// the sidebar sections are <details>, the drawer a checkbox and the theme switch a full-page link (hx-boost="false").
+
+templ Icon(kind string, size int, color string) {
+	<svg class="icon" viewBox="0 0 24 24" width={ strconv.Itoa(size) } height={ strconv.Itoa(size) } fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" if color != "" {
+		style={ "color:" + color }
+	}>
+		@templ.Raw(icons[kind])
+	</svg>
+}
+
+templ NavItem(p Page, href, icon, label string, prefix bool) {
+	<a class={ "nav", templ.KV("active", p.Path == href || (prefix && len(p.Path) >= len(href) && p.Path[:len(href)] == href)) } href={ templ.SafeURL(href) }>
+		@Icon(icon, 16, "")
+		<span class="label">{ label }</span>
+		{ children... }
+	</a>
+}
+
+templ chevron() {
+	<svg class="chev" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"></path></svg>
+}
+
+templ Layout(p Page, title, icon string) {
+	<!DOCTYPE html>
+	<html lang="en" data-theme={ p.Theme() }>
+		<head>
+			<meta charset="utf-8"/>
+			<meta name="viewport" content="width=device-width, initial-scale=1"/>
+			<title>{ p.Title }</title>
+			<link rel="stylesheet" href={ cssHref }/>
+			<script src="/htmx.min.js?v=2.0.11" defer></script>
+			<script src="/sse.min.js?v=2.2.4" defer></script>
+		</head>
+		<body hx-boost="true">
+			<div class="app">
+				<input type="checkbox" id="drawer" class="drawer-toggle" hidden/>
+				<label class="backdrop" for="drawer"></label>
+				<aside class="sidebar">
+					<a class="brand" href="/issues"><span class="logo">
+						@Icon("zap", 13, "")
+					</span>Lumen</a>
+					<a class="nav search" href="/issues">
+						@Icon("search", 14, "")
+						<span class="label">Search…</span><span class="small">⌘K</span>
+					</a>
+					@NavItem(p, "/inbox", "inbox", "Inbox", false) {
+						<span class="count">3</span>
+					}
+					@NavItem(p, "/issues", "issues", "Issues", true)
+					@NavItem(p, "/projects", "projects", "Projects", false)
+					@NavItem(p, "/dashboard", "dashboard", "Dashboard", false) {
+						<span class="live-dot"></span>
+					}
+					<details class="section" open>
+						<summary class="summary">
+							@chevron()
+							<span class="caption">YOUR TEAMS</span>
+						</summary>
+						<div class="stack enter">
+							<a class="nav" href="/projects"><span class="team" style="background:#4ea7fc"></span><span class="label">Engineering</span></a>
+							<a class="nav" href="/projects"><span class="team" style="background:#bb87fc"></span><span class="label">Design</span></a>
+							<a class="nav" href="/projects"><span class="team" style="background:#f2994a"></span><span class="label">Product</span></a>
+						</div>
+					</details>
+					<details class="section">
+						<summary class="summary">
+							@chevron()
+							<span class="caption">FAVORITES</span>
+						</summary>
+						<div class="stack enter">
+							<a class="nav" href="/issues/LUM-101">
+								@Icon("status-progress", 16, "#f2c94c")
+								<span class="label">Server rendering</span>
+							</a>
+							<a class="nav" href="/issues/LUM-102">
+								@Icon("status-review", 16, "#4cb782")
+								<span class="label">Dark mode</span>
+							</a>
+						</div>
+					</details>
+					<div class="grow"></div>
+					@NavItem(p, "/settings", "settings", "Settings", false)
+				</aside>
+				<div class="main">
+					<div class="panel">
+						@TopBar(p, title, icon)
+						{ children... }
+					</div>
+				</div>
+			</div>
+		</body>
+	</html>
+}
+
+templ TopBar(p Page, title, icon string) {
+	<div class="topbar">
+		<label class="iconbtn hamburger" for="drawer">
+			@Icon("menu", 18, "")
+		</label>
+		<div class="title"><span class="muted">
+			@Icon(icon, 16, "")
+		</span><span class="trim">{ title }</span></div>
+		<a class="iconbtn" href="/theme/toggle" hx-boost="false">
+			if p.Dark {
+				@Icon("sun", 16, "")
+			} else {
+				@Icon("moon", 16, "")
+			}
+		</a>
+		<a class="iconbtn" href="/inbox">
+			@Icon("bell", 16, "")
+		</a>
+		<div class="menu-wrap">
+			<button class="iconbtn avatar-btn" popovertarget="menu"><span class="avatar" style="background:#5e6ad2">RP</span></button>
+			<div class="menu" id="menu" popover>
+				<a href="/settings">
+					@Icon("user", 16, "")
+					<span>My profile</span>
+				</a>
+				<a href="/theme/toggle" hx-boost="false">
+					@Icon("moon", 16, "")
+					<span>Toggle theme</span>
+				</a>
+				<a href="/settings">
+					@Icon("settings", 16, "")
+					<span>Settings</span>
+				</a>
+				<hr/>
+				<a href="/issues">
+					@Icon("log-out", 16, "")
+					<span>Log out</span>
+				</a>
+			</div>
+		</div>
+	</div>
+}
+
+templ Pills(labels []Label) {
+	for _, l := range labels {
+		<span class="pill"><span class="dot" style={ "background:" + l.Color }></span><span class="small muted">{ l.Name }</span></span>
+	}
+}
+
+templ Avatar(p Person) {
+	<span class="avatar" style={ "background:" + p.Color }>{ p.Initials }</span>
+}
+
+templ IssuesPage(p Page, rows []Row) {
+	@Layout(p, "Issues", "issues") {
+		<div class="toolbar">
+			<div class="grow">
+				<span class="pill on small">All</span><span class="pill small muted">Active</span><span class="pill small muted">Backlog</span>
+				<span class="faint small hide-640" style="margin-left:6px">{ strconv.Itoa(len(rows)) } issues · { strconv.Itoa(activeCount(rows)) } active</span>
+			</div>
+			<a class="btn" href="/issues/LUM-101">
+				@Icon("plus", 14, "")
+				New issue
+			</a>
+		</div>
+		for _, g := range groups(rows) {
+			<div>
+				<div class="group">
+					@Icon("status-"+g.Status.Key, 16, g.Status.Color)
+					{ g.Status.Name } <span class="n">{ strconv.Itoa(len(g.Rows)) }</span>
+				</div>
+				for _, i := range g.Rows {
+					<a class="row" href={ templ.SafeURL(i.Href) }>
+						@Icon(i.PriorityIcon, 14, i.PriorityColor)
+						<span class="faint hide-480">{ i.ID }</span>
+						@Icon(i.StatusIcon, 14, i.StatusColor)
+						<span class="trim">{ i.Title }</span>
+						<span class="labels hide-820">
+							@Pills(i.LabelList)
+						</span>
+						@Avatar(i.Person)
+						<span class="faint small nowrap hide-640">{ i.UpdatedText }</span>
+					</a>
+				}
+			</div>
+		}
+	}
+}
+
+templ NotFoundPage(p Page) {
+	@Layout(p, "Issue", "issues") {
+		<div style="padding:28px">Issue not found.</div>
+	}
+}
+
+templ IssuePage(p Page, i Row, f issueForm) {
+	@Layout(p, "Issue", "issues") {
+		<form method="post" action={ templ.SafeURL(i.Href) } class="detail">
+			<div class="left">
+				<div style="display:flex;gap:6px;align-items:center"><a class="nav" style="padding:2px 4px" href="/issues">Issues</a><span class="faint">›</span><span class="muted">{ i.ID }</span></div>
+				<input class="title-input" name="title" value={ i.Title } placeholder="Issue title"/>
+				<textarea class="textarea" name="description" placeholder="Add a description…">{ i.Description }</textarea>
+				if f.Error != "" {
+					<div class="error">{ f.Error }</div>
+				}
+				if f.Saved != "" {
+					<div class="muted">{ f.Saved }</div>
+				}
+				<div style="display:flex;gap:8px;align-items:center"><button class="btn" type="submit">Save changes</button><a class="nav" href="/issues">Cancel</a></div>
+				<div class="card enter" style="margin-top:10px;display:flex;flex-direction:column;gap:12px">
+					<span class="caption">ACTIVITY</span>
+					<div style="display:flex;gap:10px;align-items:center">
+						@Avatar(i.Person)
+						<span class="muted">Assigned the issue and moved it to this status.</span>
+					</div>
+					<div style="display:flex;gap:10px;align-items:center"><span class="avatar" style="background:#5e6ad2">RP</span><span class="muted">Created the issue from the projects view.</span></div>
+				</div>
+			</div>
+			<div class="right">
+				<div class="field"><span class="caption">STATUS</span><select class="select" name="status">
+					for _, s := range statuses {
+						<option value={ s.Key } selected?={ s.Key == i.Status }>{ s.Name }</option>
+					}
+				</select></div>
+				<div class="field"><span class="caption">PRIORITY</span><select class="select" name="priority">
+					for _, pr := range priorities {
+						<option value={ pr.Key } selected?={ pr.Key == i.Priority }>{ pr.Name }</option>
+					}
+				</select></div>
+				<div class="field"><span class="caption">ASSIGNEE</span><select class="select" name="assignee">
+					for _, pe := range people {
+						<option value={ pe.Name } selected?={ pe.Name == i.Assignee }>{ pe.Name }</option>
+					}
+				</select></div>
+				<div class="field"><span class="caption">LABELS</span><div class="labels" style="flex-wrap:wrap">
+					@Pills(i.LabelList)
+				</div></div>
+				<div class="field"><span class="caption">TEAM</span><span>{ i.Team }</span></div>
+				<div class="field"><span class="caption">UPDATED</span><span class="muted">{ i.UpdatedText }</span></div>
+			</div>
+		</form>
+	}
+}
+
+templ ProjectsPage(p Page, rows []Row) {
+	@Layout(p, "Projects", "projects") {
+		<div class="toolbar" style="display:block;padding:12px 16px"><div class="h2">v2 Launch</div><div class="muted small">Team board · drag the cards around in your head</div></div>
+		<div class="board">
+			<div class="columns">
+				for _, c := range columns(rows) {
+					<div class="column">
+						<div class="column-head">
+							@Icon("status-"+c.Status.Key, 16, c.Status.Color)
+							{ c.Status.Name } <span class="faint" style="font-weight:400">{ strconv.Itoa(len(c.Rows)) }</span>
+						</div>
+						for _, i := range c.Rows {
+							<a class="kcard enter" href={ templ.SafeURL(i.Href) }>
+								<div style="display:flex;justify-content:space-between;align-items:center"><span class="faint small">{ i.ID }</span>
+									@Avatar(i.Person)
+								</div>
+								<div style="font-weight:500">{ i.Title }</div>
+								<div class="labels"><span class="pill">
+									@Icon(i.PriorityIcon, 12, i.PriorityColor)
+								</span>
+									@Pills(i.LabelList)
+								</div>
+							</a>
+						}
+					</div>
+				}
+			</div>
+		</div>
+	}
+}
+
+templ InboxPage(p Page, rows []Row) {
+	@Layout(p, "Inbox", "inbox") {
+		<div class="toolbar"><span class="h2">Notifications</span><span class="count">{ strconv.Itoa(unreadCount()) } unread</span></div>
+		for _, n := range inbox(rows) {
+			<a class="inbox-row enter" href={ templ.SafeURL(n.Issue.Href) }>
+				if n.Unread {
+					<span class="unread"></span>
+				} else {
+					<span class="unread" style="visibility:hidden"></span>
+				}
+				@Avatar(n.Person)
+				<div style="display:flex;flex-direction:column;gap:2px;min-width:0">
+					<div style="display:flex;gap:5px;min-width:0"><b class="trim">{ n.Person.Name }</b><span class="muted trim">{ n.Text }</span><span class="muted hide-520">{ n.Issue.ID }</span></div>
+					<div style="display:flex;gap:6px;align-items:center;min-width:0">
+						@Icon(n.Issue.StatusIcon, 12, n.Issue.StatusColor)
+						<span class="muted small trim">{ n.Issue.Title }</span>
+					</div>
+				</div>
+				<div style="display:flex;gap:8px;align-items:center"><span class="hide-520">
+					@Icon(n.Icon, 14, n.Color)
+				</span><span class="faint small nowrap">{ n.Time }</span></div>
+			</a>
+		}
+	}
+}
+
+templ Preview(bg, side, row, accent string) {
+	<div style={ "background:" + bg + ";border-radius:6px;height:84px;padding:8px;display:grid;grid-template-columns:40px 1fr;gap:8px" }>
+		<div style={ "background:" + side + ";border-radius:4px" }></div>
+		<div style="display:flex;flex-direction:column;gap:6px">
+			<div style={ "background:" + row + ";border-radius:4px;height:14px" }></div><div style={ "background:" + row + ";border-radius:4px;height:14px" }></div>
+			<div style={ "background:" + accent + ";border-radius:4px;height:14px;width:50px" }></div>
+		</div>
+	</div>
+}
+
+templ SettingsPage(p Page, f settingsForm) {
+	@Layout(p, "Settings", "settings") {
+		<div class="settings">
+			<div><div class="h1">Settings</div><div class="muted">Preferences for your account and Lumen's appearance.</div></div>
+			<div class="card enter" style="display:flex;flex-direction:column;gap:14px">
+				<div class="h2">Appearance</div>
+				<div class="theme-cards">
+					<a class="theme-card light" href="/theme/light" hx-boost="false">
+						@Preview("#f4f5f8", "#e5e6eb", "#fff", "#5e6ad2")
+						<div style="display:flex;gap:8px;align-items:center;font-weight:600">
+							@Icon("sun", 16, "")
+							Light
+						</div>
+					</a>
+					<a class="theme-card dark" href="/theme/dark" hx-boost="false">
+						@Preview("#0b0c0e", "#1a1b1f", "#16171b", "#6e79e0")
+						<div style="display:flex;gap:8px;align-items:center;font-weight:600">
+							@Icon("moon", 16, "")
+							Dark
+						</div>
+					</a>
+				</div>
+			</div>
+			<form method="post" action="/settings" class="card enter" style="display:flex;flex-direction:column;gap:14px">
+				<div class="h2">Profile</div>
+				<div class="two"><span class="caption">NAME</span><span class="caption">EMAIL</span><input class="input" name="name" value={ f.Name }/><input class="input" type="email" name="email" value={ f.Email }/></div>
+				<label class="check"><input type="checkbox" name="weekly" checked?={ f.Weekly }/>Weekly email digest</label>
+				<label class="check"><input type="checkbox" name="desktop" checked?={ f.Desktop }/>Desktop alerts</label>
+				if f.Error != "" {
+					<div class="error">{ f.Error }</div>
+				}
+				if f.Saved != "" {
+					<div class="success">{ f.Saved }</div>
+				}
+				<div><button class="btn" type="submit">Save</button></div>
+			</form>
+		</div>
+	}
+}
+
+templ DashboardPage(p Page, d Snapshot) {
+	@Layout(p, "Dashboard", "dashboard") {
+		<div hx-ext="sse" sse-connect="/dashboard/live" sse-swap="message">
+			@Dash(d)
+		</div>
+	}
+}
+
+templ Dash(d Snapshot) {
+	<div class="dash">
+		<div class="header">
+			<div><div class="h1">Dashboard</div><div class="muted">Real-time sales</div></div>
+			<div class="status"><span class="pulse"></span><span class="muted">{ d.Updated }</span></div>
+		</div>
+		<div class="kpis">
+			for _, k := range d.Kpis {
+				<div class="card enter">
+					<div class="muted">{ k.Name }</div><div class="kpi">{ k.Value }</div>
+					<div class="delta">
+						if k.Up {
+							<span class="up">▲</span>
+						} else {
+							<span class="down">▼</span>
+						}
+						<span class="muted">{ k.Delta }</span>
+					</div>
+				</div>
+			}
+		</div>
+		<div class="charts">
+			<div class="card col enter">
+				<div class="row2"><span class="h2">Active users</span><span class="muted">{ d.TrafficNow }</span></div>
+				<svg viewBox="0 0 600 180" preserveAspectRatio="none" class="chart">
+					<polygon points={ d.Area } fill="var(--accent-soft)"></polygon>
+					<polyline points={ d.Line } fill="none" stroke="var(--accent)" stroke-width="2" vector-effect="non-scaling-stroke" stroke-linejoin="round"></polyline>
+				</svg>
+			</div>
+			<div class="card col enter">
+				<span class="h2">Sales by hour</span>
+				<div class="bars">
+					for _, b := range d.Bars {
+						<div class="barcol"><span class="tiny">{ b.Value }</span><div class="bar" style={ "height:" + strconv.FormatFloat(b.Height, 'f', -1, 64) + "px" }></div><span class="tiny">{ b.Label }</span></div>
+					}
+				</div>
+			</div>
+		</div>
+		<div class="card enter">
+			<div class="h2" style="margin-bottom:8px">Recent orders</div>
+			for _, o := range d.Orders {
+				<div class="order"><span class="muted">{ o.ID }</span><b>{ o.Customer }</b><span>{ o.Amount }</span><span class={ "badge " + o.Status }>{ orderLabel(o.Status) }</span></div>
+			}
+		</div>
+	</div>
+}

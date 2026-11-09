@@ -1,0 +1,71 @@
+<UserControl xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:a="https://aioros.dev"
+             xmlns:m="using:Gallery.Models" x:DataType="m:TextModel" a:Page.Title="Text">
+  <StackPanel Spacing="20">
+    <TextBlock Classes="h1" Text="Text" />
+    <Border Classes="card">
+      <StackPanel Spacing="12">
+        <TextBlock Classes="h2" Text="TextBlock" />
+        <TextBlock Text="A plain TextBlock that wraps when the line is too long for the card it sits in." TextWrapping="Wrap" />
+        <TextBlock Text="A trimmed TextBlock that does not wrap and ends with an ellipsis when it runs out of room." TextTrimming="CharacterEllipsis" />
+        <TextBlock TextWrapping="Wrap"><Run Text="Inlines: " /><Bold>bold</Bold><Run Text=", " /><Italic>italic</Italic><Run Text=", " /><Underline>underline</Underline><Run Text=", " /><Span Foreground="#0078D7" FontWeight="SemiBold">a colored span</Span><Run Text=" and a control " /><InlineUIContainer><Border Width="12" Height="12" CornerRadius="6" Background="#0078D7" /></InlineUIContainer><LineBreak /><Run Text="after a line break." /></TextBlock>
+        <SelectableTextBlock Text="A SelectableTextBlock: select this text to see the Fluent selection color." TextWrapping="Wrap" />
+        <AccessText Text="An AccessText with an access key: _Save" />
+      </StackPanel>
+    </Border>
+    <Border Classes="card">
+      <StackPanel Spacing="12">
+        <TextBlock Classes="h2" Text="TextBox" />
+        <StackPanel Spacing="4">
+          <Label Content="_Email" Target="{Binding #email}" />
+          <TextBox Name="email" a:Web.Id="email" Text="{Binding Email}" PlaceholderText="you@example.com" />
+        </StackPanel>
+        <TextBox Text="{Binding Name}" PlaceholderText="Your name" />
+        <TextBox Text="{Binding Password}" PasswordChar="•" />
+        <TextBox MaxLength="5" PlaceholderText="Five characters at most" />
+        <TextBox Text="Read only" IsReadOnly="True" />
+        <TextBox Text="Disabled" IsEnabled="False" />
+        <TextBox Text="{Binding Notes}" AcceptsReturn="True" TextWrapping="Wrap" MinHeight="72" />
+        <CheckBox Content="Subscribe" IsChecked="{Binding Subscribe}" />
+        <ComboBox SelectedItem="{Binding Plan}">
+          <x:String>Free</x:String>
+          <x:String>Pro</x:String>
+          <x:String>Team</x:String>
+        </ComboBox>
+        <Button Content="Save" Command="{Binding SaveCommand}" />
+        <TextBlock Text="{Binding Summary}" />
+      </StackPanel>
+    </Border>
+    <Border Classes="card">
+      <StackPanel Spacing="12">
+        <TextBlock Classes="h2" Text="MaskedTextBox, NumericUpDown and AutoCompleteBox" />
+        <StackPanel Spacing="4">
+          <Label Content="_Phone" Target="{Binding #phone}" />
+          <MaskedTextBox Name="phone" a:Web.Id="phone" Mask="(000) 000-0000" Text="{Binding Phone}" />
+        </StackPanel>
+        <StackPanel Spacing="4">
+          <Label Content="_Quantity" Target="{Binding #quantity}" />
+          <NumericUpDown Name="quantity" a:Web.Id="quantity" Value="{Binding Quantity}" Minimum="0" Maximum="10" Increment="0.5" />
+        </StackPanel>
+        <NumericUpDown Value="3" IsReadOnly="True" ShowButtonSpinner="False" />
+        <StackPanel Spacing="4">
+          <Label Content="_Fruit" Target="{Binding #fruit}" />
+          <AutoCompleteBox Name="fruit" a:Web.Id="fruit" Text="{Binding Fruit}" ItemsSource="{Binding Fruits}" PlaceholderText="Start typing a fruit" />
+        </StackPanel>
+        <Button Content="Place order" Command="{Binding PlaceOrderCommand}" />
+        <TextBlock Text="{Binding Order}" />
+      </StackPanel>
+    </Border>
+    <Border Classes="card">
+      <StackPanel Spacing="12">
+        <TextBlock Classes="h2" Text="ColorPicker" />
+        <StackPanel Orientation="Horizontal" Spacing="12">
+          <ColorPicker Color="{Binding Accent}" />
+          <ColorPicker Color="#E81123" IsEnabled="False" />
+        </StackPanel>
+        <Button Content="Pick" Command="{Binding PickColorCommand}" />
+        <TextBlock Text="{Binding Picked}" />
+      </StackPanel>
+    </Border>
+  </StackPanel>
+</UserControl>

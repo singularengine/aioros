@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" />
+    <PackageReference Include="Microsoft.Extensions.TimeProvider.Testing" />
+    <ProjectReference Include="..\..\src\Aioros.Generators\Aioros.Generators.csproj" />
+    <ProjectReference Include="..\..\src\Aioros.CodeFixes\Aioros.CodeFixes.csproj" />
+    <ProjectReference Include="..\..\src\Aioros.Abstractions\Aioros.Abstractions.csproj" />
+    <ProjectReference Include="..\..\src\Aioros.Runtime\Aioros.Runtime.csproj" />
+    <PackageReference Update="Microsoft.CodeAnalysis.BannedApiAnalyzers" GeneratePathProperty="true" />
+  </ItemGroup>
+  <ItemGroup>
+    <AssemblyMetadata Include="BannedApiAnalyzers" Value="$(PkgMicrosoft_CodeAnalysis_BannedApiAnalyzers)/analyzers/dotnet/cs" />
+    <AssemblyMetadata Include="AppBannedSymbols" Value="$(AiorosRoot)src/Aioros/build/BannedSymbols.Aioros.txt" />
+  </ItemGroup>
+</Project>

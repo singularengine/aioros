@@ -1,0 +1,35 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:Lumen.ViewModels"
+             xmlns:data="using:Lumen.Data"
+             xmlns:a="https://aioros.dev"
+             xmlns:views="using:Lumen.Views"
+             x:Class="Lumen.Views.RecentIssues"
+             x:DataType="vm:RecentIssuesViewModel">
+    <Border Padding="16,12" BorderBrush="{DynamicResource Line}" BorderThickness="0,0,0,1">
+      <StackPanel Spacing="6">
+        <StackPanel Orientation="Horizontal" Spacing="8">
+          <TextBlock Classes="h2" Text="Recent issues" VerticalAlignment="Center" />
+          <TextBlock Classes="faint small" Text="{Binding Summary}" VerticalAlignment="Center" />
+          <Button Classes="ghost" Content="Mark all read" Command="{Binding MarkReadCommand}" VerticalAlignment="Center" />
+        </StackPanel>
+        <ItemsControl ItemsSource="{Binding Issues}">
+          <ItemsControl.ItemTemplate>
+            <DataTemplate x:DataType="data:Issue">
+              <Grid ColumnDefinitions="*,Auto" ColumnSpacing="8">
+                <Border Classes="row" a:Web.Href="{Binding Href}">
+                  <Grid ColumnDefinitions="Auto,Auto,*,Auto" ColumnSpacing="10">
+                    <a:Icon Kind="{Binding StatusIcon}" Foreground="{Binding StatusColor}" Size="14" VerticalAlignment="Center" />
+                    <TextBlock Grid.Column="1" Classes="faint" Text="{Binding Id}" VerticalAlignment="Center" a:Web.HideBelow="480" />
+                    <TextBlock Grid.Column="2" Text="{Binding Title}" TextTrimming="CharacterEllipsis" VerticalAlignment="Center" />
+                    <TextBlock Grid.Column="3" Classes="faint small" Text="{Binding UpdatedText}" VerticalAlignment="Center" />
+                  </Grid>
+                </Border>
+                <views:IssueWatch Grid.Column="1" a:View.ItemKey="Id" />
+              </Grid>
+            </DataTemplate>
+          </ItemsControl.ItemTemplate>
+        </ItemsControl>
+      </StackPanel>
+    </Border>
+</UserControl>

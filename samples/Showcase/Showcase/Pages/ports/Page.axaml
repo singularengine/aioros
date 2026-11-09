@@ -1,0 +1,29 @@
+<UserControl xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:a="https://aioros.dev" xmlns:m="using:Showcase.Models" xmlns:p="using:Showcase.Ports"
+             xmlns:loader="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia" x:DataType="m:PortsModel">
+  <StackPanel Spacing="28">
+    <StackPanel Spacing="12" MaxWidth="820" HorizontalAlignment="Left">
+      <TextBlock Classes="eyebrow" Text="PORTED, NOT REWRITTEN" />
+      <TextBlock Classes="display" Text="Open-source Avalonia apps on Aioros" />
+      <TextBlock Classes="lead" Text="Six apps written by others, ported as they are: their view models, code-behinds, themes and controls kept, their windows turned into pages. Each still runs natively, and on the web wherever its features belong there. Every port shows its original beside it and what it took." />
+    </StackPanel>
+
+    <ItemsControl ItemsSource="{Binding Ports}">
+      <ItemsControl.ItemTemplate>
+        <DataTemplate x:DataType="m:PortCard">
+          <Border Classes="tile" a:Web.Href="{Binding Href}" Padding="0" Margin="0,0,0,20" ClipToBounds="True">
+            <Grid ColumnDefinitions="2*,3*" a:Web.StackBelow="760">
+              <Image loader:ImageLoader.Source="{Binding Image}" AutomationProperties.Name="{Binding Name}" Stretch="UniformToFill" Height="220" />
+              <StackPanel Grid.Column="1" Spacing="10" Margin="28,24" VerticalAlignment="Center">
+                <TextBlock Classes="eyebrow" Text="{Binding Kind}" />
+                <TextBlock Classes="h2" Text="{Binding Name}" />
+                <TextBlock Classes="muted wrap" Text="{Binding Summary}" />
+                <TextBlock Classes="go small" Text="The original beside the port →" FontWeight="SemiBold" />
+              </StackPanel>
+            </Grid>
+          </Border>
+        </DataTemplate>
+      </ItemsControl.ItemTemplate>
+    </ItemsControl>
+  </StackPanel>
+</UserControl>

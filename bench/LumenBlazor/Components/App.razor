@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="@theme">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <base href="/" />
+    <ResourcePreloader />
+    <link rel="stylesheet" href="@Assets["lumen.css"]" />
+    <ImportMap />
+    <HeadOutlet @rendermode="mode" />
+</head>
+<body>
+    <Routes @rendermode="mode" />
+    <script src="@Assets["_framework/blazor.web.js"]"></script>
+</body>
+</html>
+@code {
+    [CascadingParameter] private HttpContext? HttpContext { get; set; }
+    [Inject] private LumenRender Render { get; set; } = null!;
+    private string theme => HttpContext?.Request.Cookies["theme"] == "dark" ? "dark" : "light";
+    private IComponentRenderMode? mode => Render.Static ? null : InteractiveServer;
+}

@@ -1,0 +1,53 @@
+# Lumen in Leptos (bench/app.sh variant `leptos`): server-side rendering on Axum, hydrated in the browser by the
+# WebAssembly build, the fullstack setup of Leptos's start-axum template. Built with `cargo leptos build --release`.
+[package]
+name = "leptos-lumen"
+version = "0.1.0"
+edition = "2024"
+publish = false
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+leptos = "=0.8.22"
+leptos_router = "=0.8.17"
+leptos_meta = "0.8"
+serde = { version = "1", features = ["derive"] }
+serde_json = { version = "1", features = ["preserve_order"] }
+axum = { version = "0.8", optional = true }
+leptos_axum = { version = "=0.8.10", optional = true }
+tokio = { version = "1", features = ["rt-multi-thread", "macros", "time", "sync", "net"], optional = true }
+tokio-stream = { version = "0.1", features = ["sync"], optional = true }
+tower-http = { version = "0.6", features = ["compression-br", "compression-gzip"], optional = true }
+wasm-bindgen = { version = "=0.2.129", optional = true }
+console_error_panic_hook = { version = "0.1", optional = true }
+send_wrapper = { version = "0.6", optional = true }
+web-sys = { version = "0.3", features = ["EventSource", "MessageEvent"], optional = true }
+
+[features]
+hydrate = ["leptos/hydrate", "dep:wasm-bindgen", "dep:console_error_panic_hook", "dep:send_wrapper", "dep:web-sys"]
+ssr = [
+  "dep:axum", "dep:leptos_axum", "dep:tokio", "dep:tokio-stream", "dep:tower-http",
+  "leptos/ssr", "leptos_meta/ssr", "leptos_router/ssr",
+]
+
+[profile.wasm-release]
+inherits = "release"
+opt-level = "z"
+lto = true
+codegen-units = 1
+panic = "abort"
+
+[package.metadata.leptos]
+output-name = "leptos-lumen"
+site-root = "target/site"
+site-pkg-dir = "pkg"
+style-file = "../lumen-shared/lumen.css"
+site-addr = "127.0.0.1:5238"
+reload-port = 3001
+bin-features = ["ssr"]
+bin-default-features = false
+lib-features = ["hydrate"]
+lib-default-features = false
+lib-profile-release = "wasm-release"

@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <AssemblyName>aioros</AssemblyName>
+    <PackAsTool>true</PackAsTool>
+    <ToolCommandName>aioros</ToolCommandName>
+    <PackageId>Aioros.Cli</PackageId>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Aioros.Abstractions\Aioros.Abstractions.csproj" />
+    <ProjectReference Include="..\Aioros.Runtime\Aioros.Runtime.csproj" />
+    <ProjectReference Include="..\Aioros.Routing\Aioros.Routing.csproj" />
+  </ItemGroup>
+</Project>

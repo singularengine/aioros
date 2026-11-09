@@ -1,0 +1,179 @@
+<UserControl xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:m="using:Gallery.Models" xmlns:t="using:Gallery.DataTemplates" x:DataType="m:ItemsModel" xmlns:a="https://aioros.dev" a:Page.Title="Items">
+  <StackPanel Spacing="20">
+    <TextBlock Classes="h1" Text="Items" />
+    <Border Classes="card">
+      <StackPanel Spacing="12">
+        <TextBlock Classes="h2" Text="ListBox" />
+        <Grid ColumnDefinitions="*,*" ColumnSpacing="16">
+          <StackPanel Spacing="6">
+            <TextBlock Classes="muted" Text="Single selection, bound to a list" />
+            <ListBox ItemsSource="{Binding Fruits}" SelectedItem="{Binding Fruit}">
+              <ListBox.ItemTemplate>
+                <DataTemplate x:DataType="m:Fruit">
+                  <StackPanel>
+                    <TextBlock Text="{Binding Name}" FontWeight="SemiBold" />
+                    <TextBlock Classes="muted" Text="{Binding Origin}" FontSize="12" />
+                  </StackPanel>
+                </DataTemplate>
+              </ListBox.ItemTemplate>
+            </ListBox>
+          </StackPanel>
+          <StackPanel Grid.Column="1" Spacing="6">
+            <TextBlock Classes="muted" Text="Multiple selection" />
+            <ListBox SelectionMode="Multiple">
+              <ListBoxItem IsSelected="True">Read</ListBoxItem>
+              <ListBoxItem>Write</ListBoxItem>
+              <ListBoxItem IsSelected="True">Share</ListBoxItem>
+            </ListBox>
+          </StackPanel>
+        </Grid>
+        <Button Content="Apply" Command="{Binding ApplyCommand}" />
+        <TextBlock Text="{Binding Summary}" />
+      </StackPanel>
+    </Border>
+    <Border Classes="card">
+      <StackPanel Spacing="12">
+        <TextBlock Classes="h2" Text="TabControl" />
+        <TabControl SelectedIndex="{Binding Tab}">
+          <TabItem Header="Mail">
+            <TextBlock Text="Three unread messages in the inbox." />
+          </TabItem>
+          <TabItem Header="Calendar">
+            <TextBlock Text="No events today." />
+          </TabItem>
+          <TabItem Header="Contacts">
+            <TextBlock Text="Twelve people, two groups." />
+          </TabItem>
+        </TabControl>
+        <TextBlock Classes="h2" Text="TabStrip" />
+        <TabStrip SelectedIndex="{Binding View}">
+          <TabStripItem>Day</TabStripItem>
+          <TabStripItem>Week</TabStripItem>
+          <TabStripItem>Month</TabStripItem>
+        </TabStrip>
+      </StackPanel>
+    </Border>
+    <Border Classes="card">
+      <StackPanel Spacing="12">
+        <TextBlock Classes="h2" Text="TreeView" />
+        <TreeView>
+          <TreeViewItem Header="Documents" IsExpanded="True">
+            <TreeViewItem Header="Report.pdf" IsSelected="True" />
+            <TreeViewItem Header="Archive">
+              <TreeViewItem Header="2025" />
+              <TreeViewItem Header="2024" />
+            </TreeViewItem>
+          </TreeViewItem>
+          <TreeViewItem Header="Pictures">
+            <TreeViewItem Header="Holidays" />
+          </TreeViewItem>
+          <TreeViewItem Header="Notes.txt" />
+        </TreeView>
+      </StackPanel>
+    </Border>
+    <Border Classes="card">
+      <StackPanel Spacing="12">
+        <TextBlock Classes="h2" Text="Carousel and PipsPager" />
+        <Carousel SelectedIndex="{Binding Page}" Height="140">
+          <Border Background="#0078D7" CornerRadius="8"><TextBlock Text="One" Foreground="White" FontSize="28" HorizontalAlignment="Center" VerticalAlignment="Center" /></Border>
+          <Border Background="#107C10" CornerRadius="8"><TextBlock Text="Two" Foreground="White" FontSize="28" HorizontalAlignment="Center" VerticalAlignment="Center" /></Border>
+          <Border Background="#D83B01" CornerRadius="8"><TextBlock Text="Three" Foreground="White" FontSize="28" HorizontalAlignment="Center" VerticalAlignment="Center" /></Border>
+          <Border Background="#5C2D91" CornerRadius="8"><TextBlock Text="Four" Foreground="White" FontSize="28" HorizontalAlignment="Center" VerticalAlignment="Center" /></Border>
+          <Border Background="#008272" CornerRadius="8"><TextBlock Text="Five" Foreground="White" FontSize="28" HorizontalAlignment="Center" VerticalAlignment="Center" /></Border>
+        </Carousel>
+        <PipsPager NumberOfPages="{Binding Pages}" SelectedPageIndex="{Binding Page}" HorizontalAlignment="Center" />
+      </StackPanel>
+    </Border>
+    <Border Classes="card">
+      <StackPanel Spacing="12">
+        <TextBlock Classes="h2" Text="TableView" />
+        <TableView ItemsSource="{Binding Countries}">
+          <TableView.Columns>
+            <TableViewColumn Header="Name" Binding="{Binding Name}" Width="3*" x:DataType="m:Country" />
+            <TableViewColumn Header="Region" Binding="{Binding Region}" Width="2*" x:DataType="m:Country" />
+            <TableViewColumn Header="Population" Binding="{Binding Population}" Width="2*" HorizontalContentAlignment="Right" x:DataType="m:Country" />
+            <TableViewColumn Header="Area" Binding="{Binding Area}" Width="120" HorizontalContentAlignment="Right" x:DataType="m:Country" />
+          </TableView.Columns>
+        </TableView>
+      </StackPanel>
+    </Border>
+    <Border Classes="card">
+      <StackPanel Spacing="12">
+        <TextBlock Classes="h2" Text="TableView with fields" />
+        <TextBox Width="240" HorizontalAlignment="Left" PlaceholderText="Filter countries..." a:Web.Delay="300" Text="{Binding Filter}" />
+        <TableView ItemsSource="{Binding Shown}">
+          <TableView.Columns>
+            <TableViewColumn Width="48">
+              <TableViewColumn.Header><CheckBox IsChecked="{Binding AllPicked}" AutomationProperties.Name="Pick all" /></TableViewColumn.Header>
+              <TableViewColumn.CellTemplate>
+                <DataTemplate x:DataType="m:Pick"><CheckBox IsChecked="{Binding IsPicked}" AutomationProperties.Name="Pick" /></DataTemplate>
+              </TableViewColumn.CellTemplate>
+            </TableViewColumn>
+            <TableViewColumn Header="Name" Width="3*">
+              <TableViewColumn.CellTemplate>
+                <DataTemplate x:DataType="m:Pick"><TextBlock Text="{Binding Country.Name}" VerticalAlignment="Center" /></DataTemplate>
+              </TableViewColumn.CellTemplate>
+            </TableViewColumn>
+            <TableViewColumn Width="120" HorizontalContentAlignment="Stretch">
+              <TableViewColumn.Header><TextBlock Text="Area" HorizontalAlignment="Right" /></TableViewColumn.Header>
+              <TableViewColumn.CellTemplate>
+                <DataTemplate x:DataType="m:Pick"><TextBlock Text="{Binding Country.Area}" HorizontalAlignment="Right" VerticalAlignment="Center" /></DataTemplate>
+              </TableViewColumn.CellTemplate>
+            </TableViewColumn>
+          </TableView.Columns>
+        </TableView>
+        <TextBlock Classes="muted" Text="{Binding Picked}" />
+      </StackPanel>
+    </Border>
+    <Border Classes="card">
+      <StackPanel Spacing="12">
+        <TextBlock Classes="h2" Text="DataGrid" />
+        <DataGrid ItemsSource="{Binding Countries}" IsReadOnly="True" HeadersVisibility="Column">
+          <DataGrid.Columns>
+            <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="3*" x:DataType="m:Country" />
+            <DataGridTextColumn Header="Region" Binding="{Binding Region}" Width="2*" x:DataType="m:Country" />
+            <DataGridTemplateColumn Header="Area" Width="120">
+              <DataGridTemplateColumn.CellTemplate>
+                <DataTemplate x:DataType="m:Country"><TextBlock Text="{Binding Area}" HorizontalAlignment="Right" VerticalAlignment="Center" /></DataTemplate>
+              </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+          </DataGrid.Columns>
+        </DataGrid>
+      </StackPanel>
+    </Border>
+    <Border Classes="card">
+      <StackPanel Spacing="12">
+        <TextBlock Classes="h2" Text="ComboBox items" />
+        <ComboBox SelectedIndex="0" Width="200">
+          <ComboBoxItem>Small</ComboBoxItem>
+          <ComboBoxItem>Medium</ComboBoxItem>
+          <ComboBoxItem>Large</ComboBoxItem>
+        </ComboBox>
+      </StackPanel>
+    </Border>
+    <Border Classes="card">
+      <StackPanel Spacing="12">
+        <TextBlock Classes="h2" Text="Template selector" />
+        <TextBlock Classes="muted" Text="An IDataTemplate of the app picks each notice's template by its kind" />
+        <ItemsControl ItemsSource="{Binding Notices}">
+          <ItemsControl.ItemTemplate>
+            <t:NoticeTemplateSelector>
+              <DataTemplate x:Key="info" x:DataType="m:Notice">
+                <TextBlock Text="{Binding Text}" />
+              </DataTemplate>
+              <DataTemplate x:Key="warning" x:DataType="m:Notice">
+                <Border Background="#FFF4CE" CornerRadius="4" Padding="8,4">
+                  <TextBlock Text="{Binding Text}" Foreground="#8A5300" FontWeight="SemiBold" />
+                </Border>
+              </DataTemplate>
+              <DataTemplate x:Key="success" x:DataType="m:Notice">
+                <TextBlock Text="{Binding Text}" Foreground="#107C10" FontStyle="Italic" />
+              </DataTemplate>
+            </t:NoticeTemplateSelector>
+          </ItemsControl.ItemTemplate>
+        </ItemsControl>
+      </StackPanel>
+    </Border>
+  </StackPanel>
+</UserControl>

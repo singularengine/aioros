@@ -1,0 +1,6 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <ProjectReference Include="..\..\Aioros.Abstractions\Aioros.Abstractions.csproj" />
+    <ProjectReference Include="..\..\Aioros.Runtime\Aioros.Runtime.csproj" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,6 @@
+<UserControl xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:a="https://aioros.dev" xmlns:m="using:Aioros.Targets.Desktop.Tests.Navigation" x:DataType="m:Leaving">
+  <StackPanel>
+    <Button Content="Go" Command="{Binding GoCommand}" />
+    <Button Content="Away" Command="{Binding AwayCommand}" />
+  </StackPanel>
+</UserControl>

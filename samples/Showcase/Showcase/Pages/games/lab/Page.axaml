@@ -1,0 +1,167 @@
+<UserControl xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:a="https://aioros.dev" xmlns:g="using:Showcase.Games" xmlns:loader="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia" x:DataType="g:LabModel" a:Web.Live="True">
+  <StackPanel Spacing="20">
+    <Grid ColumnDefinitions="*,Auto" a:Web.StackBelow="860">
+      <StackPanel Spacing="6">
+        <StackPanel Orientation="Horizontal" Spacing="10">
+          <Border Classes="g-pulse" VerticalAlignment="Center" />
+          <TextBlock Classes="g-blue small" Text="LIVE · UPDATED TWICE A SECOND" FontWeight="Bold" VerticalAlignment="Center" />
+        </StackPanel>
+        <TextBlock Classes="g-hero" Text="Concurrency lab" />
+        <TextBlock Classes="g-muted wrap" MaxWidth="640" HorizontalAlignment="Left" Text="Virtual players use the store like browsers, over HTTP: each signed in with its own account, they open the XAML pages (the store with random filters, games, their library) and buy through the page's form. Every page is a precompiled XAML plan filled on whichever thread-pool thread is free, with no UI framework on the request path; purchases are transactions with an atomic owner count." />
+      </StackPanel>
+      <StackPanel Grid.Column="1" Spacing="8" VerticalAlignment="Center">
+        <TextBlock Classes="g-muted small" Text="VIRTUAL PLAYERS" FontWeight="SemiBold" />
+        <ItemsControl ItemsSource="{Binding Crew}">
+          <ItemsControl.ItemsPanel><ItemsPanelTemplate><StackPanel Orientation="Horizontal" Spacing="6" /></ItemsPanelTemplate></ItemsControl.ItemsPanel>
+          <ItemsControl.ItemTemplate>
+            <DataTemplate x:DataType="g:CrewOption">
+              <Panel>
+                <Button Classes="g-crew on" Content="{Binding Label}" Command="{Binding Command}" CommandParameter="{Binding Count}" IsVisible="{Binding Current}" />
+                <Button Classes="g-crew" Content="{Binding Label}" Command="{Binding Command}" CommandParameter="{Binding Count}" IsVisible="{Binding !Current}" />
+              </Panel>
+            </DataTemplate>
+          </ItemsControl.ItemTemplate>
+        </ItemsControl>
+      </StackPanel>
+    </Grid>
+
+    <Grid ColumnDefinitions="*,*,*,*" ColumnSpacing="14" a:Web.StackBelow="860">
+      <Border Classes="g-panel">
+        <StackPanel Spacing="4">
+          <TextBlock Classes="g-muted small" Text="XAML PAGES / SECOND" FontWeight="SemiBold" />
+          <TextBlock Classes="g-figure" Text="{Binding Operations}" />
+          <StackPanel Orientation="Horizontal" Spacing="10">
+            <TextBlock Classes="g-green small" Text="{Binding Reads, StringFormat='{}{0} purchases/s'}" />
+            <TextBlock Classes="g-blue small" Text="{Binding Writes, StringFormat='{}{0} MB/s'}" />
+          </StackPanel>
+        </StackPanel>
+      </Border>
+      <Border Grid.Column="1" Classes="g-panel">
+        <StackPanel Spacing="4">
+          <TextBlock Classes="g-muted small" Text="LATENCY P50 / P99" FontWeight="SemiBold" />
+          <TextBlock Classes="g-figure" Text="{Binding P50}" />
+          <TextBlock Classes="g-muted small" Text="{Binding P99, StringFormat='p99 {0}'}" />
+        </StackPanel>
+      </Border>
+      <Border Grid.Column="2" Classes="g-panel">
+        <StackPanel Spacing="4">
+          <TextBlock Classes="g-muted small" Text="SERVER THREADS SERVING PAGES" FontWeight="SemiBold" />
+          <TextBlock Classes="g-figure" Text="{Binding Threads}" />
+          <TextBlock Classes="g-muted small" Text="{Binding Pool, StringFormat='{}{0} in the thread pool'}" />
+        </StackPanel>
+      </Border>
+      <Border Grid.Column="3" Classes="g-panel">
+        <StackPanel Spacing="4">
+          <TextBlock Classes="g-muted small" Text="PLAYERS ONLINE" FontWeight="SemiBold" />
+          <TextBlock Classes="g-figure" Text="{Binding Players}" />
+          <TextBlock Classes="g-muted small" Text="{Binding Total, StringFormat='{}{0} operations so far'}" />
+        </StackPanel>
+      </Border>
+    </Grid>
+
+    <Grid ColumnDefinitions="3*,2*" ColumnSpacing="14" a:Web.StackBelow="900">
+      <Border Classes="g-panel">
+        <StackPanel Spacing="10">
+          <Grid ColumnDefinitions="*,Auto">
+            <TextBlock Classes="g-head" Text="Throughput" />
+            <TextBlock Grid.Column="1" Classes="g-muted small" Text="{Binding Database, StringFormat='XAML pages per second, data on {0}'}" VerticalAlignment="Center" />
+          </Grid>
+          <a:Chart Title="XAML pages per second, live" Height="200" Foreground="#8F98A0" GridLines="#22334A">
+            <a:ChartSeries Kind="Area" ItemsSource="{Binding Throughput}" XPath="At" YPath="Value" Stroke="#66C0F4" />
+          </a:Chart>
+          <Grid ColumnDefinitions="*,Auto">
+            <TextBlock Classes="g-head" Text="p99 latency" />
+            <TextBlock Grid.Column="1" Classes="g-muted small" Text="milliseconds" VerticalAlignment="Center" />
+          </Grid>
+          <a:Chart Title="p99 latency, live" Height="120" Foreground="#8F98A0" GridLines="#22334A">
+            <a:ChartSeries Kind="Line" ItemsSource="{Binding Latency}" XPath="At" YPath="Value" Stroke="#BEEE11" StrokeThickness="1.5" />
+          </a:Chart>
+        </StackPanel>
+      </Border>
+      <StackPanel Grid.Column="1" Spacing="14">
+        <Border Classes="g-panel">
+          <StackPanel Spacing="10">
+            <TextBlock Classes="g-head" Text="Selling right now" />
+            <TextBlock Classes="g-muted small" Text="Start some players to see sales stream in." IsVisible="{Binding Quiet}" />
+            <ItemsControl ItemsSource="{Binding Top}">
+              <ItemsControl.ItemsPanel><ItemsPanelTemplate><StackPanel Spacing="8" /></ItemsPanelTemplate></ItemsControl.ItemsPanel>
+              <ItemsControl.ItemTemplate>
+                <DataTemplate x:DataType="g:TopSeller">
+                  <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="10">
+                    <Border Width="64" Height="30" CornerRadius="6" ClipToBounds="True">
+                      <Image loader:ImageLoader.Source="{Binding Art}" AutomationProperties.Name="{Binding Title}" Stretch="UniformToFill" Width="64" Height="30" />
+                    </Border>
+                    <TextBlock Grid.Column="1" Classes="g-white" Text="{Binding Title}" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" />
+                    <TextBlock Grid.Column="2" Classes="g-green small" Text="{Binding Sales, StringFormat='{}{0} sold'}" VerticalAlignment="Center" FontWeight="SemiBold" />
+                  </Grid>
+                </DataTemplate>
+              </ItemsControl.ItemTemplate>
+            </ItemsControl>
+          </StackPanel>
+        </Border>
+        <Border Classes="g-panel">
+          <StackPanel Spacing="8">
+            <TextBlock Classes="g-head" Text="Purchase feed" />
+            <ItemsControl ItemsSource="{Binding Feed}">
+              <ItemsControl.ItemsPanel><ItemsPanelTemplate><StackPanel Spacing="7" /></ItemsPanelTemplate></ItemsControl.ItemsPanel>
+              <ItemsControl.ItemTemplate>
+                <DataTemplate x:DataType="g:FeedItem">
+                  <Grid ColumnDefinitions="Auto,*" ColumnSpacing="8">
+                    <a:Icon Kind="shopping-cart" Size="14" Foreground="#BEEE11" VerticalAlignment="Center" />
+                    <StackPanel Grid.Column="1">
+                      <TextBlock Classes="small g-white" Text="{Binding Text}" TextTrimming="CharacterEllipsis" />
+                      <TextBlock Classes="small g-muted" Text="{Binding Detail}" />
+                    </StackPanel>
+                  </Grid>
+                </DataTemplate>
+              </ItemsControl.ItemTemplate>
+            </ItemsControl>
+          </StackPanel>
+        </Border>
+      </StackPanel>
+    </Grid>
+
+    <Border Classes="g-panel">
+      <StackPanel Spacing="12">
+        <Grid ColumnDefinitions="*,Auto" a:Web.StackBelow="760">
+          <StackPanel Spacing="2">
+            <TextBlock Classes="g-head" Text="{Binding SeedPhase, StringFormat='Seeder · {0}'}" />
+            <TextBlock Classes="g-muted small" Text="{Binding SeedSummary}" />
+          </StackPanel>
+          <TextBlock Grid.Column="1" Classes="g-green" Text="{Binding SeedRate}" FontWeight="SemiBold" VerticalAlignment="Center" />
+        </Grid>
+        <ProgressBar Value="{Binding SeedPercent}" Maximum="100" Height="8" />
+        <ItemsControl ItemsSource="{Binding Workers}">
+          <ItemsControl.ItemsPanel><ItemsPanelTemplate><UniformGrid Columns="4" ColumnSpacing="12" RowSpacing="12" a:Web.StackBelow="760" /></ItemsPanelTemplate></ItemsControl.ItemsPanel>
+          <ItemsControl.ItemTemplate>
+            <DataTemplate x:DataType="g:WorkerRow">
+              <Border Background="#0E1520" CornerRadius="10" Padding="12">
+                <StackPanel Spacing="6">
+                  <Grid ColumnDefinitions="*,Auto">
+                    <TextBlock Classes="g-white small" Text="{Binding Name}" FontWeight="SemiBold" />
+                    <TextBlock Grid.Column="1" Classes="g-blue small" Text="{Binding Thread}" />
+                  </Grid>
+                  <ProgressBar Value="{Binding Share}" Maximum="100" Height="4" />
+                  <Grid ColumnDefinitions="*,Auto">
+                    <TextBlock Classes="g-muted small" Text="{Binding Rows}" />
+                    <TextBlock Grid.Column="1" Classes="g-muted small" Text="{Binding Phase}" />
+                  </Grid>
+                </StackPanel>
+              </Border>
+            </DataTemplate>
+          </ItemsControl.ItemTemplate>
+        </ItemsControl>
+      </StackPanel>
+    </Border>
+
+    <StackPanel Orientation="Horizontal" Spacing="8">
+      <a:Icon Kind="server" Size="14" Foreground="#66C0F4" VerticalAlignment="Center" />
+      <TextBlock Classes="g-muted small" Text="{Binding Cores, StringFormat='{}{0} CPU cores'}" VerticalAlignment="Center" />
+      <TextBlock Classes="g-muted small" Text="·" VerticalAlignment="Center" />
+      <TextBlock Classes="g-muted small" Text="{Binding Errors, StringFormat='{}{0} failed operations'}" VerticalAlignment="Center" />
+      <TextBlock Classes="g-muted small" Text="·" VerticalAlignment="Center" />
+      <TextBlock Classes="g-muted small" Text="{Binding DatabaseNote}" VerticalAlignment="Center" TextWrapping="Wrap" />
+    </StackPanel>
+  </StackPanel>
+</UserControl>

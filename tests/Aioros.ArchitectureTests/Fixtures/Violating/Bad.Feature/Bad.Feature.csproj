@@ -1,0 +1,7 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Avalonia" />
+    <ProjectReference Include="..\Bad.Target\Bad.Target.csproj" />
+  </ItemGroup>
+</Project>

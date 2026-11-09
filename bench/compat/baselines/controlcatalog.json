@@ -1,0 +1,203 @@
+{
+  "allowance": {
+    "colors": 1.0,
+    "layout": 1.0,
+    "pixels": 0.5,
+    "texts": 1.0
+  },
+  "routes": {},
+  "variants": {
+    "/ dark focus": {
+      "colors": 100.0,
+      "layout": 100.0,
+      "pixels": 81.46,
+      "texts": 100.0
+    },
+    "/ dark normal": {
+      "colors": 100.0,
+      "layout": 100.0,
+      "pixels": 99.6,
+      "texts": 100.0
+    },
+    "/ dark pointerover": {
+      "colors": 100.0,
+      "layout": 100.0,
+      "pixels": 99.77,
+      "texts": 100.0
+    },
+    "/ dark pressed": {
+      "colors": 100.0,
+      "layout": 60.0,
+      "pixels": 99.77,
+      "texts": 100.0
+    },
+    "/ light focus": {
+      "colors": 100.0,
+      "layout": 100.0,
+      "pixels": 99.08,
+      "texts": 100.0
+    },
+    "/ light normal": {
+      "colors": 100.0,
+      "layout": 100.0,
+      "pixels": 97.41,
+      "texts": 100.0
+    },
+    "/ light pointerover": {
+      "colors": 100.0,
+      "layout": 100.0,
+      "pixels": 98.56,
+      "texts": 100.0
+    },
+    "/ light pressed": {
+      "colors": 100.0,
+      "layout": 60.0,
+      "pixels": 99.26,
+      "texts": 100.0
+    },
+    "/border dark focus": {
+      "colors": 100.0,
+      "layout": 100.0,
+      "pixels": 81.9,
+      "texts": 100.0
+    },
+    "/border dark normal": {
+      "colors": 100.0,
+      "layout": 100.0,
+      "pixels": 87.42,
+      "texts": 100.0
+    },
+    "/border dark pointerover": {
+      "colors": 100.0,
+      "layout": 100.0,
+      "pixels": 87.42,
+      "texts": 100.0
+    },
+    "/border dark pressed": {
+      "colors": 100.0,
+      "layout": 100.0,
+      "pixels": 87.42,
+      "texts": 100.0
+    },
+    "/border light focus": {
+      "colors": 100.0,
+      "layout": 100.0,
+      "pixels": 86.43,
+      "texts": 100.0
+    },
+    "/border light normal": {
+      "colors": 100.0,
+      "layout": 100.0,
+      "pixels": 87.58,
+      "texts": 100.0
+    },
+    "/border light pointerover": {
+      "colors": 100.0,
+      "layout": 100.0,
+      "pixels": 87.58,
+      "texts": 100.0
+    },
+    "/border light pressed": {
+      "colors": 100.0,
+      "layout": 100.0,
+      "pixels": 87.58,
+      "texts": 100.0
+    },
+    "/relativepanel dark focus": {
+      "colors": 100.0,
+      "layout": 0.0,
+      "pixels": 30.71,
+      "texts": 100.0
+    },
+    "/relativepanel dark normal": {
+      "colors": 100.0,
+      "layout": 0.0,
+      "pixels": 23.17,
+      "texts": 100.0
+    },
+    "/relativepanel dark pointerover": {
+      "colors": 100.0,
+      "layout": 0.0,
+      "pixels": 23.17,
+      "texts": 100.0
+    },
+    "/relativepanel dark pressed": {
+      "colors": 100.0,
+      "layout": 0.0,
+      "pixels": 23.17,
+      "texts": 100.0
+    },
+    "/relativepanel light focus": {
+      "colors": 93.33,
+      "layout": 0.0,
+      "pixels": 33.04,
+      "texts": 100.0
+    },
+    "/relativepanel light normal": {
+      "colors": 93.33,
+      "layout": 0.0,
+      "pixels": 22.54,
+      "texts": 100.0
+    },
+    "/relativepanel light pointerover": {
+      "colors": 93.33,
+      "layout": 0.0,
+      "pixels": 22.54,
+      "texts": 100.0
+    },
+    "/relativepanel light pressed": {
+      "colors": 93.33,
+      "layout": 0.0,
+      "pixels": 22.54,
+      "texts": 100.0
+    },
+    "/textblock dark focus": {
+      "colors": 100.0,
+      "layout": 4.55,
+      "pixels": 73.48,
+      "texts": 95.65
+    },
+    "/textblock dark normal": {
+      "colors": 86.36,
+      "layout": 4.55,
+      "pixels": 81.49,
+      "texts": 95.65
+    },
+    "/textblock dark pointerover": {
+      "colors": 86.36,
+      "layout": 4.55,
+      "pixels": 81.49,
+      "texts": 95.65
+    },
+    "/textblock dark pressed": {
+      "colors": 86.36,
+      "layout": 4.55,
+      "pixels": 81.49,
+      "texts": 95.65
+    },
+    "/textblock light focus": {
+      "colors": 90.91,
+      "layout": 4.55,
+      "pixels": 81.17,
+      "texts": 95.65
+    },
+    "/textblock light normal": {
+      "colors": 86.36,
+      "layout": 4.55,
+      "pixels": 85.69,
+      "texts": 95.65
+    },
+    "/textblock light pointerover": {
+      "colors": 86.36,
+      "layout": 4.55,
+      "pixels": 85.69,
+      "texts": 95.65
+    },
+    "/textblock light pressed": {
+      "colors": 86.36,
+      "layout": 4.55,
+      "pixels": 85.69,
+      "texts": 95.65
+    }
+  }
+}

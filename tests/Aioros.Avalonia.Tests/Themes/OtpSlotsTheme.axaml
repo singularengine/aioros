@@ -1,0 +1,25 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:a="https://aioros.dev" xmlns:c="using:Aioros.Avalonia.Tests.Models">
+  <DataTemplate x:Key="SlotsOtpSlot" x:DataType="c:OtpSlot">
+    <Border Classes="otp-box" Classes.active="{Binding IsActive}" a:Web.SlotActive="active"
+            Width="36" Height="36" Background="Transparent" BorderThickness="1">
+      <TextBlock Text="{Binding Character}" FontSize="14" LineHeight="20" HorizontalAlignment="Center" VerticalAlignment="Center" />
+    </Border>
+  </DataTemplate>
+
+  <ControlTheme x:Key="SlotsOtp" TargetType="c:InputOtp">
+    <Setter Property="HorizontalAlignment" Value="Left" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Panel>
+          <ItemsControl Name="PART_Slots" ItemsSource="{TemplateBinding Slots}" ItemTemplate="{StaticResource SlotsOtpSlot}" IsHitTestVisible="False"
+                        a:Web.Slots="{Binding #PART_TextBox}">
+            <ItemsControl.ItemsPanel><ItemsPanelTemplate><StackPanel Orientation="Horizontal" /></ItemsPanelTemplate></ItemsControl.ItemsPanel>
+          </ItemsControl>
+          <TextBox Name="PART_TextBox" Text="{TemplateBinding Text, Mode=TwoWay}" MaxLength="{TemplateBinding Length}"
+                   Opacity="0" MinHeight="36" Padding="0" BorderThickness="0" Background="Transparent" CaretBrush="Transparent" />
+        </Panel>
+      </ControlTemplate>
+    </Setter>
+  </ControlTheme>
+</ResourceDictionary>

@@ -1,0 +1,20 @@
+<Project Sdk="Aspire.AppHost.Sdk/13.6.1">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <AiorosHost>true</AiorosHost>
+    <UserSecretsId>aioros-showcase-apphost</UserSecretsId>
+    <NoWarn>$(NoWarn);ASPIRE010</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Aspire.Hosting.PostgreSQL" />
+    <PackageReference Include="MessagePack" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="../Showcase/Showcase.csproj" />
+    <ProjectReference Include="../../Kartova/Kartova/Kartova.csproj" />
+    <ProjectReference Include="../../AdvancedToDoList/AdvancedToDoList/AdvancedToDoList.csproj" />
+    <ProjectReference Include="../../Stylet/StyletSamples/StyletSamples.csproj" />
+    <ProjectReference Include="../../ReactiveRouting/ReactiveRouting/ReactiveRouting.csproj" />
+  </ItemGroup>
+</Project>

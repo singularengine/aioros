@@ -1,0 +1,75 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:Lumen.ViewModels"
+             xmlns:a="https://aioros.dev"
+             x:DataType="vm:SettingsViewModel">
+    <StackPanel Margin="28,24" Spacing="20" MaxWidth="760" HorizontalAlignment="Left">
+      <StackPanel Spacing="4">
+        <TextBlock Classes="h1" Text="Settings" />
+        <TextBlock Classes="muted" Text="Preferences for your account and Lumen's appearance." />
+      </StackPanel>
+
+      <Border Classes="card enter">
+        <StackPanel Spacing="14">
+          <StackPanel Spacing="2">
+            <TextBlock Classes="h2" Text="Appearance" />
+            <TextBlock Classes="muted small" Text="{DynamicResource ThemeName}" />
+          </StackPanel>
+          <Grid ColumnDefinitions="*,*" ColumnSpacing="12" RowSpacing="12" a:Web.StackBelow="560">
+            <Border Grid.Column="0" a:Web.Href="/theme/light" CornerRadius="10" BorderThickness="2" BorderBrush="{DynamicResource ThemeCardLight}" Padding="10">
+              <StackPanel Spacing="10">
+                <Border Background="#F4F5F8" CornerRadius="6" Height="84" Padding="8">
+                  <Grid ColumnDefinitions="40,*" ColumnSpacing="8">
+                    <Border Background="#E5E6EB" CornerRadius="4" />
+                    <StackPanel Grid.Column="1" Spacing="6">
+                      <Border Background="#FFFFFF" CornerRadius="4" Height="14" />
+                      <Border Background="#FFFFFF" CornerRadius="4" Height="14" />
+                      <Border Background="#5E6AD2" CornerRadius="4" Height="14" Width="50" HorizontalAlignment="Left" />
+                    </StackPanel>
+                  </Grid>
+                </Border>
+                <StackPanel Orientation="Horizontal" Spacing="8">
+                  <a:Icon Kind="sun" VerticalAlignment="Center" />
+                  <TextBlock Text="Light" FontWeight="SemiBold" VerticalAlignment="Center" />
+                </StackPanel>
+              </StackPanel>
+            </Border>
+            <Border Grid.Column="1" a:Web.Href="/theme/dark" CornerRadius="10" BorderThickness="2" BorderBrush="{DynamicResource ThemeCardDark}" Padding="10">
+              <StackPanel Spacing="10">
+                <Border Background="#0B0C0E" CornerRadius="6" Height="84" Padding="8">
+                  <Grid ColumnDefinitions="40,*" ColumnSpacing="8">
+                    <Border Background="#1A1B1F" CornerRadius="4" />
+                    <StackPanel Grid.Column="1" Spacing="6">
+                      <Border Background="#16171B" CornerRadius="4" Height="14" />
+                      <Border Background="#16171B" CornerRadius="4" Height="14" />
+                      <Border Background="#6E79E0" CornerRadius="4" Height="14" Width="50" HorizontalAlignment="Left" />
+                    </StackPanel>
+                  </Grid>
+                </Border>
+                <StackPanel Orientation="Horizontal" Spacing="8">
+                  <a:Icon Kind="moon" VerticalAlignment="Center" />
+                  <TextBlock Text="Dark" FontWeight="SemiBold" VerticalAlignment="Center" />
+                </StackPanel>
+              </StackPanel>
+            </Border>
+          </Grid>
+        </StackPanel>
+      </Border>
+
+      <Border Classes="card enter">
+        <StackPanel Spacing="14">
+          <TextBlock Classes="h2" Text="Profile" />
+          <Grid ColumnDefinitions="*,*" ColumnSpacing="12" RowSpacing="6" RowDefinitions="Auto,Auto" a:Web.StackBelow="560">
+            <TextBlock Classes="caption" Text="NAME" />
+            <TextBox Grid.Row="1" Text="{Binding Name}" />
+            <TextBlock Grid.Column="1" Classes="caption" Text="EMAIL" />
+            <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Email}" a:Web.InputType="email" />
+          </Grid>
+          <CheckBox Content="Weekly email digest" IsChecked="{Binding WeeklyDigest}" />
+          <CheckBox Content="Desktop alerts" IsChecked="{Binding DesktopAlerts}" />
+          <TextBlock Classes="success" Text="{Binding Saved}" IsVisible="{Binding HasSaved}" />
+          <Button Classes="accent" Content="Save" Command="{Binding SaveCommand}" HorizontalAlignment="Left" />
+        </StackPanel>
+      </Border>
+    </StackPanel>
+</UserControl>

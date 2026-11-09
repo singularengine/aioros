@@ -1,0 +1,62 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:m="using:Aioros.Avalonia.Tests.Models">
+  <ControlTheme x:Key="{x:Type m:Outline}" TargetType="m:Outline">
+    <Setter Property="Template">
+      <ControlTemplate TargetType="m:Outline">
+        <Border Padding="4" BorderBrush="Gray" BorderThickness="1">
+          <ItemsPresenter Name="PART_ItemsPresenter" ItemsPanel="{TemplateBinding ItemsPanel}" />
+        </Border>
+      </ControlTemplate>
+    </Setter>
+  </ControlTheme>
+  <ControlTheme x:Key="{x:Type m:Picked}" TargetType="m:Picked">
+    <Setter Property="Template">
+      <ControlTemplate TargetType="m:Picked">
+        <TextBlock Name="PART_Mark" Text="o" />
+      </ControlTemplate>
+    </Setter>
+    <Style Selector="^[IsOn=True] /template/ TextBlock#PART_Mark">
+      <Setter Property="Foreground" Value="Red" />
+    </Style>
+  </ControlTheme>
+  <ControlTheme x:Key="{x:Type m:OutlineItem}" TargetType="m:OutlineItem">
+    <Setter Property="Template">
+      <ControlTemplate TargetType="m:OutlineItem">
+        <StackPanel>
+          <Border Name="PART_Row" Background="{TemplateBinding Background}">
+            <Border.Padding>
+              <MultiBinding Converter="{x:Static m:LevelIndent.Instance}">
+                <Binding Path="Indent" RelativeSource="{RelativeSource TemplatedParent}" />
+                <Binding Path="Level" RelativeSource="{RelativeSource TemplatedParent}" />
+              </MultiBinding>
+            </Border.Padding>
+            <DockPanel>
+              <TextBlock Name="PART_Chevron" DockPanel.Dock="Right" Text="v" />
+              <ContentPresenter Name="PART_IconPresenter" DockPanel.Dock="Left" Padding="0,0,4,0"
+                                Content="{Binding Icon, RelativeSource={RelativeSource TemplatedParent}}"
+                                ContentTemplate="{Binding IconTemplate, RelativeSource={RelativeSource TemplatedParent}}" />
+              <ContentPresenter Name="PART_HeaderPresenter"
+                                Content="{Binding Header, RelativeSource={RelativeSource TemplatedParent}}"
+                                ContentTemplate="{Binding HeaderTemplate, RelativeSource={RelativeSource TemplatedParent}}" />
+            </DockPanel>
+          </Border>
+          <ItemsPresenter Name="PART_ItemsPresenter" Margin="0,2,0,0" ItemsPanel="{TemplateBinding ItemsPanel}" />
+        </StackPanel>
+      </ControlTemplate>
+    </Setter>
+    <Style Selector="^:empty /template/ TextBlock#PART_Chevron">
+      <Setter Property="IsVisible" Value="False" />
+    </Style>
+    <Style Selector="^[IsSeparator=True]">
+      <Setter Property="Template">
+        <ControlTemplate>
+          <StackPanel Margin="0,6">
+            <ContentPresenter Name="PART_HeaderPresenter" Foreground="Gray"
+                              Content="{TemplateBinding Header}" ContentTemplate="{TemplateBinding HeaderTemplate}" />
+            <Rectangle Height="1" Fill="Gray" />
+          </StackPanel>
+        </ControlTemplate>
+      </Setter>
+    </Style>
+  </ControlTheme>
+</ResourceDictionary>

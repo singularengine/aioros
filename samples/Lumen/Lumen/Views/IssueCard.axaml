@@ -1,0 +1,38 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:data="using:Lumen.Data"
+             xmlns:a="https://aioros.dev"
+             x:Class="Lumen.Views.IssueCard"
+             x:DataType="data:Issue">
+    <Border Classes="kcard enter" a:Web.Href="{Binding Href}">
+      <StackPanel Spacing="8">
+        <Grid ColumnDefinitions="*,Auto">
+          <TextBlock Classes="faint small" Text="{Binding Id}" VerticalAlignment="Center" />
+          <Border Grid.Column="1" Classes="avatar" Background="{Binding Assignee.Color}">
+            <TextBlock Text="{Binding Assignee.Initials}" />
+          </Border>
+        </Grid>
+        <TextBlock Classes="wrap" Text="{Binding Title}" FontWeight="Medium" />
+        <StackPanel Orientation="Horizontal" Spacing="6">
+          <Border Classes="pill">
+            <a:Icon Kind="{Binding PriorityIcon}" Foreground="{Binding PriorityColor}" Size="12" />
+          </Border>
+          <ItemsControl ItemsSource="{Binding Labels}">
+            <ItemsControl.ItemsPanel>
+              <ItemsPanelTemplate><StackPanel Orientation="Horizontal" Spacing="4" /></ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+              <DataTemplate x:DataType="data:Label">
+                <Border Classes="pill">
+                  <StackPanel Orientation="Horizontal" Spacing="5">
+                    <Border Classes="dot" Background="{Binding Color}" VerticalAlignment="Center" />
+                    <TextBlock Classes="small muted" Text="{Binding Name}" VerticalAlignment="Center" />
+                  </StackPanel>
+                </Border>
+              </DataTemplate>
+            </ItemsControl.ItemTemplate>
+          </ItemsControl>
+        </StackPanel>
+      </StackPanel>
+    </Border>
+</UserControl>

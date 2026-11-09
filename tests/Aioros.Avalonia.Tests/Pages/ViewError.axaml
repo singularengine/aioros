@@ -1,0 +1,3 @@
+<Border xmlns="https://github.com/avaloniaui" Padding="8">
+  <TextBlock Text="Our view broke" />
+</Border>

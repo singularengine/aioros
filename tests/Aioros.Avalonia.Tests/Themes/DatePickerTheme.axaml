@@ -1,0 +1,125 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <ResourceDictionary.MergedDictionaries>
+    <ResourceInclude Source="avares://Aioros.Avalonia.Tests/Themes/CalendarTheme.axaml" />
+  </ResourceDictionary.MergedDictionaries>
+
+  <ControlTheme x:Key="PickerText" TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="BorderThickness" Value="0" />
+    <Setter Property="Padding" Value="0" />
+    <Setter Property="MinHeight" Value="0" />
+    <Setter Property="CornerRadius" Value="0" />
+  </ControlTheme>
+
+  <ControlTheme x:Key="PickerButton" TargetType="Button">
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="Foreground" Value="#0a0a0a" />
+    <Setter Property="CornerRadius" Value="8" />
+    <Setter Property="FocusAdorner" Value="{x:Null}" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border Name="PART_Root" Background="{TemplateBinding Background}" CornerRadius="{TemplateBinding CornerRadius}">
+          <ContentPresenter Name="PART_ContentPresenter" Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        </Border>
+      </ControlTemplate>
+    </Setter>
+  </ControlTheme>
+
+  <ControlTheme x:Key="{x:Type CalendarDatePicker}" TargetType="CalendarDatePicker">
+    <Setter Property="Background" Value="#ffffff" />
+    <Setter Property="Foreground" Value="#0a0a0a" />
+    <Setter Property="PlaceholderForeground" Value="#737373" />
+    <Setter Property="BorderBrush" Value="#e5e5e5" />
+    <Setter Property="BorderThickness" Value="1" />
+    <Setter Property="CornerRadius" Value="8" />
+    <Setter Property="Height" Value="36" />
+    <Setter Property="Padding" Value="12,0" />
+    <Setter Property="FontSize" Value="14" />
+    <Setter Property="HorizontalAlignment" Value="Left" />
+    <Setter Property="VerticalAlignment" Value="Top" />
+    <Setter Property="SelectedDateFormat" Value="Custom" />
+    <Setter Property="CustomDateFormatString" Value="MMMM d, yyyy" />
+    <Setter Property="PlaceholderText" Value="Pick a date" />
+    <Setter Property="IsTodayHighlighted" Value="False" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Panel>
+          <Border Name="PART_Root" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}"
+                  BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{TemplateBinding CornerRadius}">
+            <Grid ColumnDefinitions="Auto,*" Margin="{TemplateBinding Padding}">
+              <Border Name="PART_Icon" Width="16" Height="16" Margin="0,0,8,0" VerticalAlignment="Center" Background="#0a0a0a" />
+              <TextBox Name="PART_TextBox" Grid.Column="1" Theme="{StaticResource PickerText}" IsHitTestVisible="False" Focusable="False"
+                       Foreground="{TemplateBinding Foreground}" FontSize="{TemplateBinding FontSize}"
+                       PlaceholderText="{TemplateBinding PlaceholderText}" PlaceholderForeground="{TemplateBinding PlaceholderForeground}"
+                       VerticalContentAlignment="Center" VerticalAlignment="Center" />
+            </Grid>
+          </Border>
+          <Button Name="PART_Button" Theme="{StaticResource PickerButton}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                  AutomationProperties.Name="{TemplateBinding PlaceholderText}" />
+          <Popup Name="PART_Popup" PlacementTarget="{TemplateBinding}" Placement="BottomEdgeAlignedLeft" VerticalOffset="4" IsLightDismissEnabled="True">
+            <Border Background="#ffffff" BorderBrush="#e5e5e5" BorderThickness="1" CornerRadius="8">
+              <Calendar Name="PART_Calendar" Background="Transparent"
+                        SelectedDate="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=SelectedDate, Mode=TwoWay}"
+                        DisplayDate="{TemplateBinding DisplayDate}" />
+            </Border>
+          </Popup>
+        </Panel>
+      </ControlTemplate>
+    </Setter>
+    <Style Selector="^:pointerover /template/ Border#PART_Root">
+      <Setter Property="Background" Value="#f5f5f5" />
+    </Style>
+    <Style Selector="^:pointerover /template/ Border#PART_Icon">
+      <Setter Property="Background" Value="#2563eb" />
+    </Style>
+    <Style Selector="^:focus-within /template/ Border#PART_Root">
+      <Setter Property="BorderBrush" Value="#a3a3a3" />
+    </Style>
+
+    <Style Selector="^.input">
+      <Setter Property="CustomDateFormatString" Value="MMMM dd, yyyy" />
+      <Setter Property="PlaceholderText" Value="" />
+    </Style>
+    <Style Selector="^.input /template/ Border#PART_Icon">
+      <Setter Property="IsVisible" Value="False" />
+    </Style>
+    <Style Selector="^.input /template/ TextBox#PART_TextBox">
+      <Setter Property="IsHitTestVisible" Value="True" />
+      <Setter Property="Focusable" Value="True" />
+      <Setter Property="Margin" Value="0,0,32,0" />
+    </Style>
+    <Style Selector="^.input /template/ Button#PART_Button">
+      <Setter Property="Width" Value="24" />
+      <Setter Property="Height" Value="24" />
+      <Setter Property="HorizontalAlignment" Value="Right" />
+      <Setter Property="VerticalAlignment" Value="Center" />
+      <Setter Property="Margin" Value="0,0,8,0" />
+    </Style>
+    <Style Selector="^.input /template/ Popup#PART_Popup">
+      <Setter Property="Placement" Value="BottomEdgeAlignedRight" />
+      <Setter Property="HorizontalOffset" Value="8" />
+      <Setter Property="VerticalOffset" Value="10" />
+    </Style>
+  </ControlTheme>
+  <ControlTheme x:Key="ChoicesPicker" TargetType="CalendarDatePicker" BasedOn="{StaticResource {x:Type CalendarDatePicker}}">
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Panel>
+          <TextBox Name="PART_TextBox" Theme="{StaticResource PickerText}" IsHitTestVisible="False" Focusable="False" PlaceholderText="{TemplateBinding PlaceholderText}" />
+          <Button Name="PART_Button" Theme="{StaticResource PickerButton}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+          <Popup Name="PART_Popup" PlacementTarget="{TemplateBinding}" Placement="BottomEdgeAlignedLeft" VerticalOffset="4" IsLightDismissEnabled="True">
+            <StackPanel Background="#ffffff">
+              <ComboBox Name="PART_Choices" SelectedIndex="{TemplateBinding Tag, Mode=TwoWay}">
+                <ComboBoxItem Content="Today" />
+                <ComboBoxItem Content="Tomorrow" />
+              </ComboBox>
+              <Calendar Name="PART_Calendar" Background="Transparent"
+                        SelectedDate="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=SelectedDate, Mode=TwoWay}"
+                        DisplayDate="{TemplateBinding DisplayDate}" />
+            </StackPanel>
+          </Popup>
+        </Panel>
+      </ControlTemplate>
+    </Setter>
+  </ControlTheme>
+</ResourceDictionary>

@@ -1,0 +1,46 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:Lumen.ViewModels"
+             xmlns:data="using:Lumen.Data"
+             xmlns:a="https://aioros.dev"
+             xmlns:views="using:Lumen.Views"
+             x:DataType="vm:ProjectsViewModel">
+    <StackPanel>
+      <Border Padding="16,12" BorderBrush="{DynamicResource Line}" BorderThickness="0,0,0,1">
+        <StackPanel Spacing="2">
+          <TextBlock Classes="h2" Text="v2 Launch" />
+          <TextBlock Classes="muted small" Text="Team board · drag the cards around in your head" />
+        </StackPanel>
+      </Border>
+      <views:RecentIssues />
+      <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
+        <ItemsControl ItemsSource="{Binding Columns}" Margin="16">
+          <ItemsControl.ItemsPanel>
+            <ItemsPanelTemplate><StackPanel Orientation="Horizontal" Spacing="12" /></ItemsPanelTemplate>
+          </ItemsControl.ItemsPanel>
+          <ItemsControl.ItemTemplate>
+            <DataTemplate x:DataType="vm:BoardColumn">
+              <StackPanel Width="272" Spacing="8">
+                <StackPanel Orientation="Horizontal" Spacing="8" Margin="4,0">
+                  <a:Icon Kind="{Binding Icon}" Foreground="{Binding Color}" VerticalAlignment="Center" />
+                  <TextBlock Text="{Binding Name}" FontWeight="SemiBold" VerticalAlignment="Center" />
+                  <TextBlock Classes="faint" Text="{Binding Count}" VerticalAlignment="Center" />
+                </StackPanel>
+                <ItemsControl ItemsSource="{Binding Issues}">
+                  <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate><StackPanel Spacing="8" /></ItemsPanelTemplate>
+                  </ItemsControl.ItemsPanel>
+                  <ItemsControl.ItemTemplate>
+                    <DataTemplate x:DataType="data:Issue">
+                      <views:IssueCard />
+                    </DataTemplate>
+                  </ItemsControl.ItemTemplate>
+                </ItemsControl>
+              </StackPanel>
+            </DataTemplate>
+          </ItemsControl.ItemTemplate>
+        </ItemsControl>
+      </ScrollViewer>
+      <a:View Source="/Pages/inbox/Page.axaml" />
+    </StackPanel>
+</UserControl>

@@ -1,0 +1,7 @@
+<UserControl xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <StackPanel Spacing="16">
+    <TextBlock Classes="h1" Text="Aioros Gallery" />
+    <TextBlock Classes="h2" Text="The XAML framework for web and native apps" />
+    <TextBlock TextWrapping="Wrap" Text="Every control, rendered by Aioros on the server as plain HTML and CSS, next to the same control in its native desktop render." />
+  </StackPanel>
+</UserControl>

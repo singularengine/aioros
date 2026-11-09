@@ -1,0 +1,73 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+env:
+  PLAYWRIGHT_BROWSERS_PATH: /ms-playwright
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container: mcr.microsoft.com/dotnet/sdk:10.0
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - name: sdk
+        run: dotnet --version > /dev/null 2>&1 || eng/install-sdk.sh
+      - name: tools
+        run: |
+          set -eu
+          export DEBIAN_FRONTEND=noninteractive
+          apt-get update -q > /dev/null
+          apt-get install -y -q libfontconfig1 libfreetype6 xz-utils > /dev/null
+          curl -fsSL https://nodejs.org/dist/v22.20.0/node-v22.20.0-linux-x64.tar.xz | tar -xJ -C /usr/local --strip-components=1
+          eng/install-scripts.sh
+          npx -y playwright@1.63.0 install --with-deps chromium > /dev/null
+          ln -sf "$(ls -d /ms-playwright/chromium-*/chrome-linux*/chrome | head -1)" /usr/bin/chromium
+      - name: Build
+        run: dotnet build Aioros.slnx -c Release
+      - name: Test
+        run: dotnet test --solution Aioros.slnx -c Release --no-build --max-parallel-test-modules 2
+      - name: Pack
+        run: |
+          dotnet pack Aioros.slnx -c Release --no-build
+          dotnet pack templates/Aioros.Templates.csproj -c Release
+
+  compat:
+    runs-on: ubuntu-latest
+    container: mcr.microsoft.com/dotnet/sdk:10.0
+    needs: build
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - name: sdk
+        run: dotnet --version > /dev/null 2>&1 || eng/install-sdk.sh
+      - name: tools
+        run: |
+          set -eu
+          export DEBIAN_FRONTEND=noninteractive
+          apt-get update -q > /dev/null
+          apt-get install -y -q python3 python3-numpy python3-pil xz-utils > /dev/null
+          curl -fsSL https://nodejs.org/dist/v22.20.0/node-v22.20.0-linux-x64.tar.xz | tar -xJ -C /usr/local --strip-components=1
+          eng/install-scripts.sh
+          npx -y playwright@1.63.0 install --with-deps chromium > /dev/null
+          ln -sf "$(ls -d /ms-playwright/chromium-*/chrome-linux*/chrome | head -1)" /usr/bin/chromium
+      - name: Compatibility bench (Control Gallery)
+        env:
+          CHROMIUM: /usr/bin/chromium
+          CONFIGURATION: Release
+          OUT: artifacts/compat/gallery
+        run: bench/compat/run.sh gallery --check --report artifacts/compat/gallery/report
+      - name: Compatibility bench (ControlCatalog pages)
+        if: always()
+        env:
+          CHROMIUM: /usr/bin/chromium
+          CONFIGURATION: Release
+          OUT: artifacts/compat/controlcatalog
+          PORT: 5391
+        run: bench/compat/run.sh controlcatalog --check

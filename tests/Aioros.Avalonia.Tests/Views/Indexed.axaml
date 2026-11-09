@@ -1,0 +1,7 @@
+<UserControl xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:m="using:Aioros.Avalonia.Tests.Models" x:Class="Aioros.Avalonia.Tests.Models.Indexed" x:DataType="m:Bookshelf">
+  <StackPanel>
+    <Border DataContext="{Binding Items[0]}"><TextBlock Text="{Binding Name}" /></Border>
+    <TextBlock Text="{Binding Items[1].Name}" />
+  </StackPanel>
+</UserControl>

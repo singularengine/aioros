@@ -1,0 +1,52 @@
+<UserControl xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:m="using:Gallery.Models" x:DataType="m:RangesModel" xmlns:a="https://aioros.dev" a:Page.Title="Ranges and dates">
+  <StackPanel Spacing="20">
+    <TextBlock Classes="h1" Text="Ranges and dates" />
+    <Border Classes="card">
+      <StackPanel Spacing="12">
+        <TextBlock Classes="h2" Text="Slider" />
+        <Slider Minimum="0" Maximum="100" Value="{Binding Volume}" />
+        <Slider Minimum="0" Maximum="100" Value="25" TickFrequency="25" TickPlacement="Outside" IsSnapToTickEnabled="True" />
+        <Slider Minimum="0" Maximum="100" Value="70" IsEnabled="False" />
+        <Slider Minimum="0" Maximum="100" Value="40" TickFrequency="10" TickPlacement="BottomRight" Orientation="Vertical" Height="150" HorizontalAlignment="Left" />
+      </StackPanel>
+    </Border>
+    <Border Classes="card">
+      <StackPanel Spacing="16">
+        <TextBlock Classes="h2" Text="ProgressBar" />
+        <ProgressBar Value="{Binding Progress}" />
+        <ProgressBar Minimum="0" Maximum="200" Value="50" ShowProgressText="True" />
+        <ProgressBar IsIndeterminate="True" />
+      </StackPanel>
+    </Border>
+    <Border Classes="card">
+      <StackPanel Spacing="12">
+        <TextBlock Classes="h2" Text="Bound shape" />
+        <TextBlock Text="Its corner radius and skew follow the saved progress." />
+        <Border Width="160" Height="48" Margin="24,8" HorizontalAlignment="Left" Background="#42a5f5" CornerRadius="{Binding Corners}" RenderTransformOrigin="0%,100%">
+          <Border.RenderTransform><SkewTransform AngleX="{Binding Lean}" /></Border.RenderTransform>
+        </Border>
+      </StackPanel>
+    </Border>
+    <Border Classes="card">
+      <StackPanel Spacing="12">
+        <TextBlock Classes="h2" Text="Calendar" />
+        <StackPanel Orientation="Horizontal" Spacing="16">
+          <Calendar DisplayDate="2026-03-14" SelectedDate="2026-03-14" VerticalAlignment="Top" />
+          <Calendar DisplayMode="Year" DisplayDate="2026-03-14" SelectedDate="2026-03-14" VerticalAlignment="Top" />
+        </StackPanel>
+      </StackPanel>
+    </Border>
+    <Border Classes="card">
+      <StackPanel Spacing="12">
+        <TextBlock Classes="h2" Text="Date and time pickers" />
+        <CalendarDatePicker SelectedDate="{Binding Day}" Width="200" />
+        <DatePicker SelectedDate="{Binding Start}" />
+        <TimePicker SelectedTime="{Binding At}" ClockIdentifier="24HourClock" />
+        <DatePicker IsEnabled="False" />
+        <Button Classes="accent" Content="Save" Command="{Binding SaveCommand}" />
+        <TextBlock Text="{Binding Summary}" />
+      </StackPanel>
+    </Border>
+  </StackPanel>
+</UserControl>

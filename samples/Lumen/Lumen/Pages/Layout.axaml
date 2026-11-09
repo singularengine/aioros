@@ -1,0 +1,156 @@
+<UserControl xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:a="https://aioros.dev" xmlns:shell="using:Lumen.Shell" x:DataType="shell:ShellModel">
+  <SplitView DisplayMode="Inline" IsPaneOpen="True" OpenPaneLength="244"
+             PaneBackground="{DynamicResource AppBg}" a:Web.Id="nav" a:Web.CollapseBelow="900">
+    <SplitView.Pane>
+      <Border Padding="10,12" a:Web.TransitionName="sidebar">
+        <Grid RowDefinitions="Auto,*,Auto">
+          <StackPanel Spacing="2" a:Web.Tag="nav">
+            <Border Classes="brand" a:Web.Href="/issues" Margin="0,0,0,8">
+              <StackPanel Orientation="Horizontal" Spacing="10">
+                <Border Width="22" Height="22" CornerRadius="6" Background="{DynamicResource SystemAccentColor}">
+                  <a:Icon Kind="zap" Size="13" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                </Border>
+                <TextBlock Text="Lumen" FontWeight="SemiBold" FontSize="14" VerticalAlignment="Center" Foreground="{DynamicResource Text}" />
+              </StackPanel>
+            </Border>
+            <Border Classes="nav" a:Web.Href="/issues" Margin="0,0,0,10" BorderBrush="{DynamicResource Line}" BorderThickness="1">
+              <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="8">
+                <a:Icon Kind="search" Size="14" VerticalAlignment="Center" />
+                <TextBlock Grid.Column="1" Text="Search…" VerticalAlignment="Center" />
+                <TextBlock Grid.Column="2" Text="⌘K" FontSize="11" VerticalAlignment="Center" />
+              </Grid>
+            </Border>
+            <Border Classes="nav" a:Web.Href="/inbox">
+              <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="10">
+                <a:Icon Kind="inbox" VerticalAlignment="Center" />
+                <TextBlock Grid.Column="1" Text="Inbox" VerticalAlignment="Center" />
+                <Border Grid.Column="2" Classes="count"><TextBlock Text="3" /></Border>
+              </Grid>
+            </Border>
+            <Border Classes="nav" a:Web.Href="/issues">
+              <Grid ColumnDefinitions="Auto,*" ColumnSpacing="10">
+                <a:Icon Kind="issues" VerticalAlignment="Center" />
+                <TextBlock Grid.Column="1" Text="Issues" VerticalAlignment="Center" />
+              </Grid>
+            </Border>
+            <Border Classes="nav" a:Web.Href="/projects">
+              <Grid ColumnDefinitions="Auto,*" ColumnSpacing="10">
+                <a:Icon Kind="projects" VerticalAlignment="Center" />
+                <TextBlock Grid.Column="1" Text="Projects" VerticalAlignment="Center" />
+              </Grid>
+            </Border>
+            <Border Classes="nav" a:Web.Href="/dashboard">
+              <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="10">
+                <a:Icon Kind="dashboard" VerticalAlignment="Center" />
+                <TextBlock Grid.Column="1" Text="Dashboard" VerticalAlignment="Center" />
+                <Border Grid.Column="2" Width="6" Height="6" CornerRadius="3" Background="#22C55E" VerticalAlignment="Center" />
+              </Grid>
+            </Border>
+
+            <Expander Classes="side" IsExpanded="True">
+              <Expander.Header>
+                <TextBlock Classes="caption" Text="YOUR TEAMS" />
+              </Expander.Header>
+              <StackPanel Spacing="2">
+                <Border Classes="nav" a:Web.Href="/projects">
+                  <Grid ColumnDefinitions="Auto,*" ColumnSpacing="10">
+                    <Border Width="16" Height="16" CornerRadius="4" Background="#4EA7FC" VerticalAlignment="Center" />
+                    <TextBlock Grid.Column="1" Text="Engineering" VerticalAlignment="Center" />
+                  </Grid>
+                </Border>
+                <Border Classes="nav" a:Web.Href="/projects">
+                  <Grid ColumnDefinitions="Auto,*" ColumnSpacing="10">
+                    <Border Width="16" Height="16" CornerRadius="4" Background="#BB87FC" VerticalAlignment="Center" />
+                    <TextBlock Grid.Column="1" Text="Design" VerticalAlignment="Center" />
+                  </Grid>
+                </Border>
+                <Border Classes="nav" a:Web.Href="/projects">
+                  <Grid ColumnDefinitions="Auto,*" ColumnSpacing="10">
+                    <Border Width="16" Height="16" CornerRadius="4" Background="#F2994A" VerticalAlignment="Center" />
+                    <TextBlock Grid.Column="1" Text="Product" VerticalAlignment="Center" />
+                  </Grid>
+                </Border>
+              </StackPanel>
+            </Expander>
+
+            <Expander Classes="side" IsExpanded="False">
+              <Expander.Header>
+                <TextBlock Classes="caption" Text="FAVORITES" />
+              </Expander.Header>
+              <StackPanel Spacing="2">
+                <Border Classes="nav" a:Web.Href="/issues/LUM-101">
+                  <Grid ColumnDefinitions="Auto,*" ColumnSpacing="10">
+                    <a:Icon Classes="st-progress" Kind="status-progress" VerticalAlignment="Center" />
+                    <TextBlock Grid.Column="1" Text="Server rendering" VerticalAlignment="Center" />
+                  </Grid>
+                </Border>
+                <Border Classes="nav" a:Web.Href="/issues/LUM-102">
+                  <Grid ColumnDefinitions="Auto,*" ColumnSpacing="10">
+                    <a:Icon Classes="st-review" Kind="status-review" VerticalAlignment="Center" />
+                    <TextBlock Grid.Column="1" Text="Dark mode" VerticalAlignment="Center" />
+                  </Grid>
+                </Border>
+              </StackPanel>
+            </Expander>
+          </StackPanel>
+
+          <Border Grid.Row="2" Classes="nav" a:Web.Href="/settings">
+            <Grid ColumnDefinitions="Auto,*" ColumnSpacing="10">
+              <a:Icon Kind="settings" VerticalAlignment="Center" />
+              <TextBlock Grid.Column="1" Text="Settings" VerticalAlignment="Center" />
+            </Grid>
+          </Border>
+        </Grid>
+      </Border>
+    </SplitView.Pane>
+
+    <Border Background="{DynamicResource SurfaceBg}" Margin="8" CornerRadius="10"
+            BorderBrush="{DynamicResource Line}" BorderThickness="1">
+      <StackPanel>
+        <Border a:Web.Tag="header" Height="48" Padding="12,0" BorderBrush="{DynamicResource Line}" BorderThickness="0,0,0,1">
+          <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="8">
+            <Button Classes="ghost" AutomationProperties.Name="Menu" a:Web.Toggles="nav" a:Web.HideAbove="900" VerticalAlignment="Center">
+              <a:Icon Kind="menu" Size="18" />
+            </Button>
+            <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+              <a:Icon Kind="{Binding Icon}" Foreground="{DynamicResource Muted}" VerticalAlignment="Center" />
+              <TextBlock Text="{Binding Section}" FontWeight="SemiBold" VerticalAlignment="Center" />
+            </StackPanel>
+            <StackPanel Grid.Column="2" Orientation="Horizontal" Spacing="2" VerticalAlignment="Center">
+              <Border Classes="iconbtn" AutomationProperties.Name="Switch theme" a:Web.Href="/theme/toggle">
+                <a:Icon Kind="{DynamicResource ThemeIcon}" />
+              </Border>
+              <Border Classes="iconbtn" AutomationProperties.Name="Notifications" a:Web.Href="/inbox">
+                <a:Icon Kind="bell" />
+              </Border>
+              <Button Classes="ghost" AutomationProperties.Name="Account" VerticalAlignment="Center">
+                <Button.Flyout>
+                  <MenuFlyout Placement="BottomEdgeAlignedRight">
+                    <MenuItem Header="My profile" a:Web.Href="/settings">
+                      <MenuItem.Icon><a:Icon Kind="user" /></MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="Toggle theme" a:Web.Href="/theme/toggle">
+                      <MenuItem.Icon><a:Icon Kind="moon" /></MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="Settings" a:Web.Href="/settings">
+                      <MenuItem.Icon><a:Icon Kind="settings" /></MenuItem.Icon>
+                    </MenuItem>
+                    <Separator />
+                    <MenuItem Header="Log out" a:Web.Href="/issues">
+                      <MenuItem.Icon><a:Icon Kind="log-out" /></MenuItem.Icon>
+                    </MenuItem>
+                  </MenuFlyout>
+                </Button.Flyout>
+                <Border Classes="avatar" Background="#5E6AD2">
+                  <TextBlock Text="ED" />
+                </Border>
+              </Button>
+            </StackPanel>
+          </Grid>
+        </Border>
+        <a:Outlet a:Web.TransitionName="main" />
+      </StackPanel>
+    </Border>
+  </SplitView>
+</UserControl>

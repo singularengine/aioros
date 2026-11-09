@@ -1,0 +1,21 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:a="https://aioros.dev"
+             xmlns:viewModels="clr-namespace:AdvancedToDoList.ViewModels"
+             a:Page.Title="Confirm"
+             x:DataType="viewModels:ConfirmationViewModel">
+    <!-- The overlay dialog of the original app (SharedControls' OverlayDialog), as a page -->
+    <Border Margin="20" Padding="15" MaxWidth="500" HorizontalAlignment="Center" VerticalAlignment="Top"
+            Background="{DynamicResource SystemControlBackgroundAltHighBrush}"
+            BorderBrush="{DynamicResource SystemControlForegroundBaseMediumLowBrush}"
+            BorderThickness="1" CornerRadius="{DynamicResource OverlayCornerRadius}">
+        <StackPanel Spacing="15">
+            <TextBlock Classes="h1" Text="{Binding Title}" />
+            <TextBlock Text="{Binding Message}" />
+            <WrapPanel HorizontalAlignment="Right" ItemSpacing="5">
+                <Button Command="{Binding YesCommand}" Content="Yes" />
+                <Button Command="{Binding NoCommand}" Content="No" />
+            </WrapPanel>
+        </StackPanel>
+    </Border>
+</UserControl>

@@ -1,0 +1,24 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:views="using:ViewScale.Views"
+             xmlns:data="using:ViewScale.Data"
+             x:Class="ViewScale.Views.Rows"
+             x:DataType="views:RowsViewModel">
+  <Border Padding="12,8" BorderBrush="#26808080" BorderThickness="0,0,0,1">
+    <StackPanel Spacing="4">
+      <TextBlock Classes="h2" Text="{Binding Heading}" />
+      <ItemsControl ItemsSource="{Binding Items}">
+        <ItemsControl.ItemTemplate>
+          <DataTemplate x:DataType="data:Row">
+            <Grid ColumnDefinitions="60,*,90,140" ColumnSpacing="10">
+              <TextBlock Text="{Binding Id}" />
+              <TextBlock Grid.Column="1" Text="{Binding Title}" />
+              <TextBlock Grid.Column="2" Text="{Binding Status}" />
+              <TextBlock Grid.Column="3" Text="{Binding UpdatedText}" />
+            </Grid>
+          </DataTemplate>
+        </ItemsControl.ItemTemplate>
+      </ItemsControl>
+    </StackPanel>
+  </Border>
+</UserControl>

@@ -1,0 +1,9 @@
+{
+  "name": "aioros-scripts",
+  "private": true,
+  "description": "The framework's browser scripts, minified with esbuild when Aioros.Targets.Ssr builds.",
+  "type": "module",
+  "devDependencies": {
+    "esbuild": "0.28.2"
+  }
+}

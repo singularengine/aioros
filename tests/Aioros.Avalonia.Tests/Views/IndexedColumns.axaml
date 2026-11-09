@@ -1,0 +1,13 @@
+<UserControl xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:m="using:Aioros.Avalonia.Tests.Models" x:Class="Aioros.Avalonia.Tests.Models.IndexedColumns" x:DataType="m:PaymentTable">
+  <StackPanel>
+    <CheckBox Content="Status" IsChecked="{Binding Source.Columns[1].IsVisible}" />
+    <Button Content="Columns">
+      <Button.Flyout>
+        <MenuFlyout>
+          <MenuItem Header="Email" ToggleType="CheckBox" IsChecked="{Binding Source.Columns[2].IsVisible, Mode=TwoWay}" />
+        </MenuFlyout>
+      </Button.Flyout>
+    </Button>
+  </StackPanel>
+</UserControl>

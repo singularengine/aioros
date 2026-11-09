@@ -1,0 +1,51 @@
+<UserControl xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:a="https://aioros.dev" xmlns:m="using:Gallery.Models" x:DataType="m:ParityFamilyModel"
+             xmlns:loader="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia">
+  <StackPanel Spacing="20">
+    <StackPanel Orientation="Horizontal" Spacing="12">
+      <Border Classes="nav" a:Web.Href="/parity"><TextBlock Text="Parity report" /></Border>
+      <Border Classes="nav" a:Web.Href="{Binding Live}"><TextBlock Text="Open the live page" /></Border>
+    </StackPanel>
+    <TextBlock Classes="h1" Text="{Binding Title}" />
+    <TextBlock TextWrapping="Wrap" Text="The family's page in its native desktop render and as Chromium draws the HTML Aioros writes, both captured at 1280 by 900 in the light theme. Differing pixels are marked in magenta on the browser's capture." />
+    <Border Classes="card">
+      <StackPanel Spacing="10">
+        <Grid ColumnDefinitions="2*,*,*,*,*">
+          <TextBlock Classes="muted" Text="Theme and state" />
+          <TextBlock Grid.Column="1" Classes="muted" Text="Texts" />
+          <TextBlock Grid.Column="2" Classes="muted" Text="Layout" />
+          <TextBlock Grid.Column="3" Classes="muted" Text="Colors" />
+          <TextBlock Grid.Column="4" Classes="muted" Text="Pixels" />
+        </Grid>
+        <ItemsControl ItemsSource="{Binding Variants}">
+          <ItemsControl.ItemTemplate>
+            <DataTemplate x:DataType="m:ParityScores">
+              <Grid ColumnDefinitions="2*,*,*,*,*" Margin="0,4">
+                <TextBlock Text="{Binding Name}" />
+                <TextBlock Grid.Column="1" Text="{Binding Texts}" />
+                <TextBlock Grid.Column="2" Text="{Binding Layout}" />
+                <TextBlock Grid.Column="3" Text="{Binding Colors}" />
+                <TextBlock Grid.Column="4" Text="{Binding Pixels}" />
+              </Grid>
+            </DataTemplate>
+          </ItemsControl.ItemTemplate>
+        </ItemsControl>
+      </StackPanel>
+    </Border>
+    <Grid ColumnDefinitions="*,*" ColumnSpacing="16" a:Web.StackBelow="800">
+      <StackPanel Spacing="8">
+        <TextBlock Classes="h2" Text="Desktop render" />
+        <Image loader:ImageLoader.Source="{Binding Avalonia}" AutomationProperties.Name="The page as the desktop renders it" />
+      </StackPanel>
+      <StackPanel Grid.Column="1" Spacing="8">
+        <TextBlock Classes="h2" Text="Aioros on the web" />
+        <Image loader:ImageLoader.Source="{Binding Web}" AutomationProperties.Name="The page as the browser draws it" />
+      </StackPanel>
+    </Grid>
+    <StackPanel Spacing="8">
+      <TextBlock Classes="h2" Text="Differences" />
+      <Image loader:ImageLoader.Source="{Binding Differences}" AutomationProperties.Name="The differing pixels, marked on the browser's capture" />
+    </StackPanel>
+    <TextBlock Classes="muted" TextWrapping="Wrap" Text="{Binding Measured, StringFormat='Measured on {0} by bench/compat (run.sh gallery --report).'}" />
+  </StackPanel>
+</UserControl>

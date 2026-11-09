@@ -1,0 +1,101 @@
+<UserControl xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:a="https://aioros.dev" xmlns:m="using:Showcase.Models" x:DataType="m:HomeModel">
+  <StackPanel Spacing="28">
+    <Border CornerRadius="20" Padding="40,44" Background="{DynamicResource Hero}" BorderBrush="{DynamicResource Line}" BorderThickness="1">
+      <StackPanel Spacing="18" MaxWidth="760" HorizontalAlignment="Left">
+        <TextBlock Classes="eyebrow" Text="ONE XAML APP · WEB AND DESKTOP" />
+        <TextBlock Classes="display" Text="Rich, live apps, written once in XAML." />
+        <TextBlock Classes="lead" Text="Every demo in this catalog is one XAML and C# app. The browser gets server-rendered HTML and SVG with almost no JavaScript, and the same pages run natively on the desktop." />
+        <StackPanel Orientation="Horizontal" Spacing="12" Margin="0,8,0,0">
+          <Border Classes="cta" a:Web.Href="/finance">
+            <StackPanel Orientation="Horizontal" Spacing="8">
+              <TextBlock Text="Open the finance dashboard" VerticalAlignment="Center" />
+              <a:Icon Kind="arrow-right" Size="16" VerticalAlignment="Center" />
+            </StackPanel>
+          </Border>
+        </StackPanel>
+      </StackPanel>
+    </Border>
+
+    <Grid ColumnDefinitions="*,*,*" ColumnSpacing="20" a:Web.StackBelow="900">
+      <Border Classes="tile rise1" a:Web.Href="/finance">
+        <StackPanel Spacing="14">
+          <Border Classes="badge"><a:Icon Kind="trending-up" Size="22" HorizontalAlignment="Center" VerticalAlignment="Center" /></Border>
+          <TextBlock Classes="h2" Text="Financial dashboard" />
+          <TextBlock Classes="muted wrap" Text="Live prices, candlesticks, a portfolio and KPIs that update while you watch." />
+          <TextBlock Classes="go small" Text="Open the demo →" FontWeight="SemiBold" />
+        </StackPanel>
+      </Border>
+      <Border Grid.Column="1" Classes="tile rise2" a:Web.Href="/crm">
+        <StackPanel Spacing="14">
+          <Border Classes="badge"><a:Icon Kind="users" Size="22" HorizontalAlignment="Center" VerticalAlignment="Center" /></Border>
+          <TextBlock Classes="h2" Text="Sales CRM" />
+          <TextBlock Classes="muted wrap" Text="100,000 customers searched, sorted and paged on the server, with validated forms." />
+          <TextBlock Classes="go small" Text="Open the demo →" FontWeight="SemiBold" />
+        </StackPanel>
+      </Border>
+      <Border Grid.Column="2" Classes="tile rise3" a:Web.Href="/music">
+        <StackPanel Spacing="14">
+          <Border Classes="badge"><a:Icon Kind="music" Size="22" HorizontalAlignment="Center" VerticalAlignment="Center" /></Border>
+          <TextBlock Classes="h2" Text="Music player" />
+          <TextBlock Classes="muted wrap" Text="Visual design, an animated equalizer and smooth transitions, all from XAML styles." />
+          <TextBlock Classes="go small" Text="Open the demo →" FontWeight="SemiBold" />
+        </StackPanel>
+      </Border>
+    </Grid>
+
+    <Border Classes="tile rise3" a:Web.Href="/games" Padding="0" ClipToBounds="True">
+      <Grid ColumnDefinitions="2*,3*" a:Web.StackBelow="760">
+        <Border Height="200">
+          <Border.Background>
+            <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
+              <GradientStop Offset="0" Color="#1A2738" />
+              <GradientStop Offset="1" Color="#2A6FDB" />
+            </LinearGradientBrush>
+          </Border.Background>
+          <a:Icon Kind="gamepad-2" Size="96" Foreground="#FFFFFF" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        </Border>
+        <StackPanel Grid.Column="1" Spacing="10" Margin="28,24" VerticalAlignment="Center">
+          <TextBlock Classes="eyebrow" Text="EF CORE · IDENTITY · CONCURRENCY" />
+          <TextBlock Classes="h2" Text="Aioros Games: a game store on a real database" />
+          <TextBlock Classes="muted wrap" Text="8,000 games and over a million reviews and sales, seeded by parallel workers, behind an ASP.NET Core Identity sign-in. The concurrency lab sends hundreds of virtual players at the database and charts it live." />
+          <TextBlock Classes="go small" Text="Sign in and open the store (admin / admin) →" FontWeight="SemiBold" />
+        </StackPanel>
+      </Grid>
+    </Border>
+
+    <Border Classes="tile rise3" a:Web.Href="/ports">
+      <Grid ColumnDefinitions="Auto,*" ColumnSpacing="20">
+        <Border Classes="badge"><a:Icon Kind="layers" Size="22" HorizontalAlignment="Center" VerticalAlignment="Center" /></Border>
+        <StackPanel Grid.Column="1" Spacing="8">
+          <TextBlock Classes="eyebrow" Text="APPS WE DID NOT WRITE" />
+          <TextBlock Classes="h2" Text="Ported apps, beside their originals" />
+          <TextBlock Classes="muted wrap" Text="Kartova, the official to-do sample, the Stylet samples and ReactiveUI's routing sample, ported with their view models kept: what each port changed." />
+          <TextBlock Classes="go small" Text="See the ports →" FontWeight="SemiBold" />
+        </StackPanel>
+      </Grid>
+    </Border>
+
+    <Grid ColumnDefinitions="*,*,*" ColumnSpacing="20" a:Web.StackBelow="900">
+      <StackPanel Spacing="6">
+        <a:Icon Kind="globe" Size="20" Foreground="{DynamicResource Accent}" />
+        <TextBlock Text="Server-rendered" FontWeight="SemiBold" />
+        <TextBlock Classes="muted wrap small" Text="Pages compile to render plans at build time and are served without starting the UI framework." />
+      </StackPanel>
+      <StackPanel Grid.Column="1" Spacing="6">
+        <a:Icon Kind="zap" Size="20" Foreground="{DynamicResource Accent}" />
+        <TextBlock Text="Live" FontWeight="SemiBold" />
+        <TextBlock Classes="muted wrap small" Text="View-model changes stream to the browser; nothing blocks, posts run in parallel." />
+      </StackPanel>
+      <StackPanel Grid.Column="2" Spacing="6">
+        <a:Icon Kind="monitor" Size="20" Foreground="{DynamicResource Accent}" />
+        <TextBlock Text="Native on the desktop" FontWeight="SemiBold" />
+        <TextBlock Classes="muted wrap small" Text="{a:OnPlatform Default='You are running it natively: the same pages, view models and services, and pages only the installed app has.', Web='Run the same app with --desktop: the same pages, view models and services.'}" />
+      </StackPanel>
+    </Grid>
+
+    <Expander Classes="source" Header="View the XAML of this page">
+      <Border Classes="code"><SelectableTextBlock Classes="source" Text="{Binding Xaml}" /></Border>
+    </Expander>
+  </StackPanel>
+</UserControl>

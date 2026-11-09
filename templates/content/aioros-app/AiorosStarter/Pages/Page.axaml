@@ -1,0 +1,11 @@
+<UserControl xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:m="using:AiorosStarter.Models" x:DataType="m:HomeModel">
+  <StackPanel Spacing="16">
+    <TextBlock Classes="h1" Text="Welcome to Aioros" />
+    <TextBlock TextWrapping="Wrap" Text="Edit Pages/Page.axaml and save: the browser updates in place." />
+    <StackPanel Orientation="Horizontal" Spacing="12">
+      <Button Classes="accent" Content="Count" Command="{Binding CountCommand}" />
+      <TextBlock VerticalAlignment="Center" Text="{Binding Message}" />
+    </StackPanel>
+  </StackPanel>
+</UserControl>

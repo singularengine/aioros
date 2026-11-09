@@ -1,0 +1,7 @@
+<UserControl xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:a="https://aioros.dev" xmlns:m="using:Aioros.Targets.Desktop.Tests.Navigation" x:DataType="m:Shelving">
+  <ItemsControl ItemsSource="{Binding Books}" a:Drag.Target="shelf" a:Drag.Command="{Binding MoveCommand}">
+    <ItemsControl.ItemTemplate>
+      <DataTemplate x:DataType="x:String"><Border a:Drag.Item="{Binding}" Background="Transparent" Padding="4"><TextBlock Text="{Binding}" /></Border></DataTemplate>
+    </ItemsControl.ItemTemplate>
+  </ItemsControl>
+</UserControl>

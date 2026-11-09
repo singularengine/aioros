@@ -1,0 +1,175 @@
+<UserControl xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:a="https://aioros.dev" xmlns:m="using:Gallery.Models" x:DataType="m:NavigationModel" a:Page.Title="Navigation">
+  <StackPanel Spacing="20">
+    <TextBlock Classes="h1" Text="Navigation" />
+    <TextBlock Text="{Binding Message}" />
+
+    <Border Classes="card">
+      <StackPanel Spacing="12">
+        <TextBlock Classes="h2" Text="Menu" />
+        <Menu>
+          <MenuItem Header="_File">
+            <MenuItem Header="_New" InputGesture="Ctrl+N" Command="{Binding RunCommand}" CommandParameter="New">
+              <MenuItem.Icon><a:Icon Kind="plus" /></MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="_Open recent">
+              <MenuItem Header="report.md" Command="{Binding RunCommand}" CommandParameter="Open report.md" />
+              <MenuItem Header="notes.txt" Command="{Binding RunCommand}" CommandParameter="Open notes.txt" />
+            </MenuItem>
+            <Separator />
+            <MenuItem Header="Settings" a:Web.Href="/controls/navigation" InputGesture="Ctrl+OemComma">
+              <MenuItem.Icon><a:Icon Kind="settings" /></MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Disabled" IsEnabled="False" />
+          </MenuItem>
+          <MenuItem Header="_Edit">
+            <MenuItem Header="Word wrap" ToggleType="CheckBox" IsChecked="True" />
+            <MenuItem Header="-" />
+            <MenuItem Header="Find" InputGesture="Ctrl+F" Command="{Binding RunCommand}" CommandParameter="Find" />
+          </MenuItem>
+          <MenuItem Header="Help" a:Web.Href="/" />
+        </Menu>
+      </StackPanel>
+    </Border>
+
+    <Border Classes="card">
+      <StackPanel Spacing="12">
+        <TextBlock Classes="h2" Text="Flyouts and tool tips" />
+        <StackPanel Orientation="Horizontal" Spacing="8">
+          <Button Content="Menu flyout">
+            <Button.Flyout>
+              <MenuFlyout>
+                <MenuItem Header="Copy" InputGesture="Ctrl+C" Command="{Binding RunCommand}" CommandParameter="Copy" />
+                <MenuItem Header="Paste" InputGesture="Ctrl+V" Command="{Binding RunCommand}" CommandParameter="Paste" />
+                <MenuItem Header="-" />
+                <MenuItem Header="Bold" ToggleType="CheckBox" IsChecked="{Binding Bold, Mode=TwoWay}" />
+              </MenuFlyout>
+            </Button.Flyout>
+          </Button>
+          <Button Content="Flyout">
+            <Button.Flyout>
+              <Flyout>
+                <StackPanel Spacing="8">
+                  <TextBlock Text="A flyout holds any content." />
+                  <Button Content="Run" Command="{Binding RunCommand}" CommandParameter="Flyout button" />
+                </StackPanel>
+              </Flyout>
+            </Button.Flyout>
+          </Button>
+          <Button Content="Hover me" ToolTip.Tip="Tool tips show on hover and keyboard focus." />
+          <Border Padding="11,5,11,6" CornerRadius="4" Background="{DynamicResource ButtonBackground}" VerticalAlignment="Center">
+            <Border.ContextMenu>
+              <ContextMenu>
+                <MenuItem Header="Copy" Command="{Binding RunCommand}" CommandParameter="Context copy" />
+                <MenuItem Header="Paste" Command="{Binding RunCommand}" CommandParameter="Context paste" />
+              </ContextMenu>
+            </Border.ContextMenu>
+            <TextBlock Text="Context menu" />
+          </Border>
+          <Border Padding="11,5,11,6" CornerRadius="4" Background="{DynamicResource ButtonBackground}" VerticalAlignment="Center">
+            <FlyoutBase.AttachedFlyout>
+              <Flyout ShowMode="TransientWithDismissOnPointerMoveAway"><TextBlock Text="A hover card opens while the pointer rests here." /></Flyout>
+            </FlyoutBase.AttachedFlyout>
+            <TextBlock Text="Hover card" />
+          </Border>
+        </StackPanel>
+      </StackPanel>
+    </Border>
+
+    <Border Classes="card">
+      <StackPanel Spacing="12">
+        <TextBlock Classes="h2" Text="CommandBar" />
+        <CommandBar>
+          <CommandBar.Content><TextBlock Text="Document" Margin="12,0" /></CommandBar.Content>
+          <CommandBarButton Label="New" Command="{Binding RunCommand}" CommandParameter="New">
+            <CommandBarButton.Icon><a:Icon Kind="plus" /></CommandBarButton.Icon>
+          </CommandBarButton>
+          <CommandBarButton Label="Search" Command="{Binding RunCommand}" CommandParameter="Search">
+            <CommandBarButton.Icon><a:Icon Kind="search" /></CommandBarButton.Icon>
+          </CommandBarButton>
+          <CommandBarSeparator />
+          <CommandBarToggleButton Label="Bold" IsChecked="{Binding Bold}">
+            <CommandBarToggleButton.Icon><a:Icon Kind="zap" /></CommandBarToggleButton.Icon>
+          </CommandBarToggleButton>
+          <CommandBar.SecondaryCommands>
+            <CommandBarButton Label="Settings" Command="{Binding RunCommand}" CommandParameter="Settings" />
+            <CommandBarButton Label="Sign out" Command="{Binding RunCommand}" CommandParameter="Sign out" />
+          </CommandBar.SecondaryCommands>
+        </CommandBar>
+      </StackPanel>
+    </Border>
+
+    <Border Classes="card">
+      <StackPanel Spacing="12">
+        <TextBlock Classes="h2" Text="Notifications" />
+        <WrapPanel ItemSpacing="8" LineSpacing="8">
+          <WrapPanel.DataTemplates>
+            <DataTemplate DataType="Notification">
+              <StackPanel Margin="12" Spacing="8">
+                <TextBlock FontWeight="Medium" Text="{Binding Title}" />
+                <TextBlock Text="{Binding Message}" TextWrapping="Wrap" />
+              </StackPanel>
+            </DataTemplate>
+          </WrapPanel.DataTemplates>
+          <NotificationCard NotificationType="Success">
+            <Notification Type="Success" Title="Saved" Message="Your changes were saved on the server." />
+          </NotificationCard>
+          <NotificationCard NotificationType="Error">
+            <Notification Type="Error" Title="Not saved" Message="The server could not be reached." />
+          </NotificationCard>
+        </WrapPanel>
+      </StackPanel>
+    </Border>
+
+    <Border Classes="card">
+      <StackPanel Spacing="12">
+        <TextBlock Classes="h2" Text="Validation" />
+        <TextBox Text="{Binding Name}" PlaceholderText="Name (at least three letters)" />
+        <Button Content="Register" Command="{Binding RegisterCommand}" />
+      </StackPanel>
+    </Border>
+
+    <Border Classes="card">
+      <StackPanel Spacing="12">
+        <TextBlock Classes="h2" Text="Transitions and refresh" />
+        <TransitioningContentControl>
+          <TransitioningContentControl.PageTransition><PageSlide Duration="0:0:0.4" /></TransitioningContentControl.PageTransition>
+          <TextBlock Text="This content slides in when the page loads." />
+        </TransitioningContentControl>
+        <RefreshContainer>
+          <TextBlock Text="Pull to refresh is the browser's own reload." />
+        </RefreshContainer>
+      </StackPanel>
+    </Border>
+
+    <Border Classes="card">
+      <StackPanel Spacing="12">
+        <TextBlock Classes="h2" Text="Pages" />
+        <NavigationPage a:Web.Href="/controls" Height="160">
+          <ContentPage Header="Inbox">
+            <TextBlock Text="A NavigationPage shows the current page's header and a back link." Margin="16" />
+          </ContentPage>
+        </NavigationPage>
+        <TabbedPage Height="160" SelectedIndex="{Binding Tab, Mode=TwoWay}">
+          <ContentPage Header="Home"><TextBlock Text="Home page" Margin="16" /></ContentPage>
+          <ContentPage Header="Favorites"><TextBlock Text="Favorites page" Margin="16" /></ContentPage>
+          <ContentPage Header="Profile"><TextBlock Text="Profile page" Margin="16" /></ContentPage>
+        </TabbedPage>
+        <DrawerPage a:Web.Id="drawer" DrawerBreakpointLength="1100" DrawerLength="200" Height="200">
+          <DrawerPage.Drawer>
+            <StackPanel Margin="16" Spacing="8">
+              <TextBlock Text="Drawer" FontWeight="SemiBold" />
+              <TextBlock Text="Inline above 1100px, a drawer below." />
+            </StackPanel>
+          </DrawerPage.Drawer>
+          <ContentPage Header="Detail"><TextBlock Text="The detail page." Margin="16" /></ContentPage>
+        </DrawerPage>
+        <CarouselPage Height="120">
+          <ContentPage Background="#1a0078d4"><TextBlock Text="Slide 1: scroll sideways" Margin="16" /></ContentPage>
+          <ContentPage Background="#1a128b44"><TextBlock Text="Slide 2" Margin="16" /></ContentPage>
+          <ContentPage Background="#1af03916"><TextBlock Text="Slide 3" Margin="16" /></ContentPage>
+        </CarouselPage>
+      </StackPanel>
+    </Border>
+  </StackPanel>
+</UserControl>

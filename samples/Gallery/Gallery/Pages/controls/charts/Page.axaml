@@ -1,0 +1,47 @@
+<UserControl xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:a="https://aioros.dev" xmlns:m="using:Gallery.Models" x:DataType="m:ChartsModel" a:Page.Title="Charts">
+  <StackPanel Spacing="20">
+    <TextBlock Classes="h1" Text="Charts" />
+    <Border Classes="card">
+      <StackPanel Spacing="8">
+        <TextBlock Classes="h2" Text="Area and line" />
+        <a:Chart Title="Revenue against target" Height="240">
+          <a:ChartSeries Kind="Area" ItemsSource="{Binding Revenue}" XPath="Day" YPath="Value" Stroke="#5E6AD2" />
+          <a:ChartSeries Kind="Line" ItemsSource="{Binding Target}" XPath="Day" YPath="Value" Stroke="#F2994A" StrokeThickness="1.5" />
+        </a:Chart>
+      </StackPanel>
+    </Border>
+    <Border Classes="card">
+      <StackPanel Spacing="8">
+        <TextBlock Classes="h2" Text="Columns" />
+        <a:Chart Title="Sales by region" Height="220">
+          <a:ChartSeries Kind="Column" ItemsSource="{Binding Regions}" XPath="Label" YPath="Value" Fill="#26B5CE" />
+        </a:Chart>
+      </StackPanel>
+    </Border>
+    <Border Classes="card">
+      <StackPanel Spacing="8">
+        <TextBlock Classes="h2" Text="Candlesticks" />
+        <a:Chart Title="Stock price" Height="240">
+          <a:ChartSeries Kind="Candle" ItemsSource="{Binding Stock}" XPath="Day" OpenPath="Open" HighPath="High" LowPath="Low" YPath="Close" Fill="#4CB782" Stroke="#EB5757" />
+        </a:Chart>
+      </StackPanel>
+    </Border>
+    <Border Classes="card">
+      <StackPanel Orientation="Horizontal" Spacing="32">
+        <StackPanel Spacing="8">
+          <TextBlock Classes="h2" Text="Donut" />
+          <a:Chart Title="Users by platform" Width="260" Height="200">
+            <a:ChartSeries Kind="Donut" ItemsSource="{Binding Platforms}" XPath="Label" YPath="Value" />
+          </a:Chart>
+        </StackPanel>
+        <StackPanel Spacing="8">
+          <TextBlock Classes="h2" Text="Sparkline" />
+          <a:Chart Title="Active users" ShowAxes="False" Width="160" Height="40">
+            <a:ChartSeries Kind="Line" ItemsSource="{Binding Spark}" XPath="Day" YPath="Value" Stroke="#5E6AD2" StrokeThickness="1.5" />
+          </a:Chart>
+        </StackPanel>
+      </StackPanel>
+    </Border>
+  </StackPanel>
+</UserControl>

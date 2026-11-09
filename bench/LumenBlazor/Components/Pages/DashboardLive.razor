@@ -1,0 +1,47 @@
+@implements IDisposable
+@inject DashboardData Data
+<div class="dash">
+  <div class="header">
+    <div><div class="h1">Dashboard</div><div class="muted">Real-time sales</div></div>
+    <div class="status"><span class="pulse"></span><span class="muted">@Data.Updated</span></div>
+  </div>
+  <div class="kpis">
+    @foreach (var k in new[] { Data.RevenueKpi, Data.OrdersKpi, Data.UsersKpi, Data.ConversionKpi })
+    {
+      <div class="card enter">
+        <div class="muted">@k.Name</div><div class="kpi">@k.Value</div>
+        <div class="delta">@if (k.IsUp) { <span class="up">▲</span> } else { <span class="down">▼</span> }<span class="muted">@k.Delta</span></div>
+      </div>
+    }
+  </div>
+  <div class="charts">
+    <div class="card col enter">
+      <div class="row2"><span class="h2">Active users</span><span class="muted">@Data.TrafficNow</span></div>
+      <svg viewBox="0 0 600 180" preserveAspectRatio="none" class="chart">
+        <polygon points="@Data.TrafficArea" fill="var(--accent-soft)" />
+        <polyline points="@Data.TrafficLine" fill="none" stroke="var(--accent)" stroke-width="2" vector-effect="non-scaling-stroke" stroke-linejoin="round" />
+      </svg>
+    </div>
+    <div class="card col enter">
+      <span class="h2">Sales by hour</span>
+      <div class="bars">
+        @foreach (var b in Data.Bars)
+        {
+          <div class="barcol"><span class="tiny">@b.Value</span><div class="bar" style="height:@(b.Height.ToString(System.Globalization.CultureInfo.InvariantCulture))px"></div><span class="tiny">@b.Label</span></div>
+        }
+      </div>
+    </div>
+  </div>
+  <div class="card enter">
+    <div class="h2" style="margin-bottom:8px">Recent orders</div>
+    @foreach (var o in Data.RecentOrders)
+    {
+      <div class="order"><span class="muted">@o.Id</span><b>@o.Customer</b><span>@o.Amount</span><span class="badge @o.Status">@(o.Status switch { "paid" => "Paid", "pending" => "Pending", _ => "Failed" })</span></div>
+    }
+  </div>
+</div>
+@code {
+    protected override void OnInitialized() => Data.Changed += OnChanged;
+    private void OnChanged() => InvokeAsync(StateHasChanged);
+    public void Dispose() => Data.Changed -= OnChanged;
+}

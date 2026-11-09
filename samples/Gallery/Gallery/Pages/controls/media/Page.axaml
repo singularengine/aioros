@@ -1,0 +1,70 @@
+<UserControl xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:a="https://aioros.dev" a:Page.Title="Media">
+  <UserControl.Resources>
+    <StreamGeometry x:Key="Heart">M12,21.35 L10.55,20.03 C5.4,15.36 2,12.28 2,8.5 C2,5.42 4.42,3 7.5,3 C9.24,3 10.91,3.81 12,5.09 C13.09,3.81 14.76,3 16.5,3 C19.58,3 22,5.42 22,8.5 C22,12.28 18.6,15.36 13.45,20.04 Z</StreamGeometry>
+    <StreamGeometry x:Key="Star">M12,2 L15.09,8.26 L22,9.27 L17,14.14 L18.18,21.02 L12,17.77 L5.82,21.02 L7,14.14 L2,9.27 L8.91,8.26 Z</StreamGeometry>
+  </UserControl.Resources>
+  <StackPanel Spacing="20">
+    <TextBlock Classes="h1" Text="Media" />
+
+    <Border Classes="card">
+      <StackPanel Spacing="12">
+        <TextBlock Classes="h2" Text="Path" />
+        <StackPanel Orientation="Horizontal" Spacing="24">
+          <Path Data="{StaticResource Heart}" Fill="#e53935" />
+          <Path Data="{StaticResource Star}" Fill="#fdd835" Stroke="#f57f17" StrokeThickness="2" StrokeJoin="Round" Stretch="Uniform" Width="48" Height="48" />
+          <Path Data="M0,20 C20,-10 40,50 60,20 S100,-10 120,20" Stroke="#1e88e5" StrokeThickness="3" StrokeDashArray="2,1" StrokeLineCap="Round" />
+          <Path Data="M0,0 L40,0 L40,30 Z" Fill="#43a047" Stretch="Fill" Width="80" Height="30" />
+        </StackPanel>
+      </StackPanel>
+    </Border>
+
+    <Border Classes="card">
+      <StackPanel Spacing="12">
+        <TextBlock Classes="h2" Text="PathIcon" />
+        <StackPanel Orientation="Horizontal" Spacing="16">
+          <PathIcon Data="{StaticResource Heart}" />
+          <PathIcon Data="{StaticResource Star}" Foreground="#f9a825" />
+          <PathIcon Data="{StaticResource Heart}" Foreground="#e53935" Width="32" Height="32" />
+        </StackPanel>
+      </StackPanel>
+    </Border>
+
+    <Border Classes="card">
+      <StackPanel Spacing="12">
+        <TextBlock Classes="h2" Text="Shapes" />
+        <StackPanel Orientation="Horizontal" Spacing="20">
+          <Rectangle Width="70" Height="44" Fill="#90caf9" Stroke="#1565c0" StrokeThickness="2" RadiusX="8" RadiusY="8" />
+          <Ellipse Width="44" Height="44" Fill="#a5d6a7" Stroke="#2e7d32" StrokeThickness="2" />
+          <Line StartPoint="0,0" EndPoint="60,40" Stroke="#6d4c41" StrokeThickness="3" StrokeLineCap="Round" />
+          <Polyline Points="0,40 15,10 30,30 45,0 60,25" Stroke="#8e24aa" StrokeThickness="2" />
+          <Polygon Points="22,0 44,40 0,40" Fill="#ffcc80" Stroke="#ef6c00" StrokeThickness="2" />
+          <Arc Width="44" Height="44" StartAngle="-90" SweepAngle="270" Stroke="#00897b" StrokeThickness="4" />
+          <Sector Width="44" Height="44" StartAngle="0" SweepAngle="120" Fill="#f06292" />
+        </StackPanel>
+      </StackPanel>
+    </Border>
+
+    <Border Classes="card">
+      <StackPanel Spacing="12">
+        <TextBlock Classes="h2" Text="Image" />
+        <StackPanel Orientation="Horizontal" Spacing="16">
+          <Image Source="avares://Gallery/Assets/landscape.png" AutomationProperties.Name="A landscape at sunset" />
+          <Image Source="avares://Gallery/Assets/landscape.png" Width="100" Height="100" Stretch="UniformToFill" AutomationProperties.Name="Cropped landscape" />
+          <Image Source="avares://Gallery/Assets/landscape.png" Width="100" Height="100" Stretch="Fill" AutomationProperties.Name="Stretched landscape" />
+        </StackPanel>
+      </StackPanel>
+    </Border>
+
+    <Border Classes="card">
+      <StackPanel Spacing="12">
+        <TextBlock Classes="h2" Text="Viewbox" />
+        <StackPanel Orientation="Horizontal" Spacing="16">
+          <Viewbox Width="160" Height="60"><TextBlock Text="Scaled text" /></Viewbox>
+          <Border BorderBrush="#26808080" BorderThickness="1">
+            <Viewbox Width="120" Height="60" Stretch="Fill"><Path Data="{StaticResource Star}" Fill="#7e57c2" /></Viewbox>
+          </Border>
+        </StackPanel>
+      </StackPanel>
+    </Border>
+  </StackPanel>
+</UserControl>

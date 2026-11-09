@@ -1,0 +1,10 @@
+<UserControl xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:m="using:Aioros.Targets.Desktop.Tests.Navigation" x:DataType="m:Saving">
+  <StackPanel>
+    <TextBlock Text="{Binding Label}" />
+    <TextBlock Text="{Binding Saved}" />
+    <Button Content="Save" Command="{Binding SaveCommand}" />
+    <Button Content="Break" Command="{Binding BreakCommand}" />
+    <Button Content="Reject" Command="{Binding RejectCommand}" />
+    <Button Content="Leave" Command="{Binding LeaveCommand}" />
+  </StackPanel>
+</UserControl>

@@ -1,0 +1,11 @@
+<UserControl xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:m="using:Aioros.Avalonia.Tests.Models" x:DataType="m:ParityModel">
+  <StackPanel>
+    <StackPanel.Styles>
+      <Style Selector="CheckBox:checked"><Setter Property="Margin" Value="20" /></Style>
+    </StackPanel.Styles>
+    <TextBox Text="{Binding Title}" />
+    <CheckBox Content="Remember" IsThreeState="True" />
+    <TextBlock Text="{Binding Summary}" />
+  </StackPanel>
+</UserControl>

@@ -1,0 +1,17 @@
+bin/
+obj/
+*.user
+.vs/
+.idea/
+TestResults/
+artifacts/
+.claude/
+node_modules/
+.next/
+bench/results/
+samples/Showcase/Showcase/games.db*
+samples/Showcase/Showcase/signin.db*
+.aioros/
+.dotnet/
+__pycache__/
+*.pyc

@@ -1,0 +1,7 @@
+<UserControl xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:a="https://aioros.dev" a:Page.Title="About">
+  <StackPanel Spacing="12">
+    <TextBlock Classes="h1" Text="About" />
+    <TextBlock TextWrapping="Wrap" Text="A page is a folder with a Page.axaml. Layout.axaml wraps every page below it; [id] folders are parameters." />
+  </StackPanel>
+</UserControl>

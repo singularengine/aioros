@@ -1,0 +1,80 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:Lumen.ViewModels"
+             xmlns:data="using:Lumen.Data"
+             xmlns:a="https://aioros.dev"
+             x:DataType="vm:IssueViewModel">
+    <Grid ColumnDefinitions="*,300" a:Web.StackBelow="900">
+      <StackPanel Margin="28,20" Spacing="14">
+        <StackPanel Orientation="Horizontal" Spacing="6">
+          <Border Classes="nav" a:Web.Href="/issues" Padding="4,2"><TextBlock Text="Issues" /></Border>
+          <TextBlock Classes="faint" Text="›" VerticalAlignment="Center" />
+          <TextBlock Classes="muted" Text="{Binding Id}" VerticalAlignment="Center" />
+        </StackPanel>
+        <TextBox Classes="title" Text="{Binding IssueTitle}" PlaceholderText="Issue title" />
+        <TextBox Text="{Binding Description}" AcceptsReturn="True" TextWrapping="Wrap" MinHeight="150" PlaceholderText="Add a description…" />
+        <TextBlock Classes="muted" Text="{Binding Saved}" IsVisible="{Binding HasSaved}" />
+        <StackPanel Orientation="Horizontal" Spacing="8">
+          <Button Classes="accent" Content="Save changes" Command="{Binding SaveCommand}" />
+          <Border Classes="nav" a:Web.Href="/issues" VerticalAlignment="Center"><TextBlock Text="Cancel" /></Border>
+        </StackPanel>
+
+        <Border Classes="card enter" Margin="0,10,0,0">
+          <StackPanel Spacing="12">
+            <TextBlock Classes="caption" Text="ACTIVITY" />
+            <StackPanel Orientation="Horizontal" Spacing="10">
+              <Border Classes="avatar" Background="{Binding AssigneeColor}"><TextBlock Text="{Binding AssigneeInitials}" /></Border>
+              <TextBlock Classes="muted wrap" Text="Assigned the issue and moved it to this status." VerticalAlignment="Center" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Spacing="10">
+              <Border Classes="avatar" Background="#5E6AD2"><TextBlock Text="ED" /></Border>
+              <TextBlock Classes="muted wrap" Text="Created the issue from the projects view." VerticalAlignment="Center" />
+            </StackPanel>
+          </StackPanel>
+        </Border>
+      </StackPanel>
+
+      <Border Grid.Column="1" BorderBrush="{DynamicResource Line}" BorderThickness="1,0,0,0" Padding="18,20">
+        <StackPanel Spacing="16">
+          <StackPanel Spacing="6">
+            <TextBlock Classes="caption" Text="STATUS" />
+            <ComboBox HorizontalAlignment="Stretch" SelectedItem="{Binding Status}" ItemsSource="{x:Static vm:IssueViewModel.StatusOptions}" />
+          </StackPanel>
+          <StackPanel Spacing="6">
+            <TextBlock Classes="caption" Text="PRIORITY" />
+            <ComboBox HorizontalAlignment="Stretch" SelectedItem="{Binding Priority}" ItemsSource="{x:Static vm:IssueViewModel.PriorityOptions}" />
+          </StackPanel>
+          <StackPanel Spacing="6">
+            <TextBlock Classes="caption" Text="ASSIGNEE" />
+            <ComboBox HorizontalAlignment="Stretch" SelectedItem="{Binding Assignee}" ItemsSource="{x:Static vm:IssueViewModel.PeopleOptions}" />
+          </StackPanel>
+          <StackPanel Spacing="6">
+            <TextBlock Classes="caption" Text="LABELS" />
+            <ItemsControl ItemsSource="{Binding Labels}">
+              <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate><WrapPanel ItemSpacing="4" LineSpacing="4" /></ItemsPanelTemplate>
+              </ItemsControl.ItemsPanel>
+              <ItemsControl.ItemTemplate>
+                <DataTemplate x:DataType="data:Label">
+                  <Border Classes="pill">
+                    <StackPanel Orientation="Horizontal" Spacing="5">
+                      <Border Classes="dot" Background="{Binding Color}" VerticalAlignment="Center" />
+                      <TextBlock Classes="small muted" Text="{Binding Name}" VerticalAlignment="Center" />
+                    </StackPanel>
+                  </Border>
+                </DataTemplate>
+              </ItemsControl.ItemTemplate>
+            </ItemsControl>
+          </StackPanel>
+          <StackPanel Spacing="6">
+            <TextBlock Classes="caption" Text="TEAM" />
+            <TextBlock Text="{Binding Team}" />
+          </StackPanel>
+          <StackPanel Spacing="6">
+            <TextBlock Classes="caption" Text="UPDATED" />
+            <TextBlock Classes="muted" Text="{Binding Updated}" />
+          </StackPanel>
+        </StackPanel>
+      </Border>
+    </Grid>
+</UserControl>

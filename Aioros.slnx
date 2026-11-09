@@ -1,0 +1,56 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/Aioros.Abstractions/Aioros.Abstractions.csproj" />
+    <Project Path="src/Aioros.Cli/Aioros.Cli.csproj" />
+    <Project Path="src/Aioros.Generators/Aioros.Generators.csproj" />
+    <Project Path="src/Aioros.CodeFixes/Aioros.CodeFixes.csproj" />
+    <Project Path="src/Aioros.Markup/Aioros.Markup.csproj" />
+    <Project Path="src/Aioros.Routing/Aioros.Routing.csproj" />
+    <Project Path="src/Aioros.Runtime/Aioros.Runtime.csproj" />
+    <Project Path="src/Aioros.Testing/Aioros.Testing.csproj" />
+    <Project Path="src/Aioros/Aioros.csproj" />
+  </Folder>
+  <Folder Name="/src/Adapters/">
+    <Project Path="src/Adapters/Aioros.Avalonia/Aioros.Avalonia.csproj" />
+    <Project Path="src/Adapters/Aioros.ReactiveUI.Generators/Aioros.ReactiveUI.Generators.csproj" />
+    <Project Path="src/Adapters/Aioros.ReactiveUI/Aioros.ReactiveUI.csproj" />
+  </Folder>
+  <Folder Name="/src/Platform/">
+    <Project Path="src/Platform/Aioros.Platform/Aioros.Platform.csproj" />
+  </Folder>
+  <Folder Name="/src/Features/">
+    <Project Path="src/Features/Aioros.Features.HotReload/Aioros.Features.HotReload.csproj" />
+    <Project Path="src/Features/Aioros.Features.Live/Aioros.Features.Live.csproj" />
+  </Folder>
+  <Folder Name="/src/Targets/">
+    <Project Path="src/Targets/Aioros.Targets.Desktop/Aioros.Targets.Desktop.csproj" />
+    <Project Path="src/Targets/Aioros.Targets.Ssr/Aioros.Targets.Ssr.csproj" />
+  </Folder>
+  <Folder Name="/samples/">
+    <Project Path="samples/AdvancedToDoList/AdvancedToDoList/AdvancedToDoList.csproj" />
+    <Project Path="samples/AdvancedToDoList/SharedControls/SharedControls.csproj" />
+    <Project Path="samples/ControlCatalog/ControlCatalog/ControlCatalog.csproj" />
+    <Project Path="samples/Gallery/Gallery/Gallery.csproj" />
+    <Project Path="samples/Kartova/Kartova.Core/Kartova.Core.csproj" />
+    <Project Path="samples/Kartova/Kartova/Kartova.csproj" />
+    <Project Path="samples/Lumen/Lumen/Lumen.csproj" />
+    <Project Path="samples/ReactiveRouting/ReactiveRouting/ReactiveRouting.csproj" />
+    <Project Path="samples/Showcase/Showcase.AppHost/Showcase.AppHost.csproj" />
+    <Project Path="samples/Showcase/Showcase/Showcase.csproj" />
+    <Project Path="samples/Stylet/Stylet.Avalonia/Stylet.Avalonia.csproj" />
+    <Project Path="samples/Stylet/StyletSamples/StyletSamples.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/Aioros.ArchitectureTests/Aioros.ArchitectureTests.csproj" />
+    <Project Path="tests/Aioros.Avalonia.Tests/Aioros.Avalonia.Tests.csproj" />
+    <Project Path="tests/Aioros.Cli.Tests/Aioros.Cli.Tests.csproj" />
+    <Project Path="tests/Aioros.Generators.Tests/Aioros.Generators.Tests.csproj" />
+    <Project Path="tests/Aioros.Markup.Library/Aioros.Markup.Library.csproj" />
+    <Project Path="tests/Aioros.Platform.Tests/Aioros.Platform.Tests.csproj" />
+    <Project Path="tests/Aioros.ReactiveUI.Tests/Aioros.ReactiveUI.Tests.csproj" />
+    <Project Path="tests/Aioros.Routing.Tests/Aioros.Routing.Tests.csproj" />
+    <Project Path="tests/Aioros.Runtime.Tests/Aioros.Runtime.Tests.csproj" />
+    <Project Path="tests/Aioros.Targets.Desktop.Tests/Aioros.Targets.Desktop.Tests.csproj" />
+    <Project Path="tests/Aioros.Targets.Ssr.Tests/Aioros.Targets.Ssr.Tests.csproj" />
+  </Folder>
+</Solution>

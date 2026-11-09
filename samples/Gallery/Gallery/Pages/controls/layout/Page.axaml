@@ -1,0 +1,210 @@
+<UserControl xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:c="using:Gallery.Controls" xmlns:a="https://aioros.dev" a:Page.Title="Layout">
+  <UserControl.Resources>
+    <ControlTheme x:Key="{x:Type c:Badge}" TargetType="c:Badge">
+      <Setter Property="Background" Value="#ffd54f" />
+      <Setter Property="Template">
+        <ControlTemplate>
+          <Border Background="{TemplateBinding Background}" CornerRadius="9" Padding="8,2">
+            <TextBlock Text="{TemplateBinding Label}" FontSize="12" FontWeight="SemiBold" Foreground="#3e2723" />
+          </Border>
+        </ControlTemplate>
+      </Setter>
+    </ControlTheme>
+  </UserControl.Resources>
+  <StackPanel Spacing="20">
+    <TextBlock Classes="h1" Text="Layout" />
+
+    <Border Classes="card">
+      <StackPanel Spacing="12">
+        <TextBlock Classes="h2" Text="Panel" />
+        <TextBlock Classes="muted" Text="Children overlay each other in one cell." />
+        <Panel Height="90" Width="220" HorizontalAlignment="Left">
+          <Border Background="#1e88e5" CornerRadius="8" />
+          <TextBlock Text="Overlay" Foreground="White" Margin="12" />
+          <c:Badge Label="New" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="8" />
+        </Panel>
+      </StackPanel>
+    </Border>
+
+    <Border Classes="card">
+      <StackPanel Spacing="12">
+        <TextBlock Classes="h2" Text="DockPanel" />
+        <DockPanel Height="160" HorizontalSpacing="4" VerticalSpacing="4">
+          <Border DockPanel.Dock="Top" Background="#bbdefb" Padding="8"><TextBlock Text="Top" /></Border>
+          <Border DockPanel.Dock="Bottom" Background="#c8e6c9" Padding="8"><TextBlock Text="Bottom" /></Border>
+          <Border DockPanel.Dock="Left" Background="#ffe0b2" Padding="8"><TextBlock Text="Left" /></Border>
+          <Border DockPanel.Dock="Right" Background="#f8bbd0" Padding="8"><TextBlock Text="Right" /></Border>
+          <Border Background="#eeeeee" Padding="8"><TextBlock Text="Fill" /></Border>
+        </DockPanel>
+      </StackPanel>
+    </Border>
+
+    <Border Classes="card">
+      <StackPanel Spacing="12">
+        <TextBlock Classes="h2" Text="RelativePanel" />
+        <RelativePanel Height="120">
+          <Border Name="Anchor" Width="90" Height="40" Background="#7e57c2" CornerRadius="6"><TextBlock Text="Anchor" Foreground="White" Margin="8" /></Border>
+          <Border Width="90" Height="40" Background="#26a69a" CornerRadius="6" RelativePanel.RightOf="Anchor" RelativePanel.AlignTopWith="Anchor" Margin="8,0,0,0"><TextBlock Text="RightOf" Foreground="White" Margin="8" /></Border>
+          <Border Width="90" Height="40" Background="#ef5350" CornerRadius="6" RelativePanel.Below="Anchor" RelativePanel.AlignLeftWith="Anchor" Margin="0,8,0,0"><TextBlock Text="Below" Foreground="White" Margin="8" /></Border>
+          <Border Width="110" Height="40" Background="#5c6bc0" CornerRadius="6" RelativePanel.AlignRightWithPanel="True" RelativePanel.AlignBottomWithPanel="True"><TextBlock Text="Bottom right" Foreground="White" Margin="8" /></Border>
+        </RelativePanel>
+      </StackPanel>
+    </Border>
+
+    <Border Classes="card">
+      <StackPanel Spacing="12">
+        <TextBlock Classes="h2" Text="ReversibleStackPanel" />
+        <ReversibleStackPanel Orientation="Horizontal" ReverseOrder="True" Spacing="8">
+          <Border Background="#e3f2fd" Padding="10,6"><TextBlock Text="1 first" /></Border>
+          <Border Background="#e3f2fd" Padding="10,6"><TextBlock Text="2 second" /></Border>
+          <Border Background="#e3f2fd" Padding="10,6"><TextBlock Text="3 third" /></Border>
+        </ReversibleStackPanel>
+      </StackPanel>
+    </Border>
+
+    <Border Classes="card">
+      <StackPanel Spacing="12">
+        <TextBlock Classes="h2" Text="GridSplitter" />
+        <TextBlock Classes="muted" Text="A static divider: resizing needs script." />
+        <Grid ColumnDefinitions="*,Auto,*" Height="60">
+          <Border Background="#f3e5f5" Padding="8"><TextBlock Text="Left pane" /></Border>
+          <GridSplitter Grid.Column="1" Background="#9e9e9e" />
+          <Border Grid.Column="2" Background="#e8f5e9" Padding="8"><TextBlock Text="Right pane" /></Border>
+        </Grid>
+      </StackPanel>
+    </Border>
+
+    <Border Classes="card">
+      <StackPanel Spacing="12">
+        <TextBlock Classes="h2" Text="Transforms" />
+        <StackPanel Orientation="Horizontal" Spacing="40" Margin="16">
+          <Border Width="60" Height="40" Background="#42a5f5" RenderTransform="rotate(20deg)" />
+          <Border Width="60" Height="40" Background="#66bb6a" RenderTransform="scale(1.2,0.8)" />
+          <Border Width="60" Height="40" Background="#ffa726" RenderTransform="skewX(-20deg)" />
+          <Border Width="60" Height="40" Background="#ab47bc" RenderTransformOrigin="0,0" RenderTransform="translate(10px,10px) rotate(10deg)" />
+          <LayoutTransformControl VerticalAlignment="Center">
+            <LayoutTransformControl.LayoutTransform><RotateTransform Angle="-90" /></LayoutTransformControl.LayoutTransform>
+            <TextBlock Text="Layout transform" />
+          </LayoutTransformControl>
+        </StackPanel>
+      </StackPanel>
+    </Border>
+
+    <Border Classes="card">
+      <StackPanel Spacing="12">
+        <TextBlock Classes="h2" Text="Separator, GroupBox and HeaderedContentControl" />
+        <TextBlock Text="Above the separator" />
+        <Separator />
+        <TextBlock Text="Below the separator" />
+        <GroupBox Header="Shipping">
+          <StackPanel Spacing="6">
+            <TextBlock Text="Standard: 3 to 5 days" />
+            <TextBlock Text="Express: next day" />
+          </StackPanel>
+        </GroupBox>
+        <HeaderedContentControl Header="Header" Content="The content below its header." BorderBrush="#26808080" BorderThickness="1" CornerRadius="6" />
+      </StackPanel>
+    </Border>
+
+    <Border Classes="card">
+      <StackPanel Spacing="12">
+        <TextBlock Classes="h2" Text="ThemeVariantScope" />
+        <StackPanel Orientation="Horizontal" Spacing="12">
+          <ThemeVariantScope RequestedThemeVariant="Light">
+            <Border Background="{DynamicResource SystemControlBackgroundAltHighBrush}" BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}" BorderThickness="1" Padding="12" CornerRadius="8">
+              <TextBlock Text="Light scope" />
+            </Border>
+          </ThemeVariantScope>
+          <ThemeVariantScope RequestedThemeVariant="Dark">
+            <Border Background="{DynamicResource SystemControlBackgroundAltHighBrush}" BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}" BorderThickness="1" Padding="12" CornerRadius="8">
+              <TextBlock Text="Dark scope" />
+            </Border>
+          </ThemeVariantScope>
+        </StackPanel>
+      </StackPanel>
+    </Border>
+
+    <Border Classes="card">
+      <StackPanel Spacing="12">
+        <TextBlock Classes="h2" Text="ExperimentalAcrylicBorder" />
+        <Panel Height="120">
+          <Border CornerRadius="8">
+            <Border.Background>
+              <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
+                <GradientStop Offset="0" Color="#ff7043" />
+                <GradientStop Offset="0.5" Color="#ab47bc" />
+                <GradientStop Offset="1" Color="#29b6f6" />
+              </LinearGradientBrush>
+            </Border.Background>
+          </Border>
+          <ExperimentalAcrylicBorder CornerRadius="8" Margin="24" Padding="12">
+            <ExperimentalAcrylicBorder.Material>
+              <ExperimentalAcrylicMaterial TintColor="White" TintOpacity="0.4" MaterialOpacity="0.5" />
+            </ExperimentalAcrylicBorder.Material>
+            <TextBlock Text="Acrylic over a gradient" />
+          </ExperimentalAcrylicBorder>
+        </Panel>
+      </StackPanel>
+    </Border>
+
+    <Border Classes="card">
+      <StackPanel Spacing="12">
+        <TextBlock Classes="h2" Text="Virtualizing panels" />
+        <ItemsControl>
+          <ItemsControl.ItemsPanel><ItemsPanelTemplate><VirtualizingStackPanel Orientation="Horizontal" /></ItemsPanelTemplate></ItemsControl.ItemsPanel>
+          <Border Background="#e0f7fa" Padding="10,6" Margin="0,0,8,0"><TextBlock Text="One" /></Border>
+          <Border Background="#e0f7fa" Padding="10,6" Margin="0,0,8,0"><TextBlock Text="Two" /></Border>
+          <Border Background="#e0f7fa" Padding="10,6" Margin="0,0,8,0"><TextBlock Text="Three" /></Border>
+        </ItemsControl>
+        <Carousel SelectedIndex="1" Height="40">
+          <Border Background="#fff3e0" Padding="10"><TextBlock Text="First slide" /></Border>
+          <Border Background="#fff3e0" Padding="10"><TextBlock Text="Second slide, selected" /></Border>
+        </Carousel>
+      </StackPanel>
+    </Border>
+
+    <Border Classes="card">
+      <StackPanel Spacing="12">
+        <TextBlock Classes="h2" Text="Brushes and effects" />
+        <UniformGrid Columns="3" ColumnSpacing="12">
+          <Border Height="70" CornerRadius="8">
+            <Border.Background>
+              <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,0%"><GradientStop Offset="0" Color="#43a047" /><GradientStop Offset="1" Color="#1e88e5" /></LinearGradientBrush>
+            </Border.Background>
+          </Border>
+          <Border Height="70" CornerRadius="8">
+            <Border.Background>
+              <RadialGradientBrush Center="50%,50%" RadiusX="50%" RadiusY="50%"><GradientStop Offset="0" Color="#fff176" /><GradientStop Offset="1" Color="#e65100" /></RadialGradientBrush>
+            </Border.Background>
+          </Border>
+          <Border Height="70" CornerRadius="8">
+            <Border.Background>
+              <ConicGradientBrush Center="50%,50%"><GradientStop Offset="0" Color="#e53935" /><GradientStop Offset="0.33" Color="#fdd835" /><GradientStop Offset="0.66" Color="#1e88e5" /><GradientStop Offset="1" Color="#e53935" /></ConicGradientBrush>
+            </Border.Background>
+          </Border>
+        </UniformGrid>
+        <StackPanel Orientation="Horizontal" Spacing="12">
+          <Border Width="80" Height="50" Background="#5c6bc0" Opacity="0.5" CornerRadius="6"><TextBlock Text="Opacity" Foreground="White" Margin="6" /></Border>
+          <Border Width="80" Height="50" Background="#26a69a" ClipToBounds="True" CornerRadius="6">
+            <TextBlock Text="Clipped text that overflows" Foreground="White" Margin="6" />
+          </Border>
+          <Panel Width="100" Height="50">
+            <Border Width="60" Height="40" Background="#ef5350" HorizontalAlignment="Left" ZIndex="2" />
+            <Border Width="60" Height="40" Background="#ffca28" HorizontalAlignment="Right" VerticalAlignment="Bottom" />
+          </Panel>
+        </StackPanel>
+      </StackPanel>
+    </Border>
+
+    <Border Classes="card">
+      <StackPanel Spacing="12">
+        <TextBlock Classes="h2" Text="Custom controls" />
+        <StackPanel Orientation="Horizontal" Spacing="16">
+          <c:Badge Label="Templated" VerticalAlignment="Center" />
+          <c:Sparkline Width="160" Height="40" />
+        </StackPanel>
+      </StackPanel>
+    </Border>
+  </StackPanel>
+</UserControl>

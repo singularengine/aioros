@@ -1,0 +1,7 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:a="https://aioros.dev"
+             xmlns:dialog="using:Stylet.Samples.HelloDialog"
+             a:Page.Title="Hello Dialog"
+             a:Page.Platforms="Desktop">
+    <dialog:ShellView />
+</UserControl>

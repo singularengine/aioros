@@ -1,0 +1,11 @@
+<UserControl xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:v="using:Aioros.Avalonia.Tests.Views"
+             xmlns:m="using:Aioros.Avalonia.Tests.Models" x:DataType="m:Ledger">
+  <StackPanel>
+    <CheckBox IsChecked="{Binding Flag}" Content="Page flag" />
+    <TextBox Text="{Binding Name}" />
+    <v:Counter />
+    <v:Counter />
+    <Button Content="Page save" Command="{Binding SaveCommand}" CommandParameter="{Binding Token}" />
+  </StackPanel>
+</UserControl>

@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <Description>Aioros's web hints for Avalonia XAML (a:Web.Tag, a:Web.Href, ...): attached properties a library or an app sets in its views and control themes, read once when Aioros traces a page for the web and ignored on the native targets. References Avalonia only.</Description>
+    <PackageTags>avalonia;xaml;web;html;semantics</PackageTags>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Avalonia" />
+  </ItemGroup>
+  <ItemGroup>
+    <InternalsVisibleTo Include="Aioros.Avalonia.Tests" />
+  </ItemGroup>
+</Project>

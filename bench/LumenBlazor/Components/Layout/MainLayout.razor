@@ -1,0 +1,67 @@
+@inherits LayoutComponentBase
+@inject NavigationManager Nav
+@inject LumenRender Render
+
+<div class="app @(drawer ? "drawer" : "")">
+  @if (Render.Static)
+  {
+    <input type="checkbox" id="drawer" class="drawer-toggle" hidden />
+    <label class="backdrop" for="drawer"></label>
+  }
+  else
+  {
+    <div class="backdrop" @onclick="() => drawer = false"></div>
+  }
+  <aside class="sidebar">
+    <a class="brand" href="/issues"><span class="logo"><Icon Kind="zap" Size="13" /></span>Lumen</a>
+    <a class="nav search" href="/issues"><Icon Kind="search" Size="14" /><span class="label">Search…</span><span class="small">⌘K</span></a>
+    <NavLink class="nav" href="/inbox"><Icon Kind="inbox" /><span class="label">Inbox</span><span class="count">3</span></NavLink>
+    <NavLink class="nav" href="/issues" Match="NavLinkMatch.Prefix"><Icon Kind="issues" /><span class="label">Issues</span></NavLink>
+    <NavLink class="nav" href="/projects"><Icon Kind="projects" /><span class="label">Projects</span></NavLink>
+    <NavLink class="nav" href="/dashboard"><Icon Kind="dashboard" /><span class="label">Dashboard</span><span class="live-dot"></span></NavLink>
+    @if (Render.Static)
+    {
+      <details class="section" open><summary class="summary">@chevron<span class="caption">YOUR TEAMS</span></summary>@teamLinks</details>
+      <details class="section"><summary class="summary">@chevron<span class="caption">FAVORITES</span></summary>@favoriteLinks</details>
+    }
+    else
+    {
+      <div class="section @(teams ? "open" : "")">
+        <button class="summary" @onclick="() => teams = !teams">@chevron<span class="caption">YOUR TEAMS</span></button>
+        @if (teams) { @teamLinks }
+      </div>
+      <div class="section @(favs ? "open" : "")">
+        <button class="summary" @onclick="() => favs = !favs">@chevron<span class="caption">FAVORITES</span></button>
+        @if (favs) { @favoriteLinks }
+      </div>
+    }
+    <div class="grow"></div>
+    <NavLink class="nav" href="/settings"><Icon Kind="settings" /><span class="label">Settings</span></NavLink>
+  </aside>
+  <div class="main">
+    <div class="panel">
+      <CascadingValue Value="this" IsFixed="true">@Body</CascadingValue>
+    </div>
+  </div>
+</div>
+
+@code {
+    private bool drawer, teams = true, favs;
+    public bool Static => Render.Static;
+    public void ToggleDrawer() { drawer = !drawer; StateHasChanged(); }
+    public void ToggleTheme() => Nav.NavigateTo("/theme/toggle", forceLoad: true);
+    protected override void OnInitialized() => Nav.LocationChanged += (_, _) => { if (drawer) { drawer = false; InvokeAsync(StateHasChanged); } };
+
+    private static readonly RenderFragment chevron = @<svg class="chev" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>;
+    private static readonly RenderFragment teamLinks =
+        @<div class="stack enter">
+          <a class="nav" href="/projects"><span class="team" style="background:#4ea7fc"></span><span class="label">Engineering</span></a>
+          <a class="nav" href="/projects"><span class="team" style="background:#bb87fc"></span><span class="label">Design</span></a>
+          <a class="nav" href="/projects"><span class="team" style="background:#f2994a"></span><span class="label">Product</span></a>
+        </div>;
+    private static readonly RenderFragment favoriteLinks =
+        @<div class="stack enter">
+          <a class="nav" href="/issues/LUM-101"><Icon Kind="status-progress" Color="#f2c94c" /><span class="label">Server rendering</span></a>
+          <a class="nav" href="/issues/LUM-102"><Icon Kind="status-review" Color="#4cb782" /><span class="label">Dark mode</span></a>
+        </div>;
+}

@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <PackageReference Include="Avalonia.Desktop" />
+    <PackageReference Include="Velopack" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" />
+    <ProjectReference Include="..\..\Aioros.Abstractions\Aioros.Abstractions.csproj" />
+    <ProjectReference Include="..\..\Aioros.Runtime\Aioros.Runtime.csproj" />
+    <ProjectReference Include="..\..\Aioros.Routing\Aioros.Routing.csproj" />
+    <ProjectReference Include="..\..\Adapters\Aioros.Avalonia\Aioros.Avalonia.csproj" />
+    <ProjectReference Include="..\..\Platform\Aioros.Platform\Aioros.Platform.csproj" />
+  </ItemGroup>
+</Project>

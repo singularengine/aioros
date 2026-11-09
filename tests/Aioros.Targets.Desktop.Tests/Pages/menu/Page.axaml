@@ -1,0 +1,17 @@
+<UserControl xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:m="using:Aioros.Targets.Desktop.Tests.Navigation" x:DataType="m:Later">
+  <StackPanel>
+    <Menu>
+      <MenuItem Header="Send" Command="{Binding SendCommand}" />
+      <MenuItem Header="More">
+        <MenuItem Header="Break" Command="{Binding BreakCommand}" />
+      </MenuItem>
+    </Menu>
+    <Border Name="Area" Height="20">
+      <Border.ContextMenu>
+        <ContextMenu>
+          <MenuItem Header="Send again" Command="{Binding SendCommand}" />
+        </ContextMenu>
+      </Border.ContextMenu>
+    </Border>
+  </StackPanel>
+</UserControl>

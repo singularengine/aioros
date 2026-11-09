@@ -1,0 +1,64 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:controls="clr-namespace:SharedControls.Controls;assembly=SharedControls"
+             xmlns:viewModels="clr-namespace:AdvancedToDoList.ViewModels"
+             xmlns:a="https://aioros.dev"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             a:Page.Title="Settings"
+             x:DataType="viewModels:SettingsViewModel">
+    <ScrollViewer MaxWidth="400">
+        <StackPanel Spacing="10" 
+                    Grid.IsSharedSizeScope="True"
+                    Margin="10">
+            
+            <!-- The appearance changes the whole app: the installed app only; the web follows the browser's theme -->
+            <StackPanel Spacing="10" IsVisible="{a:OnPlatform Default=True, Web=False}">
+            <TextBlock Classes="h1" Text="Appearance"></TextBlock>
+
+            <!-- Selects the AppTheme -->
+            <controls:LabeledControl Header="Theme">
+                <ComboBox SelectedItem="{Binding Settings.AppTheme}"
+                          ItemsSource="{Binding AvailableThemeVariants}"/>
+            </controls:LabeledControl>
+            
+            <!-- Selects the AccentColor -->
+            <controls:LabeledControl Header="Accent">
+                <ColorPicker Color="{Binding Settings.AccentColor}"
+                             HorizontalAlignment="Left"
+                             IsAlphaEnabled="False"
+                             IsAlphaVisible="False" />
+            </controls:LabeledControl>
+            </StackPanel>
+
+            <!-- Options to Import or Export the TodoList -->
+            <TextBlock Classes="h1" Text="Import / Export" />
+            <Button HorizontalAlignment="Stretch"
+                    HorizontalContentAlignment="Center"
+                    IsVisible="{a:OnPlatform Default=True, Web=False}"
+                    Command="{Binding ExportDataCommand}"
+                    Content="Export the current To-Do list"></Button>
+            <!-- On the web, the export is a download -->
+            <HyperlinkButton HorizontalAlignment="Stretch"
+                             HorizontalContentAlignment="Center"
+                             IsVisible="{a:OnPlatform Default=False, Web=True}"
+                             NavigateUri="/export.json"
+                             Content="Export the current To-Do list" />
+            <!-- The import opens a file: the installed app only -->
+            <Button HorizontalAlignment="Stretch"
+                    HorizontalContentAlignment="Center"
+                    IsVisible="{a:OnPlatform Default=True, Web=False}"
+                    Command="{Binding ImportDataCommand}"
+                    Content="Import an existing To-Do list"></Button>
+            <TextBlock Text="{Binding Message}"
+                       IsVisible="{Binding Message, Converter={x:Static ObjectConverters.IsNotNull}}" />
+            
+            <TextBlock Classes="h1" Text="DANGER Zone" />
+            <Button HorizontalAlignment="Stretch"
+                    HorizontalContentAlignment="Center"
+                    Command="{Binding ClearDatabaseCommand}"
+                    Content="Clear the current To-Do list" />
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

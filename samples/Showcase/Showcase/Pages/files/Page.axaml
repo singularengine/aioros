@@ -1,0 +1,12 @@
+<UserControl xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:a="https://aioros.dev" xmlns:n="using:Showcase.Native"
+             a:Page.Title="Files"
+             a:Page.Description="Choose a folder on this computer and see what it holds, through the system folder picker that only the installed app can open."
+             a:Page.Platforms="Desktop">
+  <StackPanel Spacing="20" MaxWidth="760" HorizontalAlignment="Left">
+    <TextBlock Classes="eyebrow" Text="NATIVE ONLY · STORAGE PROVIDER" />
+    <TextBlock Classes="h1" Text="Files on this computer" />
+    <TextBlock Classes="muted wrap" Text="This page opens the system folder picker through the StorageProvider, which a website cannot do. It is declared with a:Page.Platforms=&quot;Desktop&quot;: the installed app shows it, and the website answers its route with an invitation to open or install the app." />
+    <n:FolderBrowser />
+  </StackPanel>
+</UserControl>

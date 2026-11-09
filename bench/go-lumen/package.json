@@ -1,0 +1,6 @@
+{
+  "name": "go-lumen-assets",
+  "private": true,
+  "description": "htmx and its SSE extension for the Go variant of Lumen, served by the Go server from node_modules",
+  "dependencies": { "htmx.org": "2.0.11", "htmx-ext-sse": "2.2.4" }
+}

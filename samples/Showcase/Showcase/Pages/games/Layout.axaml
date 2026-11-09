@@ -1,0 +1,47 @@
+<UserControl xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:a="https://aioros.dev" xmlns:g="using:Showcase.Games" x:DataType="g:StoreShellModel">
+  <Border Classes="store">
+    <StackPanel Spacing="22">
+      <Grid ColumnDefinitions="Auto,*,Auto" a:Web.StackBelow="760">
+        <Border a:Web.Href="/games" Padding="2">
+          <StackPanel Orientation="Horizontal" Spacing="10">
+            <Border Width="34" Height="34" CornerRadius="10">
+              <Border.Background>
+                <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
+                  <GradientStop Offset="0" Color="#66C0F4" />
+                  <GradientStop Offset="1" Color="#2A6FDB" />
+                </LinearGradientBrush>
+              </Border.Background>
+              <a:Icon Kind="gamepad-2" Size="20" Foreground="#FFFFFF" HorizontalAlignment="Center" VerticalAlignment="Center" />
+            </Border>
+            <StackPanel VerticalAlignment="Center">
+              <TextBlock Classes="g-white" Text="AIOROS GAMES" FontWeight="Bold" FontSize="15" />
+              <TextBlock Classes="g-muted small" Text="EF Core · ASP.NET Core Identity" />
+            </StackPanel>
+          </StackPanel>
+        </Border>
+        <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="4" Margin="28,0,0,0" VerticalAlignment="Center" a:Web.Tag="nav">
+          <Border Classes="g-tab" a:Web.Href="/games" a:Web.Exact="True"><TextBlock Text="Store" FontWeight="SemiBold" /></Border>
+          <Border Classes="g-tab" a:Web.Href="/games/library"><TextBlock Text="Library" FontWeight="SemiBold" /></Border>
+          <Border Classes="g-tab" a:Web.Href="/games/account"><TextBlock Text="Account" FontWeight="SemiBold" /></Border>
+          <Border Classes="g-tab" a:Web.Href="/games/lab">
+            <StackPanel Orientation="Horizontal" Spacing="7"><a:Icon Kind="cpu" Size="15" Foreground="#66C0F4" VerticalAlignment="Center" /><TextBlock Text="Concurrency lab" FontWeight="SemiBold" /></StackPanel>
+          </Border>
+        </StackPanel>
+        <StackPanel Grid.Column="2" Orientation="Horizontal" Spacing="10" VerticalAlignment="Center">
+          <Border Classes="g-avatar" Background="#2A475E">
+            <TextBlock Text="{Binding Initial}" FontWeight="Bold" Foreground="#66C0F4" HorizontalAlignment="Center" VerticalAlignment="Center" />
+          </Border>
+          <StackPanel VerticalAlignment="Center">
+            <TextBlock Classes="g-white" Text="{Binding UserName}" FontWeight="SemiBold" />
+            <TextBlock Classes="g-muted small" Text="Signed in" />
+          </StackPanel>
+          <Button Classes="g-quiet" Command="{Binding SignOutCommand}" AutomationProperties.Name="Sign out">
+            <StackPanel Orientation="Horizontal" Spacing="6"><a:Icon Kind="log-out" Size="15" VerticalAlignment="Center" /><TextBlock Text="Sign out" /></StackPanel>
+          </Button>
+        </StackPanel>
+      </Grid>
+      <a:Outlet />
+    </StackPanel>
+  </Border>
+</UserControl>

@@ -1,0 +1,2 @@
+M:System.Threading.Tasks.Task.Delay(System.TimeSpan,System.TimeProvider);Waits on time in a test. Drive time with FakeTimeProvider.Advance and await the event or signal that states the thing happened.
+M:System.Threading.Tasks.Task.Delay(System.TimeSpan,System.TimeProvider,System.Threading.CancellationToken);Waits on time in a test. Drive time with FakeTimeProvider.Advance and await the event or signal that states the thing happened.

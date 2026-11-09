@@ -1,0 +1,14 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:m="using:Aioros.Avalonia.Tests.Models">
+  <ControlTheme x:Key="{x:Type m:Confirm}" TargetType="m:Confirm">
+    <Setter Property="Template">
+      <ControlTemplate TargetType="m:Confirm">
+        <StackPanel>
+          <ContentPresenter Name="PART_ContentPresenter" Content="{TemplateBinding Content}" />
+          <TextBlock Name="PART_State" />
+          <Button Name="PART_Ok" Content="OK" />
+        </StackPanel>
+      </ControlTemplate>
+    </Setter>
+  </ControlTheme>
+</ResourceDictionary>

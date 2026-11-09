@@ -1,0 +1,9 @@
+<UserControl xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:a="https://aioros.dev"
+             xmlns:v="using:Aioros.Targets.Desktop.Tests.Views" xmlns:m="using:Aioros.Targets.Desktop.Tests.Navigation" x:DataType="m:Item">
+  <StackPanel>
+    <TextBlock Text="{Binding Label}" />
+    <v:Badge />
+    <a:View Source="/Pages/items/[id]/Page.axaml" />
+    <v:Badge />
+  </StackPanel>
+</UserControl>

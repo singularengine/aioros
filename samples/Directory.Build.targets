@@ -1,0 +1,7 @@
+<Project>
+  <Import Project="$(MSBuildThisFileDirectory)../src/Aioros/build/Aioros.targets" Condition="'$(AiorosHost)' != 'true'" />
+  <ItemGroup Condition="'$(AiorosHost)' != 'true'">
+    <ProjectReference Include="$(MSBuildThisFileDirectory)../src/Aioros/Aioros.csproj" />
+    <ProjectReference Include="$(MSBuildThisFileDirectory)../src/Aioros.Generators/Aioros.Generators.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
+  </ItemGroup>
+</Project>

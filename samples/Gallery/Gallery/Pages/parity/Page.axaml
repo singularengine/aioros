@@ -1,0 +1,49 @@
+<UserControl xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:a="https://aioros.dev" xmlns:m="using:Gallery.Models" x:DataType="m:ParityModel"
+             a:Page.Title="Parity report"
+             a:Page.Description="Every control family as the desktop renders it and as Aioros writes it for the browser, with the measured difference.">
+  <StackPanel Spacing="20">
+    <TextBlock Classes="h1" Text="Parity report" />
+    <TextBlock TextWrapping="Wrap" Text="The compatibility bench renders every Gallery page twice, natively (Skia, its own layout) and with Chromium from the HTML Aioros writes, in both themes and in the normal, pointer-over, pressed and focus states, and measures how far apart they are. Each family opens the desktop capture beside the browser's, with the differing pixels marked." />
+    <Border Classes="card">
+      <StackPanel Spacing="10">
+        <Grid ColumnDefinitions="2*,*,*,*,*">
+          <TextBlock Classes="muted" Text="Family" />
+          <TextBlock Grid.Column="1" Classes="muted" Text="Texts" />
+          <TextBlock Grid.Column="2" Classes="muted" Text="Layout" />
+          <TextBlock Grid.Column="3" Classes="muted" Text="Colors" />
+          <TextBlock Grid.Column="4" Classes="muted" Text="Pixels" />
+        </Grid>
+        <ItemsControl ItemsSource="{Binding Families}">
+          <ItemsControl.ItemTemplate>
+            <DataTemplate x:DataType="m:ParityScores">
+              <Border Classes="nav" a:Web.Href="{Binding Href}">
+                <Grid ColumnDefinitions="2*,*,*,*,*">
+                  <TextBlock Text="{Binding Name}" FontWeight="SemiBold" />
+                  <TextBlock Grid.Column="1" Text="{Binding Texts}" />
+                  <TextBlock Grid.Column="2" Text="{Binding Layout}" />
+                  <TextBlock Grid.Column="3" Text="{Binding Colors}" />
+                  <TextBlock Grid.Column="4" Text="{Binding Pixels}" />
+                </Grid>
+              </Border>
+            </DataTemplate>
+          </ItemsControl.ItemTemplate>
+        </ItemsControl>
+        <Border Padding="10,7" BorderThickness="0,1,0,0" BorderBrush="#26808080">
+          <Grid ColumnDefinitions="2*,*,*,*,*">
+            <TextBlock Text="{Binding All.Name}" FontWeight="SemiBold" />
+            <TextBlock Grid.Column="1" Text="{Binding All.Texts}" FontWeight="SemiBold" />
+            <TextBlock Grid.Column="2" Text="{Binding All.Layout}" FontWeight="SemiBold" />
+            <TextBlock Grid.Column="3" Text="{Binding All.Colors}" FontWeight="SemiBold" />
+            <TextBlock Grid.Column="4" Text="{Binding All.Pixels}" FontWeight="SemiBold" />
+          </Grid>
+        </Border>
+      </StackPanel>
+    </Border>
+    <StackPanel Spacing="6">
+      <TextBlock Classes="h2" Text="What the numbers mean" />
+      <TextBlock TextWrapping="Wrap" Text="Texts: the share of the desktop render's visible texts the browser also shows. Layout: the share of those whose box is in the same place and size within one pixel. Colors: the share whose background and ink match. Pixels: the share of painted pixels that match, with the tolerance antialiasing needs. Each number is the mean of the family's eight variants." />
+      <TextBlock Classes="muted" TextWrapping="Wrap" Text="{Binding Measured, StringFormat='Measured on {0} by bench/compat (run.sh gallery --report).'}" />
+    </StackPanel>
+  </StackPanel>
+</UserControl>

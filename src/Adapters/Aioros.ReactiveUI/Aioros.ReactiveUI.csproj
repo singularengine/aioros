@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <Description>Aioros adapter for ReactiveUI: routable view models navigate through the page's navigator and view models activate once per page.</Description>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="ReactiveUI" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" />
+    <ProjectReference Include="..\..\Aioros.Abstractions\Aioros.Abstractions.csproj" />
+    <ProjectReference Include="..\Aioros.ReactiveUI.Generators\Aioros.ReactiveUI.Generators.csproj" ReferenceOutputAssembly="false" PrivateAssets="all" />
+    <None Include="..\Aioros.ReactiveUI.Generators\bin\$(Configuration)\netstandard2.0\Aioros.ReactiveUI.Generators.dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
+  </ItemGroup>
+</Project>

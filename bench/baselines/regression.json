@@ -1,0 +1,5 @@
+{
+ "runner": {"cpu": "Intel(R) Core(TM) i7-14700", "serverCpus": "16-19"},
+ "commit": "b8c6656",
+ "rps": {"/issues": 24207, "/issues/LUM-105": 64165, "/projects": 13613, "/inbox": 45281, "/settings": 50683}
+}

@@ -1,0 +1,45 @@
+<UserControl xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:a="https://aioros.dev" xmlns:s="using:Avalonia.Platform.Storage" xmlns:u="using:Showcase.Uploads"
+             x:DataType="u:UploadsModel"
+             a:Page.Title="Uploads"
+             a:Page.Description="Pick files into a view model's IStorageFile properties: the system picker on the desktop, a file upload on the web, one view model for both.">
+  <StackPanel Spacing="20" MaxWidth="760" HorizontalAlignment="Left">
+    <TextBlock Classes="eyebrow" Text="WEB AND DESKTOP · ISTORAGEFILE" />
+    <TextBlock Classes="h1" Text="Files, picked the same way everywhere" />
+    <TextBlock Classes="muted wrap" Text="The view model holds the standard IStorageFile and reads it with OpenReadAsync. a:FilePicker opens the system picker on the desktop and is a file input on the web, where the file arrives with the form." />
+
+    <Border Classes="card" Padding="20">
+      <StackPanel Spacing="12">
+        <TextBlock Classes="h2" Text="One file" />
+        <TextBlock Classes="muted wrap small" Text="{a:OnPlatform Default='The system picker hands the app the file itself.', Web='The browser sends the file with the form, up to 10 MB.'}" />
+        <StackPanel Orientation="Horizontal" Spacing="8">
+          <a:FilePicker File="{Binding Photo}" Content="Choose a photo">
+            <a:FilePicker.FileTypes>
+              <x:Static Member="s:FilePickerFileTypes.ImageAll" />
+            </a:FilePicker.FileTypes>
+          </a:FilePicker>
+          <Button Classes="accent" Content="Read it" Command="{Binding ReadPhotoCommand}" />
+        </StackPanel>
+        <TextBlock Classes="wrap" Text="{Binding Report}" />
+        <TextBlock Classes="muted wrap small" Text="{Binding Origin}" />
+      </StackPanel>
+    </Border>
+
+    <Border Classes="card" Padding="20">
+      <StackPanel Spacing="12">
+        <TextBlock Classes="h2" Text="Several files" />
+        <StackPanel Orientation="Horizontal" Spacing="8">
+          <a:FilePicker Files="{Binding Documents}" Content="Choose documents" />
+          <Button Content="List them" Command="{Binding ListDocumentsCommand}" />
+        </StackPanel>
+        <ItemsControl ItemsSource="{Binding Listed}">
+          <ItemsControl.ItemTemplate>
+            <DataTemplate x:DataType="x:String">
+              <TextBlock Text="{Binding}" />
+            </DataTemplate>
+          </ItemsControl.ItemTemplate>
+        </ItemsControl>
+      </StackPanel>
+    </Border>
+  </StackPanel>
+</UserControl>

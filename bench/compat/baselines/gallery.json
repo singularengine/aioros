@@ -1,0 +1,498 @@
+{
+  "allowance": {
+    "colors": 1.0,
+    "layout": 1.0,
+    "pixels": 0.5,
+    "texts": 1.0
+  },
+  "routes": {
+    "/controls/navigation": {
+      "allowance": {
+        "pixels": 4.0
+      },
+      "reason": "NotificationCard's enter animation runs on Avalonia's render clock in real time, so the capture catches it at a varying point (up to 3.5 points of pixels between runs of the same code: dark pointer-over 82.01% in bench run 176, 78.5% in CI run 7173, 80.2 to 80.3% in the CI's container on the workstation)"
+    }
+  },
+  "variants": {
+    "/ dark focus": {
+      "colors": 100.0,
+      "layout": 89.47,
+      "pixels": 95.42,
+      "texts": 95.0
+    },
+    "/ dark normal": {
+      "colors": 100.0,
+      "layout": 89.47,
+      "pixels": 99.32,
+      "texts": 95.0
+    },
+    "/ dark pointerover": {
+      "colors": 100.0,
+      "layout": 89.47,
+      "pixels": 99.01,
+      "texts": 95.0
+    },
+    "/ dark pressed": {
+      "colors": 100.0,
+      "layout": 89.47,
+      "pixels": 98.88,
+      "texts": 95.0
+    },
+    "/ light focus": {
+      "colors": 78.95,
+      "layout": 89.47,
+      "pixels": 94.52,
+      "texts": 95.0
+    },
+    "/ light normal": {
+      "colors": 84.21,
+      "layout": 89.47,
+      "pixels": 99.34,
+      "texts": 95.0
+    },
+    "/ light pointerover": {
+      "colors": 84.21,
+      "layout": 89.47,
+      "pixels": 99.07,
+      "texts": 95.0
+    },
+    "/ light pressed": {
+      "colors": 84.21,
+      "layout": 89.47,
+      "pixels": 99.3,
+      "texts": 95.0
+    },
+    "/controls/buttons dark focus": {
+      "colors": 93.33,
+      "layout": 82.22,
+      "pixels": 90.08,
+      "texts": 97.83
+    },
+    "/controls/buttons dark normal": {
+      "colors": 100.0,
+      "layout": 82.22,
+      "pixels": 98.31,
+      "texts": 97.83
+    },
+    "/controls/buttons dark pointerover": {
+      "colors": 100.0,
+      "layout": 82.22,
+      "pixels": 98.05,
+      "texts": 97.83
+    },
+    "/controls/buttons dark pressed": {
+      "colors": 100.0,
+      "layout": 82.22,
+      "pixels": 97.96,
+      "texts": 97.83
+    },
+    "/controls/buttons light focus": {
+      "colors": 80.0,
+      "layout": 82.22,
+      "pixels": 91.55,
+      "texts": 97.83
+    },
+    "/controls/buttons light normal": {
+      "colors": 86.67,
+      "layout": 82.22,
+      "pixels": 98.32,
+      "texts": 97.83
+    },
+    "/controls/buttons light pointerover": {
+      "colors": 86.67,
+      "layout": 82.22,
+      "pixels": 98.09,
+      "texts": 97.83
+    },
+    "/controls/buttons light pressed": {
+      "colors": 86.67,
+      "layout": 82.22,
+      "pixels": 98.3,
+      "texts": 97.83
+    },
+    "/controls/charts dark focus": {
+      "colors": 100.0,
+      "layout": 90.0,
+      "pixels": 88.22,
+      "texts": 95.24
+    },
+    "/controls/charts dark normal": {
+      "colors": 100.0,
+      "layout": 90.0,
+      "pixels": 98.46,
+      "texts": 95.24
+    },
+    "/controls/charts dark pointerover": {
+      "colors": 100.0,
+      "layout": 90.0,
+      "pixels": 98.24,
+      "texts": 95.24
+    },
+    "/controls/charts dark pressed": {
+      "colors": 100.0,
+      "layout": 90.0,
+      "pixels": 98.16,
+      "texts": 95.24
+    },
+    "/controls/charts light focus": {
+      "colors": 80.0,
+      "layout": 90.0,
+      "pixels": 91.91,
+      "texts": 95.24
+    },
+    "/controls/charts light normal": {
+      "colors": 85.0,
+      "layout": 90.0,
+      "pixels": 98.59,
+      "texts": 95.24
+    },
+    "/controls/charts light pointerover": {
+      "colors": 85.0,
+      "layout": 90.0,
+      "pixels": 98.39,
+      "texts": 95.24
+    },
+    "/controls/charts light pressed": {
+      "colors": 85.0,
+      "layout": 90.0,
+      "pixels": 98.57,
+      "texts": 95.24
+    },
+    "/controls/items dark focus": {
+      "colors": 86.67,
+      "layout": 93.33,
+      "pixels": 91.03,
+      "texts": 97.83
+    },
+    "/controls/items dark normal": {
+      "colors": 100.0,
+      "layout": 93.33,
+      "pixels": 99.14,
+      "texts": 97.83
+    },
+    "/controls/items dark pointerover": {
+      "colors": 100.0,
+      "layout": 93.33,
+      "pixels": 98.64,
+      "texts": 97.83
+    },
+    "/controls/items dark pressed": {
+      "colors": 100.0,
+      "layout": 93.33,
+      "pixels": 98.56,
+      "texts": 97.83
+    },
+    "/controls/items light focus": {
+      "colors": 77.78,
+      "layout": 93.33,
+      "pixels": 92.44,
+      "texts": 97.83
+    },
+    "/controls/items light normal": {
+      "colors": 88.89,
+      "layout": 93.33,
+      "pixels": 99.14,
+      "texts": 97.83
+    },
+    "/controls/items light pointerover": {
+      "colors": 88.89,
+      "layout": 93.33,
+      "pixels": 98.66,
+      "texts": 97.83
+    },
+    "/controls/items light pressed": {
+      "colors": 91.11,
+      "layout": 93.33,
+      "pixels": 98.78,
+      "texts": 97.83
+    },
+    "/controls/layout dark focus": {
+      "colors": 80.56,
+      "layout": 94.44,
+      "pixels": 91.98,
+      "texts": 97.3
+    },
+    "/controls/layout dark normal": {
+      "colors": 100.0,
+      "layout": 94.44,
+      "pixels": 99.47,
+      "texts": 97.3
+    },
+    "/controls/layout dark pointerover": {
+      "colors": 100.0,
+      "layout": 94.44,
+      "pixels": 99.26,
+      "texts": 97.3
+    },
+    "/controls/layout dark pressed": {
+      "colors": 100.0,
+      "layout": 94.44,
+      "pixels": 99.2,
+      "texts": 97.3
+    },
+    "/controls/layout light focus": {
+      "colors": 77.78,
+      "layout": 94.44,
+      "pixels": 93.58,
+      "texts": 97.3
+    },
+    "/controls/layout light normal": {
+      "colors": 86.11,
+      "layout": 94.44,
+      "pixels": 99.48,
+      "texts": 97.3
+    },
+    "/controls/layout light pointerover": {
+      "colors": 86.11,
+      "layout": 94.44,
+      "pixels": 99.29,
+      "texts": 97.3
+    },
+    "/controls/layout light pressed": {
+      "colors": 86.11,
+      "layout": 94.44,
+      "pixels": 99.45,
+      "texts": 97.3
+    },
+    "/controls/media dark focus": {
+      "colors": 100.0,
+      "layout": 91.3,
+      "pixels": 89.33,
+      "texts": 95.83
+    },
+    "/controls/media dark normal": {
+      "colors": 100.0,
+      "layout": 91.3,
+      "pixels": 98.7,
+      "texts": 95.83
+    },
+    "/controls/media dark pointerover": {
+      "colors": 100.0,
+      "layout": 91.3,
+      "pixels": 98.47,
+      "texts": 95.83
+    },
+    "/controls/media dark pressed": {
+      "colors": 100.0,
+      "layout": 91.3,
+      "pixels": 98.37,
+      "texts": 95.83
+    },
+    "/controls/media light focus": {
+      "colors": 82.61,
+      "layout": 91.3,
+      "pixels": 91.02,
+      "texts": 95.83
+    },
+    "/controls/media light normal": {
+      "colors": 86.96,
+      "layout": 91.3,
+      "pixels": 98.67,
+      "texts": 95.83
+    },
+    "/controls/media light pointerover": {
+      "colors": 86.96,
+      "layout": 91.3,
+      "pixels": 98.46,
+      "texts": 95.83
+    },
+    "/controls/media light pressed": {
+      "colors": 86.96,
+      "layout": 91.3,
+      "pixels": 98.66,
+      "texts": 95.83
+    },
+    "/controls/navigation dark focus": {
+      "colors": 90.24,
+      "layout": 78.05,
+      "pixels": 89.39,
+      "texts": 97.62
+    },
+    "/controls/navigation dark normal": {
+      "colors": 100.0,
+      "layout": 78.05,
+      "pixels": 99.04,
+      "texts": 97.62
+    },
+    "/controls/navigation dark pointerover": {
+      "colors": 100.0,
+      "layout": 78.05,
+      "pixels": 96.09,
+      "texts": 97.62
+    },
+    "/controls/navigation dark pressed": {
+      "colors": 92.68,
+      "layout": 78.05,
+      "pixels": 95.05,
+      "texts": 97.62
+    },
+    "/controls/navigation light focus": {
+      "colors": 75.61,
+      "layout": 78.05,
+      "pixels": 90.54,
+      "texts": 97.62
+    },
+    "/controls/navigation light normal": {
+      "colors": 82.93,
+      "layout": 78.05,
+      "pixels": 98.94,
+      "texts": 97.62
+    },
+    "/controls/navigation light pointerover": {
+      "colors": 75.61,
+      "layout": 78.05,
+      "pixels": 97.15,
+      "texts": 97.62
+    },
+    "/controls/navigation light pressed": {
+      "colors": 78.05,
+      "layout": 78.05,
+      "pixels": 96.32,
+      "texts": 97.62
+    },
+    "/controls/ranges dark focus": {
+      "colors": 100.0,
+      "layout": 90.91,
+      "pixels": 92.32,
+      "texts": 95.65
+    },
+    "/controls/ranges dark normal": {
+      "colors": 100.0,
+      "layout": 90.91,
+      "pixels": 99.01,
+      "texts": 95.65
+    },
+    "/controls/ranges dark pointerover": {
+      "colors": 100.0,
+      "layout": 90.91,
+      "pixels": 98.75,
+      "texts": 95.65
+    },
+    "/controls/ranges dark pressed": {
+      "colors": 100.0,
+      "layout": 90.91,
+      "pixels": 98.67,
+      "texts": 95.65
+    },
+    "/controls/ranges light focus": {
+      "colors": 86.36,
+      "layout": 90.91,
+      "pixels": 93.09,
+      "texts": 95.65
+    },
+    "/controls/ranges light normal": {
+      "colors": 86.36,
+      "layout": 90.91,
+      "pixels": 99.03,
+      "texts": 95.65
+    },
+    "/controls/ranges light pointerover": {
+      "colors": 86.36,
+      "layout": 90.91,
+      "pixels": 98.8,
+      "texts": 95.65
+    },
+    "/controls/ranges light pressed": {
+      "colors": 86.36,
+      "layout": 90.91,
+      "pixels": 99.02,
+      "texts": 95.65
+    },
+    "/controls/text dark focus": {
+      "colors": 93.94,
+      "layout": 90.91,
+      "pixels": 92.59,
+      "texts": 94.29
+    },
+    "/controls/text dark normal": {
+      "colors": 100.0,
+      "layout": 90.91,
+      "pixels": 98.42,
+      "texts": 94.29
+    },
+    "/controls/text dark pointerover": {
+      "colors": 100.0,
+      "layout": 90.91,
+      "pixels": 98.23,
+      "texts": 94.29
+    },
+    "/controls/text dark pressed": {
+      "colors": 96.97,
+      "layout": 90.91,
+      "pixels": 97.49,
+      "texts": 94.29
+    },
+    "/controls/text light focus": {
+      "colors": 81.82,
+      "layout": 90.91,
+      "pixels": 93.42,
+      "texts": 94.29
+    },
+    "/controls/text light normal": {
+      "colors": 87.88,
+      "layout": 90.91,
+      "pixels": 98.4,
+      "texts": 94.29
+    },
+    "/controls/text light pointerover": {
+      "colors": 87.88,
+      "layout": 90.91,
+      "pixels": 98.24,
+      "texts": 94.29
+    },
+    "/controls/text light pressed": {
+      "colors": 84.85,
+      "layout": 90.91,
+      "pixels": 97.77,
+      "texts": 94.29
+    },
+    "/controls/vectors dark focus": {
+      "colors": 95.45,
+      "layout": 90.91,
+      "pixels": 90.64,
+      "texts": 95.65
+    },
+    "/controls/vectors dark normal": {
+      "colors": 100.0,
+      "layout": 90.91,
+      "pixels": 99.35,
+      "texts": 95.65
+    },
+    "/controls/vectors dark pointerover": {
+      "colors": 100.0,
+      "layout": 90.91,
+      "pixels": 99.13,
+      "texts": 95.65
+    },
+    "/controls/vectors dark pressed": {
+      "colors": 100.0,
+      "layout": 90.91,
+      "pixels": 99.05,
+      "texts": 95.65
+    },
+    "/controls/vectors light focus": {
+      "colors": 77.27,
+      "layout": 90.91,
+      "pixels": 91.85,
+      "texts": 95.65
+    },
+    "/controls/vectors light normal": {
+      "colors": 81.82,
+      "layout": 90.91,
+      "pixels": 99.34,
+      "texts": 95.65
+    },
+    "/controls/vectors light pointerover": {
+      "colors": 81.82,
+      "layout": 90.91,
+      "pixels": 99.14,
+      "texts": 95.65
+    },
+    "/controls/vectors light pressed": {
+      "colors": 81.82,
+      "layout": 90.91,
+      "pixels": 99.33,
+      "texts": 95.65
+    }
+  }
+}

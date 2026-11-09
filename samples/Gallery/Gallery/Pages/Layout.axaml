@@ -1,0 +1,46 @@
+<UserControl xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:a="https://aioros.dev" xmlns:m="using:Gallery.Models" x:DataType="m:ShellModel"
+             a:Page.Title="Aioros Gallery" a:Page.TitleTemplate="%s · Aioros Gallery">
+  <SplitView DisplayMode="Inline" IsPaneOpen="True" OpenPaneLength="240" a:Web.Id="nav" a:Web.CollapseBelow="800">
+    <SplitView.Pane>
+      <StackPanel Margin="16" Spacing="2">
+        <StackPanel Orientation="Horizontal" Spacing="10" Margin="10,0,0,16">
+          <Border Width="28" Height="28" CornerRadius="6.3" Background="#0E1626">
+            <Panel>
+              <Path Data="M18.12,8.23 L19.77,9.88 L6.41,21.59 Z" Fill="#FFC24B" />
+              <Path Data="M22.25,5.75 L15.15,7.9 L18.62,9.38 L20.1,12.85 Z" Fill="#FFD983" />
+            </Panel>
+          </Border>
+          <TextBlock Classes="h2" Text="Aioros Gallery" VerticalAlignment="Center" />
+        </StackPanel>
+        <Border Classes="nav" a:Web.Href="/"><TextBlock Text="Overview" /></Border>
+        <TextBlock Classes="muted" Text="CONTROLS" FontSize="11" Margin="10,16,0,6" />
+        <Border Classes="nav" a:Web.Href="/controls/text"><TextBlock Text="Text" /></Border>
+        <Border Classes="nav" a:Web.Href="/controls/buttons"><TextBlock Text="Buttons" /></Border>
+        <Border Classes="nav" a:Web.Href="/controls/ranges"><TextBlock Text="Ranges and dates" /></Border>
+        <Border Classes="nav" a:Web.Href="/controls/items"><TextBlock Text="Items" /></Border>
+        <Border Classes="nav" a:Web.Href="/controls/navigation"><TextBlock Text="Navigation" /></Border>
+        <Border Classes="nav" a:Web.Href="/controls/media"><TextBlock Text="Media" /></Border>
+        <Border Classes="nav" a:Web.Href="/controls/vectors"><TextBlock Text="Vectors" /></Border>
+        <Border Classes="nav" a:Web.Href="/controls/charts"><TextBlock Text="Charts" /></Border>
+        <Border Classes="nav" a:Web.Href="/controls/layout"><TextBlock Text="Layout" /></Border>
+        <TextBlock Classes="muted" Text="PARITY" FontSize="11" Margin="10,16,0,6" />
+        <Border Classes="nav" a:Web.Href="/parity"><TextBlock Text="Parity report" /></Border>
+      </StackPanel>
+    </SplitView.Pane>
+    <DockPanel>
+      <Border DockPanel.Dock="Top" Padding="16,10" BorderThickness="0,0,0,1" BorderBrush="#26808080">
+        <StackPanel Orientation="Horizontal" Spacing="8">
+          <Button a:Web.Toggles="nav" a:Web.HideAbove="800" Content="Menu" />
+          <TextBlock Classes="muted" Text="{Binding Current}" VerticalAlignment="Center" />
+          <HyperlinkButton NavigateUri="/theme/toggle" Content="Toggle theme" />
+        </StackPanel>
+      </Border>
+      <ScrollViewer>
+        <Border Padding="32" MaxWidth="960">
+          <a:Outlet />
+        </Border>
+      </ScrollViewer>
+    </DockPanel>
+  </SplitView>
+</UserControl>

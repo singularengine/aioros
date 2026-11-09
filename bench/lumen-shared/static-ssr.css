@@ -1,0 +1,7 @@
+/* static SSR markup (bench/LumenBlazor with Lumen__Render=Static, bench/go-lumen): the avatar menu is a native popover anchored to its button, the drawer a checkbox */
+.avatar-btn{anchor-name:--avatar}
+.menu[popover]{position:fixed;inset:auto;margin:6px 0 0;position-anchor:--avatar;position-area:bottom span-left;color:inherit}
+@media (max-width:900px){
+  .app:has(>.drawer-toggle:checked) .sidebar{transform:none;visibility:visible}
+  .app:has(>.drawer-toggle:checked) .backdrop{display:block;position:fixed;inset:0;background:rgba(0,0,0,.35);z-index:25}
+}

@@ -1,0 +1,240 @@
+<Application xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:a="https://aioros.dev"
+             x:Class="Lumen.App"
+             RequestedThemeVariant="Light">
+
+  <Application.Resources>
+    <ResourceDictionary>
+      <!-- Design tokens per theme. Pages use them through {DynamicResource}; the server compiles each page once
+           per theme, so these become the real colors of that theme's CSS. -->
+      <ResourceDictionary.ThemeDictionaries>
+        <ResourceDictionary x:Key="Light">
+          <SolidColorBrush x:Key="AppBg" Color="#F4F5F8" />
+          <SolidColorBrush x:Key="SurfaceBg" Color="#FFFFFF" />
+          <SolidColorBrush x:Key="CardBg" Color="#FFFFFF" />
+          <SolidColorBrush x:Key="CardHover" Color="#F7F8FA" />
+          <SolidColorBrush x:Key="Line" Color="#E5E6EB" />
+          <SolidColorBrush x:Key="Text" Color="#1B1C21" />
+          <SolidColorBrush x:Key="Muted" Color="#6B6F7B" />
+          <SolidColorBrush x:Key="Faint" Color="#9A9DA8" />
+          <SolidColorBrush x:Key="Hover" Color="#E9EAEF" />
+          <SolidColorBrush x:Key="Selected" Color="#E2E3EA" />
+          <SolidColorBrush x:Key="RowHover" Color="#F6F7F9" />
+          <SolidColorBrush x:Key="AccentSoft" Color="#ECEDFB" />
+          <SolidColorBrush x:Key="Chip" Color="#F0F1F4" />
+          <SolidColorBrush x:Key="MenuBackground" Color="#FFFFFF" />
+          <SolidColorBrush x:Key="MenuBorder" Color="#E5E6EB" />
+          <SolidColorBrush x:Key="MenuForeground" Color="#1B1C21" />
+          <SolidColorBrush x:Key="MenuHover" Color="#F0F1F4" />
+          <SolidColorBrush x:Key="ThemeCardLight" Color="#5E6AD2" />
+          <SolidColorBrush x:Key="ThemeCardDark" Color="#E5E6EB" />
+          <x:String x:Key="ThemeIcon">moon</x:String>
+          <x:String x:Key="ThemeName">Light</x:String>
+        </ResourceDictionary>
+        <ResourceDictionary x:Key="Dark">
+          <SolidColorBrush x:Key="AppBg" Color="#0B0C0E" />
+          <SolidColorBrush x:Key="SurfaceBg" Color="#111215" />
+          <SolidColorBrush x:Key="CardBg" Color="#16171B" />
+          <SolidColorBrush x:Key="CardHover" Color="#1B1C21" />
+          <SolidColorBrush x:Key="Line" Color="#24262B" />
+          <SolidColorBrush x:Key="Text" Color="#EDEEF0" />
+          <SolidColorBrush x:Key="Muted" Color="#8B8F98" />
+          <SolidColorBrush x:Key="Faint" Color="#5F636C" />
+          <SolidColorBrush x:Key="Hover" Color="#1A1B1F" />
+          <SolidColorBrush x:Key="Selected" Color="#222329" />
+          <SolidColorBrush x:Key="RowHover" Color="#16171B" />
+          <SolidColorBrush x:Key="AccentSoft" Color="#1F2240" />
+          <SolidColorBrush x:Key="Chip" Color="#1D1E23" />
+          <SolidColorBrush x:Key="MenuBackground" Color="#18191D" />
+          <SolidColorBrush x:Key="MenuBorder" Color="#2A2C32" />
+          <SolidColorBrush x:Key="MenuForeground" Color="#EDEEF0" />
+          <SolidColorBrush x:Key="MenuHover" Color="#24262B" />
+          <SolidColorBrush x:Key="ThemeCardLight" Color="#2A2C32" />
+          <SolidColorBrush x:Key="ThemeCardDark" Color="#6E79E0" />
+          <x:String x:Key="ThemeIcon">sun</x:String>
+          <x:String x:Key="ThemeName">Dark</x:String>
+        </ResourceDictionary>
+      </ResourceDictionary.ThemeDictionaries>
+      <Color x:Key="SystemAccentColor">#5E6AD2</Color>
+      <Color x:Key="SystemAccentColorDark1">#5560C4</Color>
+      <Color x:Key="SystemAccentColorDark2">#4B55B3</Color>
+      <Color x:Key="SystemAccentColorDark3">#414AA0</Color>
+      <Color x:Key="SystemAccentColorLight1">#6E79E0</Color>
+      <Color x:Key="SystemAccentColorLight2">#838DE8</Color>
+      <Color x:Key="SystemAccentColorLight3">#9AA2EE</Color>
+
+    </ResourceDictionary>
+  </Application.Resources>
+
+  <Application.Styles>
+    <FluentTheme />
+
+    <Style Selector="Window">
+      <Setter Property="Background" Value="{DynamicResource AppBg}" />
+      <Setter Property="Foreground" Value="{DynamicResource Text}" />
+      <Setter Property="FontSize" Value="13" />
+    </Style>
+
+    <!-- Typography -->
+    <Style Selector="TextBlock">
+      <Setter Property="TextWrapping" Value="NoWrap" />
+    </Style>
+    <Style Selector="TextBlock.h1">
+      <Setter Property="FontSize" Value="22" />
+      <Setter Property="FontWeight" Value="SemiBold" />
+    </Style>
+    <Style Selector="TextBlock.h2">
+      <Setter Property="FontSize" Value="15" />
+      <Setter Property="FontWeight" Value="SemiBold" />
+    </Style>
+    <Style Selector="TextBlock.muted"><Setter Property="Foreground" Value="{DynamicResource Muted}" /></Style>
+    <Style Selector="TextBlock.faint"><Setter Property="Foreground" Value="{DynamicResource Faint}" /></Style>
+    <Style Selector="TextBlock.wrap"><Setter Property="TextWrapping" Value="Wrap" /></Style>
+    <Style Selector="TextBlock.caption">
+      <Setter Property="FontSize" Value="11" />
+      <Setter Property="FontWeight" Value="SemiBold" />
+      <Setter Property="Foreground" Value="{DynamicResource Faint}" />
+    </Style>
+    <Style Selector="TextBlock.small"><Setter Property="FontSize" Value="12" /></Style>
+    <Style Selector="TextBlock.error">
+      <Setter Property="Foreground" Value="#E5484D" />
+      <Setter Property="FontWeight" Value="SemiBold" />
+    </Style>
+    <Style Selector="TextBlock.success">
+      <Setter Property="Foreground" Value="#30A46C" />
+      <Setter Property="FontWeight" Value="SemiBold" />
+    </Style>
+    <Style Selector="TextBox.title">
+      <Setter Property="FontSize" Value="22" />
+      <Setter Property="FontWeight" Value="SemiBold" />
+    </Style>
+    <Style Selector="TextBox.title /template/ Border#PART_BorderElement">
+      <Setter Property="BorderThickness" Value="0" />
+      <Setter Property="Background" Value="Transparent" />
+    </Style>
+
+    <!-- Sidebar navigation: hover and active looks become CSS :hover rules and classes -->
+    <Style Selector="Border.nav">
+      <Setter Property="Padding" Value="8,6" />
+      <Setter Property="CornerRadius" Value="6" />
+      <Setter Property="Background" Value="Transparent" />
+    </Style>
+    <Style Selector="Border.nav:pointerover"><Setter Property="Background" Value="{DynamicResource Hover}" /></Style>
+    <Style Selector="Border.nav:current"><Setter Property="Background" Value="{DynamicResource Selected}" /></Style>
+    <Style Selector="Border.nav TextBlock"><Setter Property="Foreground" Value="{DynamicResource Muted}" /></Style>
+    <Style Selector="Border.nav a|Icon"><Setter Property="Foreground" Value="{DynamicResource Muted}" /></Style>
+    <Style Selector="Border.nav:current TextBlock"><Setter Property="Foreground" Value="{DynamicResource Text}" /></Style>
+    <Style Selector="Border.nav:current a|Icon"><Setter Property="Foreground" Value="{DynamicResource Text}" /></Style>
+    <Style Selector="a|Icon.st-progress"><Setter Property="Foreground" Value="#F2C94C" /></Style>
+    <Style Selector="a|Icon.st-review"><Setter Property="Foreground" Value="#4CB782" /></Style>
+    <Style Selector="Border.brand">
+      <Setter Property="Padding" Value="8,6" />
+      <Setter Property="CornerRadius" Value="6" />
+      <Setter Property="Background" Value="Transparent" />
+    </Style>
+    <Style Selector="Border.brand:pointerover"><Setter Property="Background" Value="{DynamicResource Hover}" /></Style>
+    <Style Selector="Border.count">
+      <Setter Property="Background" Value="{DynamicResource Chip}" />
+      <Setter Property="CornerRadius" Value="999" />
+      <Setter Property="Padding" Value="6,0" />
+    </Style>
+    <Style Selector="Border.count TextBlock"><Setter Property="FontSize" Value="11" /></Style>
+
+    <Style Selector="Border.iconbtn">
+      <Setter Property="Padding" Value="7" />
+      <Setter Property="CornerRadius" Value="6" />
+      <Setter Property="Background" Value="Transparent" />
+    </Style>
+    <Style Selector="Border.iconbtn:pointerover"><Setter Property="Background" Value="{DynamicResource Hover}" /></Style>
+    <Style Selector="Border.iconbtn a|Icon"><Setter Property="Foreground" Value="{DynamicResource Muted}" /></Style>
+
+    <Style Selector="Button.ghost">
+      <Setter Property="Background" Value="Transparent" />
+      <Setter Property="BorderThickness" Value="0" />
+      <Setter Property="Padding" Value="6" />
+      <Setter Property="CornerRadius" Value="6" />
+    </Style>
+
+    <Style Selector="Expander.side">
+      <Setter Property="Background" Value="Transparent" />
+      <Setter Property="BorderThickness" Value="0" />
+      <Setter Property="Padding" Value="8,10,8,4" />
+    </Style>
+
+    <!-- Lists, cards, chips -->
+    <Style Selector="Border.row">
+      <Setter Property="Padding" Value="16,9" />
+      <Setter Property="Background" Value="Transparent" />
+      <Setter Property="BorderBrush" Value="{DynamicResource Line}" />
+      <Setter Property="BorderThickness" Value="0,0,0,1" />
+    </Style>
+    <Style Selector="Border.row:pointerover"><Setter Property="Background" Value="{DynamicResource RowHover}" /></Style>
+    <Style Selector="Border.group">
+      <Setter Property="Padding" Value="16,8" />
+      <Setter Property="Background" Value="{DynamicResource AppBg}" />
+      <Setter Property="BorderBrush" Value="{DynamicResource Line}" />
+      <Setter Property="BorderThickness" Value="0,0,0,1" />
+    </Style>
+    <Style Selector="Border.pill">
+      <Setter Property="BorderBrush" Value="{DynamicResource Line}" />
+      <Setter Property="BorderThickness" Value="1" />
+      <Setter Property="CornerRadius" Value="999" />
+      <Setter Property="Padding" Value="7,1" />
+    </Style>
+    <Style Selector="Border.dot">
+      <Setter Property="Width" Value="7" />
+      <Setter Property="Height" Value="7" />
+      <Setter Property="CornerRadius" Value="4" />
+    </Style>
+    <Style Selector="Border.avatar">
+      <Setter Property="Width" Value="22" />
+      <Setter Property="Height" Value="22" />
+      <Setter Property="CornerRadius" Value="11" />
+    </Style>
+    <Style Selector="Border.avatar TextBlock">
+      <Setter Property="FontSize" Value="9" />
+      <Setter Property="FontWeight" Value="Bold" />
+      <Setter Property="Foreground" Value="White" />
+      <Setter Property="HorizontalAlignment" Value="Center" />
+      <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+    <Style Selector="Border.card">
+      <Setter Property="Background" Value="{DynamicResource CardBg}" />
+      <Setter Property="BorderBrush" Value="{DynamicResource Line}" />
+      <Setter Property="BorderThickness" Value="1" />
+      <Setter Property="CornerRadius" Value="10" />
+      <Setter Property="Padding" Value="16" />
+    </Style>
+    <Style Selector="Border.kcard">
+      <Setter Property="Background" Value="{DynamicResource CardBg}" />
+      <Setter Property="BorderBrush" Value="{DynamicResource Line}" />
+      <Setter Property="BorderThickness" Value="1" />
+      <Setter Property="CornerRadius" Value="8" />
+      <Setter Property="Padding" Value="12" />
+    </Style>
+    <Style Selector="Border.kcard:pointerover"><Setter Property="Background" Value="{DynamicResource CardHover}" /></Style>
+    <Style Selector="Border.btn">
+      <Setter Property="Background" Value="{DynamicResource SystemAccentColor}" />
+      <Setter Property="CornerRadius" Value="6" />
+      <Setter Property="Padding" Value="10,6" />
+    </Style>
+    <Style Selector="Border.btn:pointerover"><Setter Property="Background" Value="{DynamicResource SystemAccentColorLight1}" /></Style>
+    <Style Selector="Border.btn TextBlock">
+      <Setter Property="Foreground" Value="White" />
+      <Setter Property="FontWeight" Value="SemiBold" />
+    </Style>
+    <Style Selector="Border.btn a|Icon"><Setter Property="Foreground" Value="White" /></Style>
+
+    <!-- Motion: a fade/slide-in for page sections (Avalonia animation -> CSS @keyframes) -->
+    <Style Selector="Border.enter">
+      <Style.Animations>
+        <Animation Duration="0:0:0.35" FillMode="Forward" Easing="CubicEaseOut">
+          <KeyFrame Cue="0%"><Setter Property="Opacity" Value="0" /></KeyFrame>
+          <KeyFrame Cue="100%"><Setter Property="Opacity" Value="1" /></KeyFrame>
+        </Animation>
+      </Style.Animations>
+    </Style>
+
+  </Application.Styles>
+</Application>

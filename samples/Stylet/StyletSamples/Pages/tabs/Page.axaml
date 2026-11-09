@@ -1,0 +1,6 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:a="https://aioros.dev"
+             xmlns:tabs="using:Stylet.Samples.TabNavigation"
+             a:Page.Title="Tab Navigation sample">
+    <tabs:ShellView />
+</UserControl>

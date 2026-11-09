@@ -1,0 +1,37 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:c="using:Aioros.Avalonia.Tests.Models">
+  <DataTemplate x:Key="CosmoInputOtpSlot" x:DataType="c:OtpSlot">
+    <StackPanel Orientation="Horizontal">
+      <Border Classes="otp-separator" Width="24" Height="24" Margin="8,0" IsVisible="{Binding HasSeparator}">
+        <Border Width="14" Height="2" CornerRadius="1" Background="#0a0a0a" />
+      </Border>
+      <Border Classes="otp-box" Classes.first="{Binding IsFirst}" Classes.last="{Binding IsLast}" Classes.active="{Binding IsActive}"
+              Width="36" Height="36" Background="Transparent"
+              BorderBrush="#e5e5e5" BorderThickness="0,1,1,1" BoxShadow="0 1 2 0 #0d000000">
+        <TextBlock Text="{Binding Character}" FontSize="14" LineHeight="20" HorizontalAlignment="Center" VerticalAlignment="Center" />
+      </Border>
+    </StackPanel>
+  </DataTemplate>
+
+  <ItemsPanelTemplate x:Key="CosmoInputOtpPanel">
+    <StackPanel Orientation="Horizontal" />
+  </ItemsPanelTemplate>
+
+  <ControlTheme x:Key="{x:Type c:InputOtp}" TargetType="c:InputOtp">
+    <Setter Property="HorizontalAlignment" Value="Left" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Panel>
+          <ItemsControl Name="PART_Slots" ItemsSource="{TemplateBinding Slots}" ItemsPanel="{StaticResource CosmoInputOtpPanel}"
+                        ItemTemplate="{StaticResource CosmoInputOtpSlot}" IsHitTestVisible="False" />
+          <TextBox Name="PART_TextBox" Text="{TemplateBinding Text, Mode=TwoWay}" MaxLength="{TemplateBinding Length}"
+                   Opacity="0" MinHeight="36" Padding="0" BorderThickness="0" Background="Transparent" CaretBrush="Transparent"
+                   IsEnabled="{TemplateBinding IsEnabled}" />
+        </Panel>
+      </ControlTemplate>
+    </Setter>
+    <Style Selector="^:disabled">
+      <Setter Property="Opacity" Value="0.5" />
+    </Style>
+  </ControlTheme>
+</ResourceDictionary>

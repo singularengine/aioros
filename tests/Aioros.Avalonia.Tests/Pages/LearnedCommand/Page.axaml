@@ -1,0 +1,9 @@
+<UserControl xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:m="using:Aioros.Avalonia.Tests.Models" x:DataType="m:Renamer">
+  <StackPanel>
+    <CheckBox Content="Remember" />
+    <PathIcon Width="16" Height="16" Data="{Binding Name, Converter={x:Static m:NameIcons.Instance}}" />
+    <TextBlock Text="{Binding Name}" />
+    <Button Content="Rename" Command="{Binding RenameCommand}" />
+  </StackPanel>
+</UserControl>

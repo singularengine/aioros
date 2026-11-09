@@ -1,0 +1,143 @@
+<UserControl xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:a="https://aioros.dev" xmlns:m="using:Gallery.Models" xmlns:s="using:Avalonia.Platform.Storage" x:DataType="m:ButtonsModel" a:Page.Title="Buttons">
+  <StackPanel Spacing="20">
+    <TextBlock Classes="h1" Text="Buttons" />
+    <Border Classes="card">
+      <StackPanel Spacing="12">
+        <TextBlock Classes="h2" Text="Button" />
+        <StackPanel Orientation="Horizontal" Spacing="8">
+          <Button Content="Standard" Command="{Binding ClickCommand}" />
+          <Button Classes="accent" Content="Accent" Command="{Binding ClickCommand}" />
+          <Button Content="Disabled" IsEnabled="False" />
+          <HyperlinkButton Content="Hyperlink" NavigateUri="https://avaloniaui.net/" />
+        </StackPanel>
+        <TextBlock Text="{Binding Message}" />
+      </StackPanel>
+    </Border>
+    <Border Classes="card">
+      <StackPanel Spacing="12">
+        <TextBlock Classes="h2" Text="RepeatButton" />
+        <StackPanel Orientation="Horizontal" Spacing="8">
+          <RepeatButton Content="Add one" Command="{Binding RepeatCommand}" />
+          <RepeatButton Content="Disabled" IsEnabled="False" />
+        </StackPanel>
+        <TextBlock Text="{Binding Count}" />
+      </StackPanel>
+    </Border>
+    <Border Classes="card">
+      <StackPanel Spacing="12">
+        <TextBlock Classes="h2" Text="ToggleButton" />
+        <StackPanel Orientation="Horizontal" Spacing="8">
+          <ToggleButton Content="Bold" IsChecked="{Binding Bold}" />
+          <ToggleButton Content="Italic" IsChecked="{Binding Italic}" />
+          <ToggleButton Content="Disabled" IsEnabled="False" />
+          <ToggleButton Content="Checked disabled" IsChecked="True" IsEnabled="False" />
+        </StackPanel>
+      </StackPanel>
+    </Border>
+    <Border Classes="card">
+      <StackPanel Spacing="12">
+        <TextBlock Classes="h2" Text="CheckBox" />
+        <StackPanel Orientation="Horizontal" Spacing="16">
+          <CheckBox Content="Agree" IsChecked="{Binding Agree}" />
+          <CheckBox Content="Three state" IsThreeState="True" IsChecked="{Binding All}" />
+          <CheckBox Content="Disabled" IsEnabled="False" />
+        </StackPanel>
+      </StackPanel>
+    </Border>
+    <Border Classes="card">
+      <StackPanel Spacing="12">
+        <TextBlock Classes="h2" Text="RadioButton" />
+        <StackPanel Orientation="Horizontal" Spacing="16">
+          <RadioButton Content="Small" IsChecked="{Binding Small}" />
+          <RadioButton Content="Medium" IsChecked="{Binding Medium}" />
+          <RadioButton Content="Large" IsChecked="{Binding Large}" />
+          <RadioButton Content="Disabled" GroupName="other" IsEnabled="False" />
+        </StackPanel>
+      </StackPanel>
+    </Border>
+    <Border Classes="card">
+      <StackPanel Spacing="12">
+        <TextBlock Classes="h2" Text="ToggleSwitch" />
+        <StackPanel Orientation="Horizontal" Spacing="24">
+          <ToggleSwitch Content="Wi-Fi" IsChecked="{Binding WiFi}" />
+          <ToggleSwitch Content="Bluetooth" IsChecked="{Binding Bluetooth}" OnContent="Visible" OffContent="Hidden" />
+          <ToggleSwitch Content="Disabled" IsEnabled="False" />
+        </StackPanel>
+      </StackPanel>
+    </Border>
+    <Border Classes="card">
+      <StackPanel Spacing="12">
+        <TextBlock Classes="h2" Text="DropDownButton, SplitButton and ToggleSplitButton" />
+        <StackPanel Orientation="Horizontal" Spacing="8">
+          <DropDownButton Content="Sort">
+            <DropDownButton.Flyout>
+              <MenuFlyout>
+                <MenuItem Header="By name" a:Web.Href="?sort=name" />
+                <MenuItem Header="By date" a:Web.Href="?sort=date" />
+              </MenuFlyout>
+            </DropDownButton.Flyout>
+          </DropDownButton>
+          <DropDownButton Content="Info">
+            <DropDownButton.Flyout>
+              <Flyout>
+                <TextBlock Text="Flyouts open as anchored popovers." />
+              </Flyout>
+            </DropDownButton.Flyout>
+          </DropDownButton>
+          <SplitButton Content="Send" Command="{Binding SendCommand}">
+            <SplitButton.Flyout>
+              <MenuFlyout>
+                <MenuItem Header="Schedule" a:Web.Href="?send=later" />
+              </MenuFlyout>
+            </SplitButton.Flyout>
+          </SplitButton>
+          <ToggleSplitButton Content="Bold" IsChecked="{Binding Bold}">
+            <ToggleSplitButton.Flyout>
+              <MenuFlyout>
+                <MenuItem Header="Heavy" a:Web.Href="?weight=heavy" />
+              </MenuFlyout>
+            </ToggleSplitButton.Flyout>
+          </ToggleSplitButton>
+          <SplitButton Content="Disabled" IsEnabled="False" />
+        </StackPanel>
+      </StackPanel>
+    </Border>
+    <Border Classes="card">
+      <StackPanel Spacing="12">
+        <TextBlock Classes="h2" Text="ButtonSpinner" />
+        <StackPanel Orientation="Horizontal" Spacing="8">
+          <ButtonSpinner Content="Right spinner" />
+          <ButtonSpinner Content="Left spinner" ButtonSpinnerLocation="Left" />
+          <ButtonSpinner Content="Disabled" AllowSpin="False" />
+        </StackPanel>
+      </StackPanel>
+    </Border>
+    <Border Classes="card">
+      <StackPanel Spacing="12">
+        <TextBlock Classes="h2" Text="FilePicker" />
+        <StackPanel Orientation="Horizontal" Spacing="8">
+          <a:FilePicker File="{Binding Attachment}" Content="Choose an image">
+            <a:FilePicker.FileTypes>
+              <x:Static Member="s:FilePickerFileTypes.ImageAll" />
+            </a:FilePicker.FileTypes>
+          </a:FilePicker>
+          <a:FilePicker Files="{Binding Attachments}" Content="Choose files" />
+          <a:FilePicker File="{Binding Attachment}" Content="Disabled" IsEnabled="False" />
+        </StackPanel>
+      </StackPanel>
+    </Border>
+    <Border Classes="card">
+      <StackPanel Spacing="12">
+        <TextBlock Classes="h2" Text="Bound styles" />
+        <TextBlock Text="Width, opacity, padding and colors bound to the model: each render of the precompiled page writes them in the control's inline style. Press Add one to change them." TextWrapping="Wrap" />
+        <StackPanel Orientation="Horizontal" Spacing="8">
+          <Button Content="Wide" Width="{Binding Wide}" />
+          <Button Content="Painted" Background="{Binding Paint}" Foreground="{Binding Ink}" />
+          <ToggleButton Content="Padded" Padding="{Binding Inset}" />
+          <CheckBox Content="Fading" Opacity="{Binding Fade}" />
+        </StackPanel>
+      </StackPanel>
+    </Border>
+  </StackPanel>
+</UserControl>

@@ -1,0 +1,5 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Aioros.Cli\Aioros.Cli.csproj" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,6 @@
+<UserControl xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:m="using:Aioros.ReactiveUI.Tests.Models" x:DataType="m:ShelfViewModel">
+  <StackPanel>
+    <TextBlock Text="Shelf page" />
+    <Button Content="Open" Command="{Binding Open}" />
+  </StackPanel>
+</UserControl>

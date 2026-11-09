@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json.schemastore.org/launchsettings.json",
+  "profiles": {
+    "Kartova": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "launchUrl": "about",
+      "applicationUrl": "http://localhost:5322",
+      "environmentVariables": { "ASPNETCORE_ENVIRONMENT": "Development" }
+    },
+    "Kartova (desktop)": {
+      "commandName": "Project",
+      "commandLineArgs": "--desktop",
+      "environmentVariables": { "ASPNETCORE_ENVIRONMENT": "Development" }
+    }
+  }
+}

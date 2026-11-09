@@ -1,0 +1,38 @@
+@page "/issues"
+@inject Store Store
+<PageTitle>Issues · Lumen</PageTitle>
+<TopBar Title="Issues" IconKind="issues" />
+<div class="toolbar">
+  <div class="grow">
+    <span class="pill on small">All</span><span class="pill small muted">Active</span><span class="pill small muted">Backlog</span>
+    <span class="faint small hide-640" style="margin-left:6px">@summary</span>
+  </div>
+  <a class="btn" href="/issues/LUM-101"><Icon Kind="plus" Size="14" />New issue</a>
+</div>
+@foreach (var g in groups)
+{
+  <div class="group"><Icon Kind="@("status-" + g.Key)" Color="@g.Color" />@g.Name <span class="n">@g.Issues.Length</span></div>
+  @foreach (var i in g.Issues)
+  {
+    <a class="row" href="@i.Href">
+      @Icons.Inline(i.PriorityIcon, i.PriorityColor, 14)
+      <span class="faint hide-480">@i.Id</span>
+      @Icons.Inline(i.StatusIcon, i.StatusColor, 14)
+      <span class="trim">@i.Title</span>
+      <span class="labels hide-820">@foreach (var l in i.Labels) { <span class="pill"><span class="dot" style="background:@l.Color"></span><span class="small muted">@l.Name</span></span> }</span>
+      <span class="avatar" style="background:@i.Assignee.Color">@i.Assignee.Initials</span>
+      <span class="faint small nowrap hide-640">@i.UpdatedText</span>
+    </a>
+  }
+}
+@code {
+    private (string Key, string Name, string Color, Issue[] Issues)[] groups = [];
+    private string summary = "";
+    protected override void OnInitialized()
+    {
+        var issues = Store.Issues;
+        groups = Store.Statuses.Values.Select(s => (s.Key, s.Name, s.Color, issues.Where(i => i.Status == s.Key).OrderByDescending(i => i.Updated).ToArray()))
+            .Where(g => g.Item4.Length > 0).ToArray();
+        summary = $"{issues.Length} issues · {issues.Count(i => i.Status is "progress" or "review")} active";
+    }
+}

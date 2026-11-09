@@ -1,0 +1,7 @@
+<UserControl xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:a="https://aioros.dev" xmlns:m="using:Aioros.Targets.Desktop.Tests.Navigation" x:DataType="m:Home">
+  <StackPanel>
+    <Border a:Web.Href="/items/7" Background="#eee" Padding="10"><TextBlock Text="Open item" /></Border>
+    <Border a:Web.Href="/broken" Background="#eee" Padding="10"><TextBlock Text="Open broken" /></Border>
+    <HyperlinkButton NavigateUri="/about" Content="About link" />
+  </StackPanel>
+</UserControl>

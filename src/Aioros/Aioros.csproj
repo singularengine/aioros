@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <IsAotCompatible>true</IsAotCompatible>
+    <EnableRequestDelegateGenerator>true</EnableRequestDelegateGenerator>
+    <InterceptorsNamespaces>$(InterceptorsNamespaces);Microsoft.AspNetCore.Http.Generated</InterceptorsNamespaces>
+
+    <RootNamespace>Aioros</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    <ProjectReference Include="..\Aioros.Abstractions\Aioros.Abstractions.csproj" />
+    <ProjectReference Include="..\Aioros.Runtime\Aioros.Runtime.csproj" />
+    <ProjectReference Include="..\Aioros.Routing\Aioros.Routing.csproj" />
+    <ProjectReference Include="..\Aioros.Markup\Aioros.Markup.csproj" />
+    <ProjectReference Include="..\Adapters\Aioros.Avalonia\Aioros.Avalonia.csproj" />
+    <ProjectReference Include="..\Targets\Aioros.Targets.Ssr\Aioros.Targets.Ssr.csproj" />
+    <ProjectReference Include="..\Targets\Aioros.Targets.Desktop\Aioros.Targets.Desktop.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Aioros.Generators\Aioros.Generators.csproj" ReferenceOutputAssembly="false" PrivateAssets="all" />
+    <ProjectReference Include="..\Aioros.CodeFixes\Aioros.CodeFixes.csproj" ReferenceOutputAssembly="false" PrivateAssets="all" />
+    <None Include="build\Aioros.targets" Pack="true" PackagePath="build;buildTransitive" />
+    <None Include="build\BannedSymbols.Aioros.txt" Pack="true" PackagePath="build;buildTransitive" />
+    <PackageReference Update="Microsoft.CodeAnalysis.BannedApiAnalyzers" PrivateAssets="none" />
+    <None Include="..\Aioros.Generators\bin\$(Configuration)\netstandard2.0\Aioros.Generators.dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
+    <None Include="..\Aioros.CodeFixes\bin\$(Configuration)\netstandard2.0\Aioros.CodeFixes.dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
+  </ItemGroup>
+</Project>

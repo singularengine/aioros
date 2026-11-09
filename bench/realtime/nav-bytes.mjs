@@ -1,0 +1,17 @@
+const BASE = process.argv[2];
+import { chromium } from "playwright-core";
+const browser = await chromium.launch({ executablePath: "/usr/bin/chromium", args: ["--no-sandbox", "--disable-gpu"] });
+const page = await browser.newPage();
+const cdp = await page.context().newCDPSession(page);
+await cdp.send("Network.enable");
+const urls = new Map(); const log = [];
+cdp.on("Network.requestWillBeSent", e => urls.set(e.requestId, e.request.url));
+cdp.on("Network.responseReceived", e => urls.set(e.requestId, urls.get(e.requestId) + " " + (e.response.headers["content-encoding"] || e.response.headers["Content-Encoding"] || "-")));
+cdp.on("Network.loadingFinished", e => log.push([urls.get(e.requestId), e.encodedDataLength]));
+await page.goto(BASE + "/issues", { waitUntil: "load" }); await page.waitForTimeout(1000);
+log.length = 0;
+await page.locator(`aside a[href="/projects"]`).first().click();
+await page.waitForFunction(() => document.body.innerText.includes("v2 Launch"));
+await page.waitForTimeout(500);
+console.log(JSON.stringify(log, null, 1));
+await browser.close();

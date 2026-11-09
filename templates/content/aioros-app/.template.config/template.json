@@ -1,0 +1,25 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Aioros contributors",
+  "classifications": [ "Web", "Avalonia", "XAML", "SSR" ],
+  "identity": "Aioros.App",
+  "name": "Aioros app",
+  "description": "An Aioros app: XAML pages rendered on the server and run natively, with hot reload.",
+  "shortName": "aioros",
+  "sourceName": "AiorosStarter",
+  "preferNameDirectory": true,
+  "primaryOutputs": [ { "path": "AiorosStarter.slnx" }, { "path": "AiorosStarter/AiorosStarter.csproj" } ],
+  "tags": { "language": "C#", "type": "project" },
+  "symbols": {
+    "AiorosVersion": {
+      "type": "parameter",
+      "datatype": "text",
+      "defaultValue": "0.1.0-preview.1",
+      "replaces": "AIOROS_VERSION",
+      "description": "The Aioros package version."
+    }
+  },
+  "postActions": [
+    { "actionId": "210D431B-A78B-4D2F-B762-4ED3E3EA9025", "description": "Restore packages", "manualInstructions": [ { "text": "Run 'dotnet restore'" } ], "continueOnError": true }
+  ]
+}

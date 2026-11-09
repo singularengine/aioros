@@ -1,0 +1,10 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+  <Import Project="$(AiorosRoot)src/Aioros/build/Aioros.targets" />
+  <ItemGroup>
+    <ProjectReference Include="$(AiorosRoot)src/Aioros/Aioros.csproj" />
+    <ProjectReference Include="$(AiorosRoot)src/Aioros.Generators/Aioros.Generators.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
+  </ItemGroup>
+</Project>

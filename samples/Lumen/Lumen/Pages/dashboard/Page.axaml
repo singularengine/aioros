@@ -1,0 +1,180 @@
+<UserControl xmlns="https://github.com/avaloniaui" a:Web.Live="True"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:Lumen.ViewModels"
+             xmlns:a="https://aioros.dev"
+             x:DataType="vm:DashboardViewModel">
+  <UserControl.Styles>
+    <!-- Avalonia animations and transitions; the serializer turns them into CSS @keyframes / transition -->
+    <Style Selector="Border.live">
+      <Style.Animations>
+        <Animation Duration="0:0:0.9" IterationCount="Infinite" PlaybackDirection="Alternate" Easing="SineEaseInOut">
+          <KeyFrame Cue="0%"><Setter Property="Opacity" Value="1" /></KeyFrame>
+          <KeyFrame Cue="100%"><Setter Property="Opacity" Value="0.25" /></KeyFrame>
+        </Animation>
+      </Style.Animations>
+    </Style>
+    <Style Selector="Border.bar">
+      <Setter Property="Background" Value="{DynamicResource SystemAccentColor}" />
+      <Setter Property="CornerRadius" Value="4,4,0,0" />
+      <Setter Property="Transitions">
+        <Transitions>
+          <DoubleTransition Property="Height" Duration="0:0:0.6" Easing="CubicEaseOut" />
+        </Transitions>
+      </Setter>
+    </Style>
+    <Style Selector="TextBlock.kpi">
+      <Setter Property="FontSize" Value="26" />
+      <Setter Property="FontWeight" Value="Bold" />
+    </Style>
+    <Style Selector="TextBlock.tiny">
+      <Setter Property="FontSize" Value="11" />
+      <Setter Property="TextWrapping" Value="NoWrap" />
+      <Setter Property="Foreground" Value="{DynamicResource Muted}" />
+    </Style>
+    <Style Selector="TextBlock.up">
+      <Setter Property="Foreground" Value="#16A34A" />
+    </Style>
+    <Style Selector="TextBlock.down">
+      <Setter Property="Foreground" Value="#DC2626" />
+    </Style>
+    <Style Selector="Border.badge">
+      <Setter Property="HorizontalAlignment" Value="Left" />
+      <Setter Property="CornerRadius" Value="999" />
+      <Setter Property="Padding" Value="8,2" />
+    </Style>
+    <Style Selector="Border.badge > TextBlock">
+      <Setter Property="FontSize" Value="12" />
+      <Setter Property="FontWeight" Value="SemiBold" />
+    </Style>
+    <Style Selector="Border.paid"><Setter Property="Background" Value="#DCFCE7" /></Style>
+    <Style Selector="Border.paid > TextBlock"><Setter Property="Foreground" Value="#166534" /></Style>
+    <Style Selector="Border.pending"><Setter Property="Background" Value="#FEF9C3" /></Style>
+    <Style Selector="Border.pending > TextBlock"><Setter Property="Foreground" Value="#854D0E" /></Style>
+    <Style Selector="Border.failed"><Setter Property="Background" Value="#FEE2E2" /></Style>
+    <Style Selector="Border.failed > TextBlock"><Setter Property="Foreground" Value="#991B1B" /></Style>
+  </UserControl.Styles>
+    <StackPanel Margin="20" Spacing="16">
+
+      <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12">
+        <StackPanel Spacing="2">
+          <TextBlock Classes="h1" Text="Dashboard" />
+          <TextBlock Classes="muted" Text="Real-time sales" />
+        </StackPanel>
+        <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+          <Border Classes="live" Width="10" Height="10" CornerRadius="5" Background="#22C55E" VerticalAlignment="Center" />
+          <TextBlock Classes="muted" Text="{Binding Updated}" VerticalAlignment="Center" />
+        </StackPanel>
+      </Grid>
+
+      <!-- KPI cards: 4 columns, 1 column below 760px -->
+      <Grid ColumnDefinitions="*,*,*,*" ColumnSpacing="12" RowSpacing="12" a:Web.StackBelow="760">
+        <Border Grid.Column="0" Classes="card enter">
+          <StackPanel Spacing="4">
+            <TextBlock Classes="muted" Text="{Binding RevenueKpi.Name}" />
+            <TextBlock Classes="kpi" Text="{Binding RevenueKpi.Value}" />
+            <StackPanel Orientation="Horizontal" Spacing="4">
+              <TextBlock Classes="up" Text="▲" IsVisible="{Binding RevenueKpi.IsUp}" />
+              <TextBlock Classes="down" Text="▼" IsVisible="{Binding RevenueKpi.IsDown}" />
+              <TextBlock Classes="muted" Text="{Binding RevenueKpi.Delta}" />
+            </StackPanel>
+          </StackPanel>
+        </Border>
+        <Border Grid.Column="1" Classes="card enter">
+          <StackPanel Spacing="4">
+            <TextBlock Classes="muted" Text="{Binding OrdersKpi.Name}" />
+            <TextBlock Classes="kpi" Text="{Binding OrdersKpi.Value}" />
+            <StackPanel Orientation="Horizontal" Spacing="4">
+              <TextBlock Classes="up" Text="▲" IsVisible="{Binding OrdersKpi.IsUp}" />
+              <TextBlock Classes="down" Text="▼" IsVisible="{Binding OrdersKpi.IsDown}" />
+              <TextBlock Classes="muted" Text="{Binding OrdersKpi.Delta}" />
+            </StackPanel>
+          </StackPanel>
+        </Border>
+        <Border Grid.Column="2" Classes="card enter">
+          <StackPanel Spacing="4">
+            <TextBlock Classes="muted" Text="{Binding UsersKpi.Name}" />
+            <TextBlock Classes="kpi" Text="{Binding UsersKpi.Value}" />
+            <StackPanel Orientation="Horizontal" Spacing="4">
+              <TextBlock Classes="up" Text="▲" IsVisible="{Binding UsersKpi.IsUp}" />
+              <TextBlock Classes="down" Text="▼" IsVisible="{Binding UsersKpi.IsDown}" />
+              <TextBlock Classes="muted" Text="{Binding UsersKpi.Delta}" />
+            </StackPanel>
+          </StackPanel>
+        </Border>
+        <Border Grid.Column="3" Classes="card enter">
+          <StackPanel Spacing="4">
+            <TextBlock Classes="muted" Text="{Binding ConversionKpi.Name}" />
+            <TextBlock Classes="kpi" Text="{Binding ConversionKpi.Value}" />
+            <StackPanel Orientation="Horizontal" Spacing="4">
+              <TextBlock Classes="up" Text="▲" IsVisible="{Binding ConversionKpi.IsUp}" />
+              <TextBlock Classes="down" Text="▼" IsVisible="{Binding ConversionKpi.IsDown}" />
+              <TextBlock Classes="muted" Text="{Binding ConversionKpi.Delta}" />
+            </StackPanel>
+          </StackPanel>
+        </Border>
+      </Grid>
+
+      <!-- Charts: line/area chart (Canvas + shapes -> SVG) and bar chart (bound heights + Transitions) -->
+      <Grid ColumnDefinitions="3*,2*" ColumnSpacing="12" RowSpacing="12" a:Web.StackBelow="900">
+        <Border Grid.Column="0" Classes="card enter">
+          <StackPanel Spacing="10">
+            <Grid ColumnDefinitions="*,Auto">
+              <TextBlock Classes="h2" Text="Active users" />
+              <TextBlock Grid.Column="1" Classes="muted" Text="{Binding TrafficNow}" />
+            </Grid>
+            <Canvas Width="600" Height="180">
+              <Polygon Points="{Binding TrafficArea}" Fill="{DynamicResource AccentSoft}" />
+              <Polyline Points="{Binding TrafficLine}" Stroke="{DynamicResource SystemAccentColor}" StrokeThickness="2" />
+            </Canvas>
+          </StackPanel>
+        </Border>
+        <Border Grid.Column="1" Classes="card enter">
+          <StackPanel Spacing="10">
+            <TextBlock Classes="h2" Text="Sales by hour" />
+            <ItemsControl ItemsSource="{Binding Bars}">
+              <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                  <UniformGrid Rows="1" ColumnSpacing="6" Height="180" />
+                </ItemsPanelTemplate>
+              </ItemsControl.ItemsPanel>
+              <ItemsControl.ItemTemplate>
+                <DataTemplate x:DataType="vm:Bar">
+                  <StackPanel Spacing="4" VerticalAlignment="Bottom">
+                    <TextBlock Classes="tiny" Text="{Binding Value}" HorizontalAlignment="Center" />
+                    <Border Classes="bar" Height="{Binding Height}" />
+                    <TextBlock Classes="tiny" Text="{Binding Label}" HorizontalAlignment="Center" />
+                  </StackPanel>
+                </DataTemplate>
+              </ItemsControl.ItemTemplate>
+            </ItemsControl>
+          </StackPanel>
+        </Border>
+      </Grid>
+
+      <!-- Recent orders: rows collapse to a single column below 560px -->
+      <Border Classes="card enter">
+        <StackPanel Spacing="8">
+          <TextBlock Classes="h2" Text="Recent orders" />
+          <ItemsControl ItemsSource="{Binding RecentOrders}">
+            <ItemsControl.ItemTemplate>
+              <DataTemplate x:DataType="vm:Order">
+                <Border BorderBrush="{DynamicResource Line}" BorderThickness="0,0,0,1" Padding="0,8">
+                  <Grid ColumnDefinitions="80,*,100,Auto" ColumnSpacing="16" RowSpacing="4" a:Web.StackBelow="560">
+                    <TextBlock Classes="muted" Text="{Binding Id}" VerticalAlignment="Center" />
+                    <TextBlock Grid.Column="1" Text="{Binding Customer}" FontWeight="SemiBold" VerticalAlignment="Center" />
+                    <TextBlock Grid.Column="2" Text="{Binding Amount}" VerticalAlignment="Center" />
+                    <Panel Grid.Column="3" VerticalAlignment="Center">
+                      <Border Classes="badge paid" IsVisible="{Binding IsPaid}"><TextBlock Text="Paid" /></Border>
+                      <Border Classes="badge pending" IsVisible="{Binding IsPending}"><TextBlock Text="Pending" /></Border>
+                      <Border Classes="badge failed" IsVisible="{Binding IsFailed}"><TextBlock Text="Failed" /></Border>
+                    </Panel>
+                  </Grid>
+                </Border>
+              </DataTemplate>
+            </ItemsControl.ItemTemplate>
+          </ItemsControl>
+        </StackPanel>
+      </Border>
+
+    </StackPanel>
+</UserControl>

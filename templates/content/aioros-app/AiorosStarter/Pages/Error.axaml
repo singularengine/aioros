@@ -1,0 +1,7 @@
+<UserControl xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <StackPanel Spacing="12">
+    <TextBlock Classes="h1" Text="Something went wrong" />
+    <TextBlock TextWrapping="Wrap" Text="The page could not be shown. Try again in a moment." />
+    <HyperlinkButton NavigateUri="/" Content="Go home" />
+  </StackPanel>
+</UserControl>

@@ -1,0 +1,147 @@
+<UserControl xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:a="https://aioros.dev" a:Page.Title="Vectors">
+  <UserControl.Resources>
+    <LinearGradientBrush x:Key="Dusk" StartPoint="0%,0%" EndPoint="100%,100%">
+      <GradientStop Offset="0" Color="#2563EB" />
+      <GradientStop Offset="1" Color="#7C3AED" />
+    </LinearGradientBrush>
+    <StreamGeometry x:Key="Star">M12,2 L15.09,8.26 L22,9.27 L17,14.14 L18.18,21.02 L12,17.77 L5.82,21.02 L7,14.14 L2,9.27 L8.91,8.26 Z</StreamGeometry>
+  </UserControl.Resources>
+  <StackPanel Spacing="16">
+    <TextBlock Classes="h1" Text="Vectors" />
+
+    <Border Classes="card">
+      <StackPanel Spacing="10">
+        <TextBlock Classes="h2" Text="Canvas" />
+        <StackPanel Orientation="Horizontal" Spacing="24">
+          <Canvas Width="240" Height="120">
+            <Rectangle Width="240" Height="120" RadiusX="12" RadiusY="12" Fill="{StaticResource Dusk}" />
+            <Ellipse Canvas.Left="16" Canvas.Top="16" Width="44" Height="44">
+              <Ellipse.Fill>
+                <RadialGradientBrush>
+                  <GradientStop Offset="0" Color="#FDE68A" />
+                  <GradientStop Offset="1" Color="#F59E0B" />
+                </RadialGradientBrush>
+              </Ellipse.Fill>
+            </Ellipse>
+            <Path Data="M16,96 C56,56 96,120 136,80 S200,60 224,72" Stroke="#FFFFFF" StrokeThickness="3" StrokeLineCap="Round" />
+            <Polygon Points="150,20 176,52 124,52" Fill="#A7F3D0" Stroke="#065F46" StrokeThickness="2" StrokeJoin="Round" />
+            <Polyline Points="76,24 92,44 108,28" Stroke="#FDE68A" StrokeThickness="2" StrokeDashArray="2,1" />
+            <Line StartPoint="16,108" EndPoint="120,108" Stroke="#C7D2FE" StrokeThickness="2" />
+            <Rectangle Canvas.Right="12" Canvas.Bottom="12" Width="44" Height="26" RadiusX="4" RadiusY="4" Fill="#FFFFFF" Stroke="#1E3A8A" StrokeThickness="2" />
+            <TextBlock Canvas.Left="190" Canvas.Top="14" Text="Sky" Foreground="#FFFFFF" FontWeight="SemiBold" />
+          </Canvas>
+          <Canvas Width="120" Height="120" Background="#F1F5F9">
+            <Path Canvas.Left="8" Canvas.Top="8" Data="{StaticResource Star}" Fill="#FACC15" Stroke="#A16207" StrokeThickness="1.5" StrokeJoin="Round" Width="104" Height="104" Stretch="Uniform" />
+          </Canvas>
+        </StackPanel>
+      </StackPanel>
+    </Border>
+
+    <Border Classes="card">
+      <StackPanel Spacing="10">
+        <TextBlock Classes="h2" Text="Gradients" />
+        <StackPanel Orientation="Horizontal" Spacing="16">
+          <Border Width="120" Height="60" CornerRadius="8" Background="{StaticResource Dusk}" />
+          <Border Width="120" Height="60" CornerRadius="8">
+            <Border.Background>
+              <LinearGradientBrush StartPoint="0,0" EndPoint="40,0" SpreadMethod="Reflect">
+                <GradientStop Offset="0" Color="#F43F5E" />
+                <GradientStop Offset="1" Color="#FDBA74" />
+              </LinearGradientBrush>
+            </Border.Background>
+          </Border>
+          <Border Width="120" Height="60" CornerRadius="8">
+            <Border.Background>
+              <RadialGradientBrush>
+                <GradientStop Offset="0" Color="#34D399" />
+                <GradientStop Offset="1" Color="#065F46" />
+              </RadialGradientBrush>
+            </Border.Background>
+          </Border>
+          <Rectangle Width="120" Height="60" RadiusX="8" RadiusY="8" Fill="{StaticResource Dusk}" Stroke="#1E3A8A" StrokeThickness="4" />
+          <Ellipse Width="60" Height="60">
+            <Ellipse.Fill>
+              <RadialGradientBrush GradientOrigin="30%,30%">
+                <GradientStop Offset="0" Color="#FFFFFF" />
+                <GradientStop Offset="1" Color="#0EA5E9" />
+              </RadialGradientBrush>
+            </Ellipse.Fill>
+          </Ellipse>
+          <Ellipse Width="60" Height="60">
+            <Ellipse.Fill>
+              <ConicGradientBrush Angle="45">
+                <GradientStop Offset="0" Color="#F43F5E" />
+                <GradientStop Offset="0.5" Color="#FACC15" />
+                <GradientStop Offset="1" Color="#F43F5E" />
+              </ConicGradientBrush>
+            </Ellipse.Fill>
+          </Ellipse>
+          <Path Data="{StaticResource Star}" Width="60" Height="60" Stretch="Uniform" Fill="{StaticResource Dusk}" StrokeThickness="2" StrokeJoin="Round">
+            <Path.Stroke>
+              <LinearGradientBrush StartPoint="0%,0%" EndPoint="0%,100%">
+                <GradientStop Offset="0" Color="#F59E0B" />
+                <GradientStop Offset="1" Color="#DC2626" />
+              </LinearGradientBrush>
+            </Path.Stroke>
+          </Path>
+        </StackPanel>
+      </StackPanel>
+    </Border>
+
+    <Border Classes="card">
+      <StackPanel Spacing="10">
+        <TextBlock Classes="h2" Text="Viewbox" />
+        <StackPanel Orientation="Horizontal" Spacing="24">
+          <Viewbox Width="28" Height="28" VerticalAlignment="Center">
+            <Canvas Width="64" Height="64">
+              <Rectangle Width="64" Height="64" RadiusX="14" RadiusY="14" Fill="{StaticResource Dusk}" />
+              <Path Width="64" Height="64" Data="M25,39 L19,55 M39,39 L45,55 M32,39 L32,52" Stroke="#C7D2FE" StrokeThickness="3.2" StrokeLineCap="Round" />
+              <Rectangle Canvas.Left="11" Canvas.Top="37" Width="42" Height="3.6" RadiusX="1.8" RadiusY="1.8" Fill="#E0E7FF" />
+              <Rectangle Canvas.Left="13" Canvas.Top="9" Width="38" Height="28" RadiusX="4.5" RadiusY="4.5" Fill="#FFFFFF" />
+              <Path Width="64" Height="64" Data="M19,31 L27,23.5 L35,26.5 L45,15.5" Stroke="#2563EB" StrokeThickness="2.6" StrokeLineCap="Round" StrokeJoin="Round" />
+            </Canvas>
+          </Viewbox>
+          <Viewbox Width="64" Height="64" VerticalAlignment="Center">
+            <Canvas Width="64" Height="64">
+              <Rectangle Width="64" Height="64" RadiusX="14" RadiusY="14" Fill="{StaticResource Dusk}" />
+              <Path Width="64" Height="64" Data="M25,39 L19,55 M39,39 L45,55 M32,39 L32,52" Stroke="#C7D2FE" StrokeThickness="3.2" StrokeLineCap="Round" />
+              <Rectangle Canvas.Left="11" Canvas.Top="37" Width="42" Height="3.6" RadiusX="1.8" RadiusY="1.8" Fill="#E0E7FF" />
+              <Rectangle Canvas.Left="13" Canvas.Top="9" Width="38" Height="28" RadiusX="4.5" RadiusY="4.5" Fill="#FFFFFF" />
+              <Path Width="64" Height="64" Data="M19,31 L27,23.5 L35,26.5 L45,15.5" Stroke="#2563EB" StrokeThickness="2.6" StrokeLineCap="Round" StrokeJoin="Round" />
+            </Canvas>
+          </Viewbox>
+          <Viewbox Width="160" Height="80" Stretch="Fill">
+            <Canvas Width="40" Height="40">
+              <Ellipse Width="40" Height="40" Fill="#FDE68A" Stroke="#B45309" StrokeThickness="2" />
+              <Path Data="M12,26 Q20,34 28,26" Stroke="#B45309" StrokeThickness="2" StrokeLineCap="Round" />
+            </Canvas>
+          </Viewbox>
+        </StackPanel>
+      </StackPanel>
+    </Border>
+
+    <Border Classes="card">
+      <StackPanel Spacing="10">
+        <TextBlock Classes="h2" Text="Strokes" />
+        <StackPanel Orientation="Horizontal" Spacing="20">
+          <Path Data="M4,8 L56,8 M4,24 L56,24 M4,40 L56,40" Stroke="#334155" StrokeThickness="8" StrokeLineCap="Flat" VerticalAlignment="Center" />
+          <Path Data="M8,8 L52,8" Stroke="#334155" StrokeThickness="8" StrokeLineCap="Square" VerticalAlignment="Center" />
+          <Polyline Points="4,44 24,8 44,44" Stroke="#0F766E" StrokeThickness="8" StrokeJoin="Miter" VerticalAlignment="Center" />
+          <Polyline Points="4,44 24,8 44,44" Stroke="#0F766E" StrokeThickness="8" StrokeJoin="Bevel" VerticalAlignment="Center" />
+          <Polyline Points="4,44 24,8 44,44" Stroke="#0F766E" StrokeThickness="8" StrokeJoin="Round" VerticalAlignment="Center" />
+          <Line StartPoint="0,24" EndPoint="80,24" Stroke="#BE185D" StrokeThickness="4" StrokeDashArray="3,1.5" StrokeDashOffset="1" VerticalAlignment="Center" />
+          <Path Data="M0,0 L30,0 L30,20 Z" Fill="#8B5CF6" Width="80" Height="40" Stretch="Fill" />
+          <Path Data="M0,0 L30,0 L30,20 Z" Fill="#8B5CF6" Width="40" Height="40" Stretch="UniformToFill" ClipToBounds="True" />
+          <Border Width="80" Height="44" CornerRadius="10" BorderThickness="3" Background="#FFFFFF">
+            <Border.BorderBrush>
+              <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
+                <GradientStop Offset="0" Color="#2563EB" />
+                <GradientStop Offset="1" Color="#DB2777" />
+              </LinearGradientBrush>
+            </Border.BorderBrush>
+          </Border>
+        </StackPanel>
+      </StackPanel>
+    </Border>
+  </StackPanel>
+</UserControl>

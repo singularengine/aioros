@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Avalonia" />
+    <PackageReference Include="Avalonia.Themes.Fluent" />
+    <PackageReference Include="Avalonia.Controls.ColorPicker" />
+    <PackageReference Include="Avalonia.Controls.DataGrid" />
+    <PackageReference Include="Avalonia.Headless" />
+    <PackageReference Include="Avalonia.Skia" />
+    <PackageReference Include="Avalonia.HarfBuzz" />
+    <PackageReference Include="Avalonia.Fonts.Inter" />
+    <PackageReference Include="Avalonia.Markup.Xaml.Loader" />
+    <PackageReference Include="CommunityToolkit.Mvvm" />
+    <PackageReference Include="OxyPlot.Core" />
+    <PackageReference Include="AsyncImageLoader.Avalonia" />
+    <ProjectReference Include="..\..\Aioros.Abstractions\Aioros.Abstractions.csproj" />
+    <ProjectReference Include="..\..\Aioros.Markup\Aioros.Markup.csproj" />
+    <ProjectReference Include="..\..\Aioros.Runtime\Aioros.Runtime.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <InternalsVisibleTo Include="Aioros.Avalonia.Tests" />
+  </ItemGroup>
+</Project>

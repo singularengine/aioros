@@ -1,0 +1,8 @@
+<UserControl xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:a="https://aioros.dev" a:Page.Title="Home">
+  <StackPanel Spacing="6" Margin="16">
+    <HyperlinkButton NavigateUri="/v1" Content="1 view" />
+    <HyperlinkButton NavigateUri="/v5" Content="5 views" />
+    <HyperlinkButton NavigateUri="/v20" Content="20 views" />
+  </StackPanel>
+</UserControl>

@@ -1,0 +1,46 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:m="using:Aioros.Avalonia.Tests.Models">
+  <ControlTheme x:Key="{x:Type m:Gauge}" TargetType="m:Gauge">
+    <Setter Property="Template">
+      <ControlTemplate TargetType="m:Gauge">
+        <StackPanel Background="{TemplateBinding Background}">
+          <TextBlock Name="PART_Title" Text="{TemplateBinding Title}" Foreground="{TemplateBinding Foreground}" />
+          <TextBlock Name="PART_Tab" Text="tab" IsVisible="{TemplateBinding IsTabStop}" Foreground="{TemplateBinding Foreground}" />
+          <TextBlock Name="PART_Bar" Foreground="{TemplateBinding Foreground}" />
+          <ItemsControl ItemsSource="{TemplateBinding Marks}" />
+          <ItemsControl ItemsSource="{TemplateBinding People}">
+            <ItemsControl.ItemTemplate>
+              <DataTemplate x:DataType="m:Person"><TextBlock Text="{Binding Name}" /></DataTemplate>
+            </ItemsControl.ItemTemplate>
+          </ItemsControl>
+          <TextBlock Name="PART_Tagged" Text="tagged" Foreground="{TemplateBinding Foreground}">
+            <TextBlock.IsVisible>
+              <MultiBinding Converter="{x:Static BoolConverters.Or}">
+                <Binding Path="Tag" RelativeSource="{RelativeSource TemplatedParent}" Converter="{x:Static ObjectConverters.IsNotNull}" />
+                <Binding Path="Marks" RelativeSource="{RelativeSource TemplatedParent}" Converter="{x:Static ObjectConverters.IsNotNull}" />
+              </MultiBinding>
+            </TextBlock.IsVisible>
+          </TextBlock>
+        </StackPanel>
+      </ControlTemplate>
+    </Setter>
+  </ControlTheme>
+  <ControlTheme x:Key="{x:Type m:Defaulted}" TargetType="m:Defaulted">
+    <Setter Property="Template">
+      <ControlTemplate TargetType="m:Defaulted">
+        <Border><TextBlock Name="PART_Shown" /></Border>
+      </ControlTemplate>
+    </Setter>
+  </ControlTheme>
+  <ControlTheme x:Key="{x:Type m:Accounts}" TargetType="m:Accounts">
+    <Setter Property="Template">
+      <ControlTemplate TargetType="m:Accounts">
+        <DataGrid ItemsSource="{TemplateBinding Rows}" IsReadOnly="True">
+          <DataGrid.Columns>
+            <DataGridTextColumn Header="Name" Binding="{Binding Name}" x:DataType="m:Product" />
+          </DataGrid.Columns>
+        </DataGrid>
+      </ControlTemplate>
+    </Setter>
+  </ControlTheme>
+</ResourceDictionary>

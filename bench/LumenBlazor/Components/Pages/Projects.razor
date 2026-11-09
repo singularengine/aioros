@@ -1,0 +1,25 @@
+@page "/projects"
+@inject Store Store
+<PageTitle>Projects · Lumen</PageTitle>
+<TopBar Title="Projects" IconKind="projects" />
+<div class="toolbar" style="display:block;padding:12px 16px"><div class="h2">v2 Launch</div><div class="muted small">Team board · drag the cards around in your head</div></div>
+<div class="board">
+  <div class="columns">
+    @foreach (var key in new[] { "backlog", "todo", "progress", "review", "done" })
+    {
+      var s = Store.Statuses[key];
+      var items = Store.Issues.Where(i => i.Status == key).OrderBy(i => i.Id).ToArray();
+      <div class="column">
+        <div class="column-head"><Icon Kind="@("status-" + key)" Color="@s.Color" />@s.Name <span class="faint" style="font-weight:400">@items.Length</span></div>
+        @foreach (var i in items)
+        {
+          <a class="kcard enter" href="@i.Href">
+            <div style="display:flex;justify-content:space-between;align-items:center"><span class="faint small">@i.Id</span><span class="avatar" style="background:@i.Assignee.Color">@i.Assignee.Initials</span></div>
+            <div style="font-weight:500">@i.Title</div>
+            <div class="labels"><span class="pill">@Icons.Inline(i.PriorityIcon, i.PriorityColor, 12)</span>@foreach (var l in i.Labels) { <span class="pill"><span class="dot" style="background:@l.Color"></span><span class="small muted">@l.Name</span></span> }</div>
+          </a>
+        }
+      </div>
+    }
+  </div>
+</div>

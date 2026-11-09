@@ -1,0 +1,40 @@
+@page "/settings"
+@inject NavigationManager Nav
+<PageTitle>Settings · Lumen</PageTitle>
+<TopBar Title="Settings" IconKind="settings" />
+<div class="settings">
+  <div><div class="h1">Settings</div><div class="muted">Preferences for your account and Lumen's appearance.</div></div>
+  <div class="card enter" style="display:flex;flex-direction:column;gap:14px">
+    <div class="h2">Appearance</div>
+    <div class="theme-cards">
+      <a class="theme-card light" href="/theme/light" data-enhance-nav="false" @onclick="@(() => Nav.NavigateTo("/theme/light", true))" @onclick:preventDefault>
+        <div style="background:#f4f5f8;border-radius:6px;height:84px;padding:8px;display:grid;grid-template-columns:40px 1fr;gap:8px"><div style="background:#e5e6eb;border-radius:4px"></div><div style="display:flex;flex-direction:column;gap:6px"><div style="background:#fff;border-radius:4px;height:14px"></div><div style="background:#fff;border-radius:4px;height:14px"></div><div style="background:#5e6ad2;border-radius:4px;height:14px;width:50px"></div></div></div>
+        <div style="display:flex;gap:8px;align-items:center;font-weight:600"><Icon Kind="sun" />Light</div>
+      </a>
+      <a class="theme-card dark" href="/theme/dark" data-enhance-nav="false" @onclick="@(() => Nav.NavigateTo("/theme/dark", true))" @onclick:preventDefault>
+        <div style="background:#0b0c0e;border-radius:6px;height:84px;padding:8px;display:grid;grid-template-columns:40px 1fr;gap:8px"><div style="background:#1a1b1f;border-radius:4px"></div><div style="display:flex;flex-direction:column;gap:6px"><div style="background:#16171b;border-radius:4px;height:14px"></div><div style="background:#16171b;border-radius:4px;height:14px"></div><div style="background:#6e79e0;border-radius:4px;height:14px;width:50px"></div></div></div>
+        <div style="display:flex;gap:8px;align-items:center;font-weight:600"><Icon Kind="moon" />Dark</div>
+      </a>
+    </div>
+  </div>
+  <EditForm Model="form" OnSubmit="Save" class="card enter" FormName="settings" Enhance style="display:flex;flex-direction:column;gap:14px">
+    <div class="h2">Profile</div>
+    <div class="two"><span class="caption">NAME</span><span class="caption">EMAIL</span><InputText class="input" @bind-Value="form!.Name" /><InputText class="input" type="email" @bind-Value="form!.Email" /></div>
+    <label class="check"><InputCheckbox @bind-Value="form!.WeeklyDigest" />Weekly email digest</label>
+    <label class="check"><InputCheckbox @bind-Value="form!.DesktopAlerts" />Desktop alerts</label>
+    @if (error.Length > 0) { <div class="error">@error</div> }
+    @if (saved.Length > 0) { <div class="success">@saved</div> }
+    <div><button class="btn" type="submit">Save</button></div>
+  </EditForm>
+</div>
+@code {
+    public sealed class Form { public string Name { get; set; } = "Edsger Dijkstra"; public string Email { get; set; } = "edsger@lumen.dev"; public bool WeeklyDigest { get; set; } = true; public bool DesktopAlerts { get; set; } }
+    [SupplyParameterFromForm(FormName = "settings")] private Form? form { get; set; }
+    protected override void OnInitialized() => form ??= new();
+    private string error = "", saved = "";
+    private void Save()
+    {
+        error = !form!.Email.Contains('@') ? "The email is not valid." : string.IsNullOrWhiteSpace(form.Name) ? "Name is required." : "";
+        saved = error.Length > 0 ? "" : "Changes saved.";
+    }
+}

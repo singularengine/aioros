@@ -1,0 +1,708 @@
+{
+ "measured": "2026-10-15",
+ "width": 1280,
+ "height": 900,
+ "shown": "light normal",
+ "routes": [
+  {
+   "route": "/",
+   "slug": "home",
+   "variants": [
+    {
+     "theme": "light",
+     "state": "normal",
+     "texts": 94.74,
+     "layout": 88.89,
+     "colors": 83.33,
+     "pixels": 99.33
+    },
+    {
+     "theme": "light",
+     "state": "pointerover",
+     "texts": 94.74,
+     "layout": 88.89,
+     "colors": 83.33,
+     "pixels": 99.05
+    },
+    {
+     "theme": "light",
+     "state": "pressed",
+     "texts": 94.74,
+     "layout": 88.89,
+     "colors": 83.33,
+     "pixels": 99.29
+    },
+    {
+     "theme": "light",
+     "state": "focus",
+     "texts": 94.74,
+     "layout": 88.89,
+     "colors": 77.78,
+     "pixels": 94.38
+    },
+    {
+     "theme": "dark",
+     "state": "normal",
+     "texts": 94.74,
+     "layout": 88.89,
+     "colors": 100.0,
+     "pixels": 99.32
+    },
+    {
+     "theme": "dark",
+     "state": "pointerover",
+     "texts": 94.74,
+     "layout": 88.89,
+     "colors": 100.0,
+     "pixels": 99.01
+    },
+    {
+     "theme": "dark",
+     "state": "pressed",
+     "texts": 94.74,
+     "layout": 88.89,
+     "colors": 100.0,
+     "pixels": 98.88
+    },
+    {
+     "theme": "dark",
+     "state": "focus",
+     "texts": 94.74,
+     "layout": 88.89,
+     "colors": 100.0,
+     "pixels": 95.65
+    }
+   ]
+  },
+  {
+   "route": "/controls/text",
+   "slug": "controls_text",
+   "variants": [
+    {
+     "theme": "light",
+     "state": "normal",
+     "texts": 94.29,
+     "layout": 90.91,
+     "colors": 87.88,
+     "pixels": 98.37
+    },
+    {
+     "theme": "light",
+     "state": "pointerover",
+     "texts": 94.29,
+     "layout": 90.91,
+     "colors": 87.88,
+     "pixels": 98.15
+    },
+    {
+     "theme": "light",
+     "state": "pressed",
+     "texts": 94.29,
+     "layout": 90.91,
+     "colors": 84.85,
+     "pixels": 97.62
+    },
+    {
+     "theme": "light",
+     "state": "focus",
+     "texts": 94.29,
+     "layout": 90.91,
+     "colors": 81.82,
+     "pixels": 93.4
+    },
+    {
+     "theme": "dark",
+     "state": "normal",
+     "texts": 94.29,
+     "layout": 90.91,
+     "colors": 100.0,
+     "pixels": 98.28
+    },
+    {
+     "theme": "dark",
+     "state": "pointerover",
+     "texts": 94.29,
+     "layout": 90.91,
+     "colors": 100.0,
+     "pixels": 98.03
+    },
+    {
+     "theme": "dark",
+     "state": "pressed",
+     "texts": 94.29,
+     "layout": 90.91,
+     "colors": 96.97,
+     "pixels": 97.34
+    },
+    {
+     "theme": "dark",
+     "state": "focus",
+     "texts": 94.29,
+     "layout": 90.91,
+     "colors": 93.94,
+     "pixels": 92.51
+    }
+   ]
+  },
+  {
+   "route": "/controls/buttons",
+   "slug": "controls_buttons",
+   "variants": [
+    {
+     "theme": "light",
+     "state": "normal",
+     "texts": 97.83,
+     "layout": 82.22,
+     "colors": 86.67,
+     "pixels": 98.32
+    },
+    {
+     "theme": "light",
+     "state": "pointerover",
+     "texts": 97.83,
+     "layout": 82.22,
+     "colors": 86.67,
+     "pixels": 97.98
+    },
+    {
+     "theme": "light",
+     "state": "pressed",
+     "texts": 97.83,
+     "layout": 82.22,
+     "colors": 86.67,
+     "pixels": 98.22
+    },
+    {
+     "theme": "light",
+     "state": "focus",
+     "texts": 97.83,
+     "layout": 82.22,
+     "colors": 80.0,
+     "pixels": 91.49
+    },
+    {
+     "theme": "dark",
+     "state": "normal",
+     "texts": 97.83,
+     "layout": 82.22,
+     "colors": 100.0,
+     "pixels": 98.22
+    },
+    {
+     "theme": "dark",
+     "state": "pointerover",
+     "texts": 97.83,
+     "layout": 82.22,
+     "colors": 100.0,
+     "pixels": 97.86
+    },
+    {
+     "theme": "dark",
+     "state": "pressed",
+     "texts": 97.83,
+     "layout": 82.22,
+     "colors": 100.0,
+     "pixels": 97.76
+    },
+    {
+     "theme": "dark",
+     "state": "focus",
+     "texts": 97.83,
+     "layout": 82.22,
+     "colors": 93.33,
+     "pixels": 89.97
+    }
+   ]
+  },
+  {
+   "route": "/controls/ranges",
+   "slug": "controls_ranges",
+   "variants": [
+    {
+     "theme": "light",
+     "state": "normal",
+     "texts": 95.65,
+     "layout": 90.91,
+     "colors": 86.36,
+     "pixels": 99.03
+    },
+    {
+     "theme": "light",
+     "state": "pointerover",
+     "texts": 95.65,
+     "layout": 90.91,
+     "colors": 86.36,
+     "pixels": 98.8
+    },
+    {
+     "theme": "light",
+     "state": "pressed",
+     "texts": 95.65,
+     "layout": 90.91,
+     "colors": 86.36,
+     "pixels": 97.8
+    },
+    {
+     "theme": "light",
+     "state": "focus",
+     "texts": 95.65,
+     "layout": 90.91,
+     "colors": 86.36,
+     "pixels": 93.09
+    },
+    {
+     "theme": "dark",
+     "state": "normal",
+     "texts": 95.65,
+     "layout": 90.91,
+     "colors": 100.0,
+     "pixels": 99.01
+    },
+    {
+     "theme": "dark",
+     "state": "pointerover",
+     "texts": 95.65,
+     "layout": 90.91,
+     "colors": 100.0,
+     "pixels": 98.75
+    },
+    {
+     "theme": "dark",
+     "state": "pressed",
+     "texts": 95.65,
+     "layout": 90.91,
+     "colors": 100.0,
+     "pixels": 97.47
+    },
+    {
+     "theme": "dark",
+     "state": "focus",
+     "texts": 95.65,
+     "layout": 90.91,
+     "colors": 100.0,
+     "pixels": 92.32
+    }
+   ]
+  },
+  {
+   "route": "/controls/items",
+   "slug": "controls_items",
+   "variants": [
+    {
+     "theme": "light",
+     "state": "normal",
+     "texts": 97.83,
+     "layout": 93.33,
+     "colors": 88.89,
+     "pixels": 99.15
+    },
+    {
+     "theme": "light",
+     "state": "pointerover",
+     "texts": 97.83,
+     "layout": 93.33,
+     "colors": 88.89,
+     "pixels": 98.67
+    },
+    {
+     "theme": "light",
+     "state": "pressed",
+     "texts": 97.83,
+     "layout": 93.33,
+     "colors": 91.11,
+     "pixels": 98.79
+    },
+    {
+     "theme": "light",
+     "state": "focus",
+     "texts": 97.83,
+     "layout": 93.33,
+     "colors": 77.78,
+     "pixels": 92.32
+    },
+    {
+     "theme": "dark",
+     "state": "normal",
+     "texts": 97.83,
+     "layout": 93.33,
+     "colors": 100.0,
+     "pixels": 99.15
+    },
+    {
+     "theme": "dark",
+     "state": "pointerover",
+     "texts": 97.83,
+     "layout": 93.33,
+     "colors": 100.0,
+     "pixels": 98.65
+    },
+    {
+     "theme": "dark",
+     "state": "pressed",
+     "texts": 97.83,
+     "layout": 93.33,
+     "colors": 100.0,
+     "pixels": 98.57
+    },
+    {
+     "theme": "dark",
+     "state": "focus",
+     "texts": 97.83,
+     "layout": 93.33,
+     "colors": 86.67,
+     "pixels": 91.01
+    }
+   ]
+  },
+  {
+   "route": "/controls/navigation",
+   "slug": "controls_navigation",
+   "variants": [
+    {
+     "theme": "light",
+     "state": "normal",
+     "texts": 97.5,
+     "layout": 64.1,
+     "colors": 71.79,
+     "pixels": 92.73
+    },
+    {
+     "theme": "light",
+     "state": "pointerover",
+     "texts": 97.5,
+     "layout": 64.1,
+     "colors": 58.97,
+     "pixels": 90.88
+    },
+    {
+     "theme": "light",
+     "state": "pressed",
+     "texts": 97.5,
+     "layout": 64.1,
+     "colors": 66.67,
+     "pixels": 91.04
+    },
+    {
+     "theme": "light",
+     "state": "focus",
+     "texts": 97.5,
+     "layout": 64.1,
+     "colors": 69.23,
+     "pixels": 88.36
+    },
+    {
+     "theme": "dark",
+     "state": "normal",
+     "texts": 97.5,
+     "layout": 64.1,
+     "colors": 89.74,
+     "pixels": 85.02
+    },
+    {
+     "theme": "dark",
+     "state": "pointerover",
+     "texts": 97.5,
+     "layout": 64.1,
+     "colors": 82.05,
+     "pixels": 82.01
+    },
+    {
+     "theme": "dark",
+     "state": "pressed",
+     "texts": 97.5,
+     "layout": 64.1,
+     "colors": 82.05,
+     "pixels": 81.36
+    },
+    {
+     "theme": "dark",
+     "state": "focus",
+     "texts": 97.5,
+     "layout": 64.1,
+     "colors": 87.18,
+     "pixels": 80.04
+    }
+   ]
+  },
+  {
+   "route": "/controls/media",
+   "slug": "controls_media",
+   "variants": [
+    {
+     "theme": "light",
+     "state": "normal",
+     "texts": 95.83,
+     "layout": 91.3,
+     "colors": 86.96,
+     "pixels": 98.67
+    },
+    {
+     "theme": "light",
+     "state": "pointerover",
+     "texts": 95.83,
+     "layout": 91.3,
+     "colors": 86.96,
+     "pixels": 98.46
+    },
+    {
+     "theme": "light",
+     "state": "pressed",
+     "texts": 95.83,
+     "layout": 91.3,
+     "colors": 86.96,
+     "pixels": 98.66
+    },
+    {
+     "theme": "light",
+     "state": "focus",
+     "texts": 95.83,
+     "layout": 91.3,
+     "colors": 82.61,
+     "pixels": 91.02
+    },
+    {
+     "theme": "dark",
+     "state": "normal",
+     "texts": 95.83,
+     "layout": 91.3,
+     "colors": 100.0,
+     "pixels": 98.7
+    },
+    {
+     "theme": "dark",
+     "state": "pointerover",
+     "texts": 95.83,
+     "layout": 91.3,
+     "colors": 100.0,
+     "pixels": 98.47
+    },
+    {
+     "theme": "dark",
+     "state": "pressed",
+     "texts": 95.83,
+     "layout": 91.3,
+     "colors": 100.0,
+     "pixels": 98.37
+    },
+    {
+     "theme": "dark",
+     "state": "focus",
+     "texts": 95.83,
+     "layout": 91.3,
+     "colors": 100.0,
+     "pixels": 89.33
+    }
+   ]
+  },
+  {
+   "route": "/controls/vectors",
+   "slug": "controls_vectors",
+   "variants": [
+    {
+     "theme": "light",
+     "state": "normal",
+     "texts": 95.65,
+     "layout": 90.91,
+     "colors": 81.82,
+     "pixels": 99.34
+    },
+    {
+     "theme": "light",
+     "state": "pointerover",
+     "texts": 95.65,
+     "layout": 90.91,
+     "colors": 81.82,
+     "pixels": 99.14
+    },
+    {
+     "theme": "light",
+     "state": "pressed",
+     "texts": 95.65,
+     "layout": 90.91,
+     "colors": 81.82,
+     "pixels": 99.33
+    },
+    {
+     "theme": "light",
+     "state": "focus",
+     "texts": 95.65,
+     "layout": 90.91,
+     "colors": 77.27,
+     "pixels": 91.85
+    },
+    {
+     "theme": "dark",
+     "state": "normal",
+     "texts": 95.65,
+     "layout": 90.91,
+     "colors": 100.0,
+     "pixels": 99.35
+    },
+    {
+     "theme": "dark",
+     "state": "pointerover",
+     "texts": 95.65,
+     "layout": 90.91,
+     "colors": 100.0,
+     "pixels": 99.13
+    },
+    {
+     "theme": "dark",
+     "state": "pressed",
+     "texts": 95.65,
+     "layout": 90.91,
+     "colors": 100.0,
+     "pixels": 99.05
+    },
+    {
+     "theme": "dark",
+     "state": "focus",
+     "texts": 95.65,
+     "layout": 90.91,
+     "colors": 95.45,
+     "pixels": 90.64
+    }
+   ]
+  },
+  {
+   "route": "/controls/charts",
+   "slug": "controls_charts",
+   "variants": [
+    {
+     "theme": "light",
+     "state": "normal",
+     "texts": 95.24,
+     "layout": 90.0,
+     "colors": 85.0,
+     "pixels": 98.59
+    },
+    {
+     "theme": "light",
+     "state": "pointerover",
+     "texts": 95.24,
+     "layout": 90.0,
+     "colors": 85.0,
+     "pixels": 98.39
+    },
+    {
+     "theme": "light",
+     "state": "pressed",
+     "texts": 95.24,
+     "layout": 90.0,
+     "colors": 85.0,
+     "pixels": 98.57
+    },
+    {
+     "theme": "light",
+     "state": "focus",
+     "texts": 95.24,
+     "layout": 90.0,
+     "colors": 80.0,
+     "pixels": 91.91
+    },
+    {
+     "theme": "dark",
+     "state": "normal",
+     "texts": 95.24,
+     "layout": 90.0,
+     "colors": 100.0,
+     "pixels": 98.46
+    },
+    {
+     "theme": "dark",
+     "state": "pointerover",
+     "texts": 95.24,
+     "layout": 90.0,
+     "colors": 100.0,
+     "pixels": 98.24
+    },
+    {
+     "theme": "dark",
+     "state": "pressed",
+     "texts": 95.24,
+     "layout": 90.0,
+     "colors": 100.0,
+     "pixels": 98.16
+    },
+    {
+     "theme": "dark",
+     "state": "focus",
+     "texts": 95.24,
+     "layout": 90.0,
+     "colors": 100.0,
+     "pixels": 88.22
+    }
+   ]
+  },
+  {
+   "route": "/controls/layout",
+   "slug": "controls_layout",
+   "variants": [
+    {
+     "theme": "light",
+     "state": "normal",
+     "texts": 97.3,
+     "layout": 94.44,
+     "colors": 86.11,
+     "pixels": 99.48
+    },
+    {
+     "theme": "light",
+     "state": "pointerover",
+     "texts": 97.3,
+     "layout": 94.44,
+     "colors": 86.11,
+     "pixels": 99.29
+    },
+    {
+     "theme": "light",
+     "state": "pressed",
+     "texts": 97.3,
+     "layout": 94.44,
+     "colors": 86.11,
+     "pixels": 99.45
+    },
+    {
+     "theme": "light",
+     "state": "focus",
+     "texts": 97.3,
+     "layout": 94.44,
+     "colors": 77.78,
+     "pixels": 93.58
+    },
+    {
+     "theme": "dark",
+     "state": "normal",
+     "texts": 97.3,
+     "layout": 94.44,
+     "colors": 100.0,
+     "pixels": 99.47
+    },
+    {
+     "theme": "dark",
+     "state": "pointerover",
+     "texts": 97.3,
+     "layout": 94.44,
+     "colors": 100.0,
+     "pixels": 99.26
+    },
+    {
+     "theme": "dark",
+     "state": "pressed",
+     "texts": 97.3,
+     "layout": 94.44,
+     "colors": 100.0,
+     "pixels": 99.2
+    },
+    {
+     "theme": "dark",
+     "state": "focus",
+     "texts": 97.3,
+     "layout": 94.44,
+     "colors": 80.56,
+     "pixels": 91.98
+    }
+   ]
+  }
+ ]
+}

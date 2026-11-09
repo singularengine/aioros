@@ -1,0 +1,183 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:m="using:Aioros.Avalonia.Tests.Models">
+  <ControlTheme x:Key="CalendarStep" TargetType="Button">
+    <Setter Property="Width" Value="32" />
+    <Setter Property="Height" Value="32" />
+    <Setter Property="Padding" Value="0" />
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="Foreground" Value="#0a0a0a" />
+    <Setter Property="CornerRadius" Value="8" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border Name="PART_Root" Background="{TemplateBinding Background}" CornerRadius="{TemplateBinding CornerRadius}">
+          <ContentPresenter Name="PART_ContentPresenter" Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        </Border>
+      </ControlTemplate>
+    </Setter>
+    <Style Selector="^:pointerover">
+      <Setter Property="Background" Value="#f5f5f5" />
+    </Style>
+  </ControlTheme>
+
+  <ControlTheme x:Key="{x:Type Calendar}" TargetType="Calendar">
+    <Setter Property="Background" Value="#ffffff" />
+    <Setter Property="Foreground" Value="#0a0a0a" />
+    <Setter Property="BorderThickness" Value="0" />
+    <Setter Property="Padding" Value="12" />
+    <Setter Property="FontSize" Value="14" />
+    <Setter Property="HorizontalAlignment" Value="Left" />
+    <Setter Property="VerticalAlignment" Value="Top" />
+    <Setter Property="m:CalendarMarks.Follows" Value="True" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}">
+          <StackPanel Name="PART_Root" HorizontalAlignment="Left">
+            <CalendarItem Name="PART_CalendarItem" Foreground="{TemplateBinding Foreground}" />
+          </StackPanel>
+        </Border>
+      </ControlTemplate>
+    </Setter>
+  </ControlTheme>
+
+  <ControlTheme x:Key="{x:Type CalendarItem}" TargetType="CalendarItem">
+    <Setter Property="DayTitleTemplate">
+      <Template x:DataType="x:String">
+        <TextBlock Text="{Binding}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="12.8" LineHeight="19.2" Foreground="#737373" />
+      </Template>
+    </Setter>
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Grid RowDefinitions="Auto,Auto">
+          <Grid ColumnDefinitions="Auto,*,Auto" Height="32" Margin="0,0,0,16">
+            <Button Name="PART_PreviousButton" Theme="{StaticResource CalendarStep}" Content="‹" />
+            <Button Name="PART_HeaderButton" Grid.Column="1" Theme="{StaticResource CalendarStep}" Width="NaN" FontWeight="Medium" HorizontalAlignment="Center" />
+            <Button Name="PART_NextButton" Grid.Column="2" Theme="{StaticResource CalendarStep}" Content="›" />
+          </Grid>
+          <Grid Name="PART_MonthView" Grid.Row="1" IsVisible="False" HorizontalAlignment="Left"
+                RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto" ColumnDefinitions="32,32,32,32,32,32,32" />
+          <Grid Name="PART_YearView" Grid.Row="1" IsVisible="False" HorizontalAlignment="Left"
+                RowDefinitions="Auto,Auto,Auto" ColumnDefinitions="56,56,56,56" />
+        </Grid>
+      </ControlTemplate>
+    </Setter>
+  </ControlTheme>
+
+  <ControlTheme x:Key="{x:Type CalendarDayButton}" TargetType="CalendarDayButton">
+    <Setter Property="ClickMode" Value="Release" />
+    <Setter Property="Width" Value="32" />
+    <Setter Property="Height" Value="32" />
+    <Setter Property="Margin" Value="0,8,0,0" />
+    <Setter Property="Padding" Value="0" />
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="Foreground" Value="#0a0a0a" />
+    <Setter Property="CornerRadius" Value="8" />
+    <Setter Property="FontSize" Value="14" />
+    <Setter Property="FontWeight" Value="Normal" />
+    <Setter Property="HorizontalContentAlignment" Value="Center" />
+    <Setter Property="VerticalContentAlignment" Value="Center" />
+    <Setter Property="FocusAdorner" Value="{x:Null}" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border Name="PART_Band" Background="Transparent">
+          <Border Name="PART_Root" Background="{TemplateBinding Background}" CornerRadius="{TemplateBinding CornerRadius}" BorderThickness="1" BorderBrush="Transparent">
+            <ContentPresenter Name="PART_ContentPresenter" Content="{TemplateBinding Content}" Foreground="{TemplateBinding Foreground}" TextBlock.LineHeight="14"
+                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+          </Border>
+        </Border>
+      </ControlTemplate>
+    </Setter>
+    <Style Selector="^:pointerover">
+      <Setter Property="Background" Value="#f5f5f5" />
+      <Setter Property="Foreground" Value="#171717" />
+    </Style>
+    <Style Selector="^:focus-visible /template/ Border#PART_Root">
+      <Setter Property="BorderBrush" Value="#a1a1a1" />
+    </Style>
+    <Style Selector="^:today">
+      <Setter Property="Background" Value="#f5f5f5" />
+      <Setter Property="Foreground" Value="#171717" />
+    </Style>
+    <Style Selector="^:inactive">
+      <Setter Property="Foreground" Value="#737373" />
+    </Style>
+    <Style Selector="^:blackout">
+      <Setter Property="Foreground" Value="#737373" />
+      <Setter Property="Opacity" Value="0.5" />
+    </Style>
+    <Style Selector="^:selected">
+      <Setter Property="Background" Value="#171717" />
+      <Setter Property="Foreground" Value="#fafafa" />
+    </Style>
+    <Style Selector="^.range-middle">
+      <Setter Property="Background" Value="#f5f5f5" />
+      <Setter Property="Foreground" Value="#171717" />
+    </Style>
+    <Style Selector="^.outside-hidden:inactive">
+      <Setter Property="IsHitTestVisible" Value="False" />
+    </Style>
+    <Style Selector="^.outside-hidden:inactive /template/ Border#PART_Band">
+      <Setter Property="Opacity" Value="0" />
+    </Style>
+  </ControlTheme>
+
+  <ControlTheme x:Key="{x:Type CalendarButton}" TargetType="CalendarButton">
+    <Setter Property="ClickMode" Value="Release" />
+    <Setter Property="Width" Value="52" />
+    <Setter Property="Height" Value="32" />
+    <Setter Property="Margin" Value="2,4" />
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="Foreground" Value="#0a0a0a" />
+    <Setter Property="CornerRadius" Value="8" />
+    <Setter Property="FontSize" Value="14" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border Name="PART_Root" Background="{TemplateBinding Background}" CornerRadius="{TemplateBinding CornerRadius}">
+          <ContentPresenter Name="PART_ContentPresenter" Content="{TemplateBinding Content}" Foreground="{TemplateBinding Foreground}"
+                            HorizontalAlignment="Center" VerticalAlignment="Center" />
+        </Border>
+      </ControlTemplate>
+    </Setter>
+    <Style Selector="^:pointerover">
+      <Setter Property="Background" Value="#f5f5f5" />
+    </Style>
+    <Style Selector="^:selected">
+      <Setter Property="Background" Value="#171717" />
+      <Setter Property="Foreground" Value="#fafafa" />
+    </Style>
+  </ControlTheme>
+
+  <ControlTheme x:Key="CaptionCalendar" TargetType="Calendar" BasedOn="{StaticResource {x:Type Calendar}}">
+    <Setter Property="m:CalendarCaptions.Follows" Value="True" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}">
+          <StackPanel Name="PART_Root" HorizontalAlignment="Left">
+            <CalendarItem Name="PART_CalendarItem" Theme="{StaticResource CaptionCalendarItem}" Foreground="{TemplateBinding Foreground}" />
+          </StackPanel>
+        </Border>
+      </ControlTemplate>
+    </Setter>
+  </ControlTheme>
+
+  <ControlTheme x:Key="CaptionCalendarItem" TargetType="CalendarItem" BasedOn="{StaticResource {x:Type CalendarItem}}">
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Grid RowDefinitions="Auto,Auto">
+          <Grid ColumnDefinitions="Auto,*,Auto" Height="32" Margin="0,0,0,16">
+            <Button Name="PART_PreviousButton" Theme="{StaticResource CalendarStep}" Content="‹" />
+            <Button Name="PART_HeaderButton" Grid.Column="1" Theme="{StaticResource CalendarStep}" Width="NaN" FontWeight="Medium" HorizontalAlignment="Center" IsVisible="False" />
+            <StackPanel Name="PART_Dropdowns" Grid.Column="1" Orientation="Horizontal" Spacing="6" HorizontalAlignment="Center">
+              <ComboBox Width="72" ItemsSource="{Binding $parent[Calendar].(m:CalendarCaptions.Months)}" SelectedIndex="{Binding $parent[Calendar].(m:CalendarCaptions.Month), Mode=TwoWay}" />
+              <ComboBox Width="88" ItemsSource="{Binding $parent[Calendar].(m:CalendarCaptions.Years)}" SelectedIndex="{Binding $parent[Calendar].(m:CalendarCaptions.Year), Mode=TwoWay}" />
+            </StackPanel>
+            <Button Name="PART_NextButton" Grid.Column="2" Theme="{StaticResource CalendarStep}" Content="›" />
+          </Grid>
+          <Grid Name="PART_MonthView" Grid.Row="1" IsVisible="False" HorizontalAlignment="Left"
+                RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto" ColumnDefinitions="32,32,32,32,32,32,32" />
+          <Grid Name="PART_YearView" Grid.Row="1" IsVisible="False" HorizontalAlignment="Left"
+                RowDefinitions="Auto,Auto,Auto" ColumnDefinitions="56,56,56,56" />
+        </Grid>
+      </ControlTemplate>
+    </Setter>
+  </ControlTheme>
+</ResourceDictionary>

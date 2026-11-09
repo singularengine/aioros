@@ -1,0 +1,430 @@
+<Application xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:a="https://aioros.dev"
+             x:Class="Showcase.App"
+             RequestedThemeVariant="Light">
+
+  <Application.Resources>
+    <ResourceDictionary>
+      <ResourceDictionary.ThemeDictionaries>
+        <ResourceDictionary x:Key="Light">
+          <SolidColorBrush x:Key="AppBg" Color="#F5F6FA" />
+          <SolidColorBrush x:Key="Surface" Color="#FFFFFF" />
+          <SolidColorBrush x:Key="SurfaceAlt" Color="#F0F2F7" />
+          <SolidColorBrush x:Key="Line" Color="#E4E7EF" />
+          <SolidColorBrush x:Key="Text" Color="#12131A" />
+          <SolidColorBrush x:Key="Muted" Color="#646B7E" />
+          <SolidColorBrush x:Key="Hover" Color="#ECEEF5" />
+          <SolidColorBrush x:Key="Accent" Color="#5B5BD6" />
+          <SolidColorBrush x:Key="AccentSoft" Color="#ECECFC" />
+          <SolidColorBrush x:Key="Positive" Color="#139A55" />
+          <SolidColorBrush x:Key="Negative" Color="#D93D42" />
+          <SolidColorBrush x:Key="CodeBg" Color="#12131A" />
+          <SolidColorBrush x:Key="CodeText" Color="#D8DAE5" />
+          <LinearGradientBrush x:Key="Hero" StartPoint="0%,0%" EndPoint="100%,100%">
+            <GradientStop Offset="0" Color="#EEF0FF" />
+            <GradientStop Offset="0.55" Color="#F7F3FF" />
+            <GradientStop Offset="1" Color="#E9F7FB" />
+          </LinearGradientBrush>
+          <BoxShadows x:Key="Lift">0 12 32 -8 #2A1B1F3A</BoxShadows>
+          <x:String x:Key="ThemeIcon">moon</x:String>
+        </ResourceDictionary>
+        <ResourceDictionary x:Key="Dark">
+          <SolidColorBrush x:Key="AppBg" Color="#090A0F" />
+          <SolidColorBrush x:Key="Surface" Color="#12131B" />
+          <SolidColorBrush x:Key="SurfaceAlt" Color="#181A24" />
+          <SolidColorBrush x:Key="Line" Color="#232634" />
+          <SolidColorBrush x:Key="Text" Color="#ECEDF4" />
+          <SolidColorBrush x:Key="Muted" Color="#8C92A8" />
+          <SolidColorBrush x:Key="Hover" Color="#1C1F2B" />
+          <SolidColorBrush x:Key="Accent" Color="#8183F4" />
+          <SolidColorBrush x:Key="AccentSoft" Color="#1E1F3D" />
+          <SolidColorBrush x:Key="Positive" Color="#3DD68C" />
+          <SolidColorBrush x:Key="Negative" Color="#FF6369" />
+          <SolidColorBrush x:Key="CodeBg" Color="#0D0E14" />
+          <SolidColorBrush x:Key="CodeText" Color="#D8DAE5" />
+          <LinearGradientBrush x:Key="Hero" StartPoint="0%,0%" EndPoint="100%,100%">
+            <GradientStop Offset="0" Color="#16173A" />
+            <GradientStop Offset="0.55" Color="#1B1230" />
+            <GradientStop Offset="1" Color="#0D2430" />
+          </LinearGradientBrush>
+          <BoxShadows x:Key="Lift">0 12 32 -8 #66000000</BoxShadows>
+          <x:String x:Key="ThemeIcon">sun</x:String>
+        </ResourceDictionary>
+      </ResourceDictionary.ThemeDictionaries>
+      <Color x:Key="SystemAccentColor">#5B5BD6</Color>
+      <Color x:Key="SystemAccentColorDark1">#4F4FC4</Color>
+      <Color x:Key="SystemAccentColorLight1">#7272E0</Color>
+    </ResourceDictionary>
+  </Application.Resources>
+
+  <Application.Styles>
+    <FluentTheme />
+
+    <Style Selector="Window">
+      <Setter Property="Background" Value="{DynamicResource AppBg}" />
+      <Setter Property="Foreground" Value="{DynamicResource Text}" />
+      <Setter Property="FontSize" Value="14" />
+    </Style>
+
+    <Style Selector="TextBlock.display">
+      <Setter Property="FontSize" Value="40" />
+      <Setter Property="FontWeight" Value="Bold" />
+      <Setter Property="TextWrapping" Value="Wrap" />
+    </Style>
+    <Style Selector="TextBlock.h1">
+      <Setter Property="FontSize" Value="28" />
+      <Setter Property="FontWeight" Value="SemiBold" />
+    </Style>
+    <Style Selector="TextBlock.h2">
+      <Setter Property="FontSize" Value="17" />
+      <Setter Property="FontWeight" Value="SemiBold" />
+    </Style>
+    <Style Selector="TextBlock.eyebrow">
+      <Setter Property="FontSize" Value="12" />
+      <Setter Property="FontWeight" Value="SemiBold" />
+      <Setter Property="Foreground" Value="{DynamicResource Accent}" />
+    </Style>
+    <Style Selector="TextBlock.lead">
+      <Setter Property="FontSize" Value="17" />
+      <Setter Property="Foreground" Value="{DynamicResource Muted}" />
+      <Setter Property="TextWrapping" Value="Wrap" />
+    </Style>
+    <Style Selector="TextBlock.muted"><Setter Property="Foreground" Value="{DynamicResource Muted}" /></Style>
+    <Style Selector="TextBlock.small"><Setter Property="FontSize" Value="12" /></Style>
+    <Style Selector="TextBlock.wrap"><Setter Property="TextWrapping" Value="Wrap" /></Style>
+    <Style Selector="TextBlock.figure">
+      <Setter Property="FontSize" Value="26" />
+      <Setter Property="FontWeight" Value="SemiBold" />
+    </Style>
+    <Style Selector="TextBlock.up"><Setter Property="Foreground" Value="{DynamicResource Positive}" /></Style>
+    <Style Selector="TextBlock.down"><Setter Property="Foreground" Value="{DynamicResource Negative}" /></Style>
+
+    <Style Selector="Border.card">
+      <Setter Property="Background" Value="{DynamicResource Surface}" />
+      <Setter Property="BorderBrush" Value="{DynamicResource Line}" />
+      <Setter Property="BorderThickness" Value="1" />
+      <Setter Property="CornerRadius" Value="14" />
+      <Setter Property="Padding" Value="20" />
+    </Style>
+
+    <!-- Demo tiles: they rise into place one after another and lift on hover -->
+    <Style Selector="Border.tile">
+      <Setter Property="Background" Value="{DynamicResource Surface}" />
+      <Setter Property="BorderBrush" Value="{DynamicResource Line}" />
+      <Setter Property="BorderThickness" Value="1" />
+      <Setter Property="CornerRadius" Value="16" />
+      <Setter Property="Padding" Value="24" />
+      <Setter Property="RenderTransform" Value="translate(0px, 0px)" />
+      <Setter Property="Transitions">
+        <Transitions>
+          <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.25" Easing="CubicEaseOut" />
+          <BrushTransition Property="BorderBrush" Duration="0:0:0.25" />
+        </Transitions>
+      </Setter>
+    </Style>
+    <Style Selector="Border.tile:pointerover">
+      <Setter Property="RenderTransform" Value="translate(0px, -6px)" />
+      <Setter Property="BorderBrush" Value="{DynamicResource Accent}" />
+      <Setter Property="BoxShadow" Value="{DynamicResource Lift}" />
+    </Style>
+    <Style Selector="Border.tile:pointerover TextBlock.go"><Setter Property="Foreground" Value="{DynamicResource Accent}" /></Style>
+    <Style Selector="Border.rise1">
+      <Style.Animations>
+        <Animation Duration="0:0:0.7" Easing="CubicEaseOut" FillMode="Backward">
+          <KeyFrame Cue="0%"><Setter Property="Opacity" Value="0" /></KeyFrame>
+          <KeyFrame Cue="100%"><Setter Property="Opacity" Value="1" /></KeyFrame>
+        </Animation>
+      </Style.Animations>
+    </Style>
+    <Style Selector="Border.rise2">
+      <Style.Animations>
+        <Animation Duration="0:0:0.7" Delay="0:0:0.12" Easing="CubicEaseOut" FillMode="Backward">
+          <KeyFrame Cue="0%"><Setter Property="Opacity" Value="0" /></KeyFrame>
+          <KeyFrame Cue="100%"><Setter Property="Opacity" Value="1" /></KeyFrame>
+        </Animation>
+      </Style.Animations>
+    </Style>
+    <Style Selector="Border.rise3">
+      <Style.Animations>
+        <Animation Duration="0:0:0.7" Delay="0:0:0.24" Easing="CubicEaseOut" FillMode="Backward">
+          <KeyFrame Cue="0%"><Setter Property="Opacity" Value="0" /></KeyFrame>
+          <KeyFrame Cue="100%"><Setter Property="Opacity" Value="1" /></KeyFrame>
+        </Animation>
+      </Style.Animations>
+    </Style>
+
+    <Style Selector="Border.badge">
+      <Setter Property="CornerRadius" Value="12" />
+      <Setter Property="Width" Value="44" />
+      <Setter Property="Height" Value="44" />
+      <Setter Property="HorizontalAlignment" Value="Left" />
+      <Setter Property="Background" Value="{DynamicResource AccentSoft}" />
+    </Style>
+    <Style Selector="Border.badge a|Icon"><Setter Property="Foreground" Value="{DynamicResource Accent}" /></Style>
+
+    <Style Selector="Border.navlink">
+      <Setter Property="Padding" Value="12,7" />
+      <Setter Property="CornerRadius" Value="8" />
+      <Setter Property="Background" Value="Transparent" />
+    </Style>
+    <Style Selector="Border.navlink:pointerover"><Setter Property="Background" Value="{DynamicResource Hover}" /></Style>
+    <Style Selector="Border.navlink TextBlock"><Setter Property="Foreground" Value="{DynamicResource Muted}" /></Style>
+    <Style Selector="Border.navlink:pointerover TextBlock"><Setter Property="Foreground" Value="{DynamicResource Text}" /></Style>
+    <Style Selector="Border.pager">
+      <Setter Property="Padding" Value="12,7" />
+      <Setter Property="CornerRadius" Value="8" />
+      <Setter Property="Background" Value="Transparent" />
+    </Style>
+    <Style Selector="Border.pager:pointerover"><Setter Property="Background" Value="{DynamicResource Hover}" /></Style>
+    <Style Selector="Border.pager TextBlock"><Setter Property="Foreground" Value="{DynamicResource Muted}" /></Style>
+    <Style Selector="Border.pager:pointerover TextBlock"><Setter Property="Foreground" Value="{DynamicResource Text}" /></Style>
+    <Style Selector="Border.navlink:current"><Setter Property="Background" Value="{DynamicResource AccentSoft}" /></Style>
+    <Style Selector="Border.navlink:current TextBlock"><Setter Property="Foreground" Value="{DynamicResource Accent}" /></Style>
+
+    <Style Selector="Border.cta">
+      <Setter Property="Padding" Value="18,11" />
+      <Setter Property="CornerRadius" Value="10" />
+      <Setter Property="Background" Value="{DynamicResource Accent}" />
+    </Style>
+    <Style Selector="Border.cta TextBlock">
+      <Setter Property="Foreground" Value="#FFFFFF" />
+      <Setter Property="FontWeight" Value="SemiBold" />
+    </Style>
+    <Style Selector="Border.cta a|Icon"><Setter Property="Foreground" Value="#FFFFFF" /></Style>
+    <Style Selector="Border.cta:pointerover"><Setter Property="Opacity" Value="0.9" /></Style>
+
+    <Style Selector="Border.chip">
+      <Setter Property="Padding" Value="8,3" />
+      <Setter Property="CornerRadius" Value="999" />
+      <Setter Property="Background" Value="{DynamicResource SurfaceAlt}" />
+    </Style>
+
+    <Style Selector="Expander.source">
+      <Setter Property="HorizontalAlignment" Value="Stretch" />
+    </Style>
+    <Style Selector="SelectableTextBlock.source">
+      <Setter Property="FontFamily" Value="Cascadia Code,JetBrains Mono,Menlo,Consolas,monospace" />
+      <Setter Property="FontSize" Value="12" />
+      <Setter Property="Foreground" Value="{DynamicResource CodeText}" />
+    </Style>
+    <Style Selector="Border.code">
+      <Setter Property="Background" Value="{DynamicResource CodeBg}" />
+      <Setter Property="CornerRadius" Value="10" />
+      <Setter Property="Padding" Value="16" />
+    </Style>
+    <!-- Aioros Games: a dark storefront that keeps its own palette in both themes -->
+    <Style Selector="Border.store">
+      <Setter Property="CornerRadius" Value="22" />
+      <Setter Property="Padding" Value="24" />
+      <Setter Property="Background">
+        <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
+          <GradientStop Offset="0" Color="#0E1520" />
+          <GradientStop Offset="0.5" Color="#1A2738" />
+          <GradientStop Offset="1" Color="#101B29" />
+        </LinearGradientBrush>
+      </Setter>
+    </Style>
+    <Style Selector="Border.store TextBlock"><Setter Property="Foreground" Value="#C7D5E0" /></Style>
+    <Style Selector="TextBlock.g-hero">
+      <Setter Property="FontSize" Value="34" />
+      <Setter Property="FontWeight" Value="Bold" />
+      <Setter Property="TextWrapping" Value="Wrap" />
+    </Style>
+    <Style Selector="Border.store TextBlock.g-hero"><Setter Property="Foreground" Value="#FFFFFF" /></Style>
+    <Style Selector="Border.store TextBlock.g-head">
+      <Setter Property="FontSize" Value="15" />
+      <Setter Property="FontWeight" Value="SemiBold" />
+      <Setter Property="Foreground" Value="#FFFFFF" />
+    </Style>
+    <Style Selector="Border.store TextBlock.g-muted"><Setter Property="Foreground" Value="#8F98A0" /></Style>
+    <Style Selector="Border.store TextBlock.g-blue"><Setter Property="Foreground" Value="#66C0F4" /></Style>
+    <Style Selector="Border.store TextBlock.g-green"><Setter Property="Foreground" Value="#BEEE11" /></Style>
+    <Style Selector="Border.store TextBlock.g-white"><Setter Property="Foreground" Value="#FFFFFF" /></Style>
+    <Style Selector="Border.store TextBlock.g-strike">
+      <Setter Property="Foreground" Value="#738895" />
+      <Setter Property="TextDecorations" Value="Strikethrough" />
+      <Setter Property="FontSize" Value="12" />
+    </Style>
+    <Style Selector="Border.store TextBlock.g-figure">
+      <Setter Property="FontSize" Value="30" />
+      <Setter Property="FontWeight" Value="Bold" />
+      <Setter Property="Foreground" Value="#FFFFFF" />
+    </Style>
+
+    <Style Selector="Border.g-tab">
+      <Setter Property="Padding" Value="14,8" />
+      <Setter Property="CornerRadius" Value="10" />
+      <Setter Property="Background" Value="Transparent" />
+    </Style>
+    <Style Selector="Border.g-tab:pointerover"><Setter Property="Background" Value="#22344A" /></Style>
+    <Style Selector="Border.g-tab.on"><Setter Property="Background" Value="#2A475E" /></Style>
+    <Style Selector="Border.g-tab.on TextBlock"><Setter Property="Foreground" Value="#FFFFFF" /></Style>
+    <Style Selector="Border.g-pager">
+      <Setter Property="Padding" Value="14,8" />
+      <Setter Property="CornerRadius" Value="10" />
+      <Setter Property="Background" Value="Transparent" />
+    </Style>
+    <Style Selector="Border.g-pager:pointerover"><Setter Property="Background" Value="#22344A" /></Style>
+    <Style Selector="Border.g-tab:current"><Setter Property="Background" Value="#2A475E" /></Style>
+    <Style Selector="Border.g-tab:current TextBlock"><Setter Property="Foreground" Value="#FFFFFF" /></Style>
+
+    <Style Selector="Border.g-chip">
+      <Setter Property="Padding" Value="12,6" />
+      <Setter Property="CornerRadius" Value="999" />
+      <Setter Property="Background" Value="#1C2A3A" />
+      <Setter Property="BorderBrush" Value="#26384D" />
+      <Setter Property="BorderThickness" Value="1" />
+    </Style>
+    <Style Selector="Border.g-chip:pointerover"><Setter Property="Background" Value="#26405A" /></Style>
+    <Style Selector="Border.g-chip.on">
+      <Setter Property="Background" Value="#66C0F4" />
+      <Setter Property="BorderBrush" Value="#66C0F4" />
+    </Style>
+    <Style Selector="Border.g-chip.on TextBlock"><Setter Property="Foreground" Value="#0E1520" /></Style>
+
+    <Style Selector="Border.g-panel">
+      <Setter Property="Background" Value="#152131" />
+      <Setter Property="BorderBrush" Value="#22334A" />
+      <Setter Property="BorderThickness" Value="1" />
+      <Setter Property="CornerRadius" Value="16" />
+      <Setter Property="Padding" Value="20" />
+    </Style>
+
+    <Style Selector="Border.g-card">
+      <Setter Property="Background" Value="#152131" />
+      <Setter Property="BorderBrush" Value="#22334A" />
+      <Setter Property="BorderThickness" Value="1" />
+      <Setter Property="CornerRadius" Value="14" />
+      <Setter Property="ClipToBounds" Value="True" />
+      <Setter Property="RenderTransform" Value="translate(0px, 0px)" />
+      <Setter Property="Transitions">
+        <Transitions>
+          <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.22" Easing="CubicEaseOut" />
+          <BrushTransition Property="BorderBrush" Duration="0:0:0.22" />
+        </Transitions>
+      </Setter>
+    </Style>
+    <Style Selector="Border.g-card:pointerover">
+      <Setter Property="RenderTransform" Value="translate(0px, -5px)" />
+      <Setter Property="BorderBrush" Value="#66C0F4" />
+      <Setter Property="BoxShadow" Value="0 18 36 -12 #CC000000" />
+    </Style>
+
+    <Style Selector="Border.g-cover">
+      <Setter Property="ClipToBounds" Value="True" />
+    </Style>
+    <Style Selector="Border.g-shade">
+      <Setter Property="Background">
+        <LinearGradientBrush StartPoint="0%,0%" EndPoint="0%,100%">
+          <GradientStop Offset="0" Color="#00000000" />
+          <GradientStop Offset="0.55" Color="#33000000" />
+          <GradientStop Offset="1" Color="#D90B1118" />
+        </LinearGradientBrush>
+      </Setter>
+    </Style>
+    <Style Selector="Border.g-shine">
+      <Setter Property="Background">
+        <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
+          <GradientStop Offset="0" Color="#40FFFFFF" />
+          <GradientStop Offset="0.45" Color="#00FFFFFF" />
+          <GradientStop Offset="1" Color="#33000000" />
+        </LinearGradientBrush>
+      </Setter>
+    </Style>
+    <Style Selector="Border.g-off">
+      <Setter Property="Background" Value="#4C6B22" />
+      <Setter Property="CornerRadius" Value="6" />
+      <Setter Property="Padding" Value="7,3" />
+    </Style>
+    <Style Selector="Border.g-off TextBlock">
+      <Setter Property="Foreground" Value="#BEEE11" />
+      <Setter Property="FontWeight" Value="Bold" />
+    </Style>
+    <Style Selector="Border.g-tag">
+      <Setter Property="Padding" Value="8,3" />
+      <Setter Property="CornerRadius" Value="6" />
+      <Setter Property="Background" Value="#22344A" />
+    </Style>
+    <Style Selector="Border.g-tag TextBlock">
+      <Setter Property="Foreground" Value="#67C1F5" />
+      <Setter Property="FontSize" Value="12" />
+    </Style>
+    <Style Selector="Border.g-buy">
+      <Setter Property="CornerRadius" Value="10" />
+      <Setter Property="Padding" Value="22,12" />
+      <Setter Property="Background">
+        <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,0%">
+          <GradientStop Offset="0" Color="#75B022" />
+          <GradientStop Offset="1" Color="#588A1B" />
+        </LinearGradientBrush>
+      </Setter>
+    </Style>
+    <Style Selector="Border.g-buy TextBlock">
+      <Setter Property="Foreground" Value="#FFFFFF" />
+      <Setter Property="FontWeight" Value="SemiBold" />
+    </Style>
+    <Style Selector="Border.g-buy a|Icon"><Setter Property="Foreground" Value="#FFFFFF" /></Style>
+    <Style Selector="Border.g-buy:pointerover"><Setter Property="Opacity" Value="0.9" /></Style>
+    <Style Selector="Button.g-action">
+      <Setter Property="Background" Value="#5C8A1E" />
+      <Setter Property="Foreground" Value="#FFFFFF" />
+      <Setter Property="FontWeight" Value="SemiBold" />
+      <Setter Property="CornerRadius" Value="10" />
+      <Setter Property="Padding" Value="22,11" />
+    </Style>
+    <Style Selector="Button.g-quiet">
+      <Setter Property="Background" Value="#22344A" />
+      <Setter Property="Foreground" Value="#C7D5E0" />
+      <Setter Property="CornerRadius" Value="10" />
+      <Setter Property="Padding" Value="14,8" />
+    </Style>
+    <Style Selector="Button.g-crew">
+      <Setter Property="Background" Value="#1C2A3A" />
+      <Setter Property="Foreground" Value="#C7D5E0" />
+      <Setter Property="CornerRadius" Value="999" />
+      <Setter Property="Padding" Value="16,7" />
+      <Setter Property="FontWeight" Value="SemiBold" />
+    </Style>
+    <Style Selector="Button.g-crew.on">
+      <Setter Property="Background" Value="#66C0F4" />
+      <Setter Property="Foreground" Value="#0E1520" />
+    </Style>
+    <Style Selector="Border.g-avatar">
+      <Setter Property="Width" Value="36" />
+      <Setter Property="Height" Value="36" />
+      <Setter Property="CornerRadius" Value="10" />
+    </Style>
+    <Style Selector="Border.g-pulse">
+      <Setter Property="Width" Value="9" />
+      <Setter Property="Height" Value="9" />
+      <Setter Property="CornerRadius" Value="5" />
+      <Setter Property="Background" Value="#BEEE11" />
+      <Style.Animations>
+        <Animation Duration="0:0:1.1" IterationCount="Infinite" PlaybackDirection="Alternate">
+          <KeyFrame Cue="0%"><Setter Property="Opacity" Value="1" /></KeyFrame>
+          <KeyFrame Cue="100%"><Setter Property="Opacity" Value="0.2" /></KeyFrame>
+        </Animation>
+      </Style.Animations>
+    </Style>
+    <Style Selector="Border.g-rise">
+      <Style.Animations>
+        <Animation Duration="0:0:0.6" Easing="CubicEaseOut" FillMode="Backward">
+          <KeyFrame Cue="0%"><Setter Property="Opacity" Value="0" /></KeyFrame>
+          <KeyFrame Cue="100%"><Setter Property="Opacity" Value="1" /></KeyFrame>
+        </Animation>
+      </Style.Animations>
+    </Style>
+    <Style Selector="Border.store TextBox">
+      <Setter Property="Background" Value="#0E1520" />
+      <Setter Property="Foreground" Value="#E6EDF3" />
+      <Setter Property="BorderBrush" Value="#2A3F57" />
+      <Setter Property="CornerRadius" Value="10" />
+      <Setter Property="Padding" Value="12,8" />
+    </Style>
+    <Style Selector="Border.store ProgressBar">
+      <Setter Property="Foreground" Value="#66C0F4" />
+      <Setter Property="Background" Value="#22344A" />
+    </Style>
+  </Application.Styles>
+</Application>

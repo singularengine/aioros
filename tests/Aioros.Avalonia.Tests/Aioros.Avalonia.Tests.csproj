@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+  </PropertyGroup>
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.TestHost" />
+    <PackageReference Include="Microsoft.Playwright" />
+    <PackageReference Include="Avalonia" />
+    <PackageReference Include="Avalonia.Themes.Fluent" />
+    <PackageReference Include="Avalonia.Controls.DataGrid" />
+    <PackageReference Include="CommunityToolkit.Mvvm" />
+    <ProjectReference Include="..\..\src\Adapters\Aioros.Avalonia\Aioros.Avalonia.csproj" />
+    <ProjectReference Include="..\..\src\Targets\Aioros.Targets.Ssr\Aioros.Targets.Ssr.csproj" />
+    <ProjectReference Include="..\..\src\Aioros.Testing\Aioros.Testing.csproj" />
+    <ProjectReference Include="..\Aioros.Markup.Library\Aioros.Markup.Library.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\Aioros.Targets.Ssr.Tests\Pages\RecordedLogs.cs" Link="Hosting\RecordedLogs.cs" />
+    <Content Include="xunit.runner.json" CopyToOutputDirectory="PreserveNewest" />
+    <PageSource Include="Pages/**/*.axaml" />
+    <AvaloniaResource Include="Assets/**" />
+    <Compile Include="../../samples/Showcase/Showcase/Board/*.cs" Link="Samples/Board/%(Filename)%(Extension)" />
+    <Compile Include="../../samples/Showcase/Showcase/Models/KanbanModel.cs" Link="Samples/Models/KanbanModel.cs" />
+    <None Include="../../samples/Showcase/Showcase/Pages/kanban/Page.axaml" Link="Samples/kanban.axaml" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+  <Target Name="CopyPageSources" AfterTargets="Build">
+    <Copy SourceFiles="@(PageSource)" DestinationFiles="@(PageSource->'$(OutDir)%(RelativeDir)%(Filename)%(Extension)')" SkipUnchangedFiles="true" />
+  </Target>
+</Project>

@@ -1,0 +1,13 @@
+<UserControl xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:a="https://aioros.dev"
+             xmlns:v="using:Aioros.Targets.Desktop.Tests.Views" xmlns:m="using:Aioros.Targets.Desktop.Tests.Navigation" x:DataType="m:Deck">
+  <StackPanel>
+    <TextBlock Text="{Binding Label}" />
+    <ItemsControl ItemsSource="{Binding Cards}">
+      <ItemsControl.ItemTemplate>
+        <DataTemplate x:DataType="m:Card">
+          <v:Saver a:View.ItemKey="Id" />
+        </DataTemplate>
+      </ItemsControl.ItemTemplate>
+    </ItemsControl>
+  </StackPanel>
+</UserControl>

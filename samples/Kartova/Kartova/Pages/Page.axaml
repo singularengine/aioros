@@ -1,0 +1,8 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:a="https://aioros.dev"
+             xmlns:views="using:Kartova.App.Views"
+             a:Page.Title="Kartova"
+             a:Page.Description="See where your disk space went: a treemap, a sunburst, duplicates and insights over the folders you scan."
+             a:Page.Platforms="Desktop">
+  <views:MainView />
+</UserControl>

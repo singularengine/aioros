@@ -1,0 +1,148 @@
+<UserControl xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:a="https://aioros.dev" xmlns:g="using:Showcase.Games" xmlns:loader="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia" x:DataType="g:GameModel">
+  <StackPanel Spacing="22">
+    <Border Classes="g-pager" a:Web.Href="/games" HorizontalAlignment="Left" Padding="8,5">
+      <StackPanel Orientation="Horizontal" Spacing="4"><a:Icon Kind="chevron-left" Size="16" Foreground="#C7D5E0" VerticalAlignment="Center" /><TextBlock Text="Store" /></StackPanel>
+    </Border>
+
+    <Grid ColumnDefinitions="3*,2*" ColumnSpacing="22" a:Web.StackBelow="900">
+      <Border Classes="g-card g-rise">
+        <StackPanel>
+          <Border Classes="g-cover" Height="300">
+            <Image loader:ImageLoader.Source="{Binding Game.Art}" AutomationProperties.Name="{Binding Game.Title}" Stretch="UniformToFill" Height="300" />
+          </Border>
+          <ItemsControl ItemsSource="{Binding Shots}" Margin="10">
+            <ItemsControl.ItemsPanel><ItemsPanelTemplate><UniformGrid Columns="3" ColumnSpacing="10" /></ItemsPanelTemplate></ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+              <DataTemplate x:DataType="x:String">
+                <Border CornerRadius="8" ClipToBounds="True" Height="96">
+                  <Image loader:ImageLoader.Source="{Binding}" AutomationProperties.Name="Screenshot" Stretch="UniformToFill" Height="96" />
+                </Border>
+              </DataTemplate>
+            </ItemsControl.ItemTemplate>
+          </ItemsControl>
+        </StackPanel>
+      </Border>
+
+      <Border Grid.Column="1" Classes="g-panel">
+        <StackPanel Spacing="14">
+          <StackPanel Spacing="2">
+            <TextBlock Classes="g-hero" Text="{Binding Game.Title}" />
+            <TextBlock Classes="g-muted" Text="{Binding Game.Studio}" />
+          </StackPanel>
+          <TextBlock Classes="wrap" Text="{Binding Summary}" LineHeight="21" />
+          <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto,Auto,Auto" ColumnSpacing="16" RowSpacing="8">
+            <TextBlock Classes="g-muted small" Text="REVIEWS" />
+            <TextBlock Grid.Column="1" Classes="small" Text="{Binding Game.Rating}" Foreground="{Binding Game.RatingColor}" FontWeight="SemiBold" />
+            <TextBlock Grid.Row="1" Classes="g-muted small" Text="RELEASED" />
+            <TextBlock Grid.Row="1" Grid.Column="1" Classes="small" Text="{Binding Released}" />
+            <TextBlock Grid.Row="2" Classes="g-muted small" Text="GENRE" />
+            <TextBlock Grid.Row="2" Grid.Column="1" Classes="small g-blue" Text="{Binding Game.Genre}" />
+            <TextBlock Grid.Row="3" Classes="g-muted small" Text="OWNERS" />
+            <TextBlock Grid.Row="3" Grid.Column="1" Classes="small" Text="{Binding Game.Owners}" />
+          </Grid>
+          <ItemsControl ItemsSource="{Binding Tags}">
+            <ItemsControl.ItemsPanel><ItemsPanelTemplate><WrapPanel ItemSpacing="6" LineSpacing="6" /></ItemsPanelTemplate></ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+              <DataTemplate x:DataType="x:String"><Border Classes="g-tag"><TextBlock Text="{Binding}" /></Border></DataTemplate>
+            </ItemsControl.ItemTemplate>
+          </ItemsControl>
+          <Border Background="#0E1520" CornerRadius="12" Padding="14">
+            <Grid ColumnDefinitions="*,Auto">
+              <StackPanel Orientation="Horizontal" Spacing="10" VerticalAlignment="Center">
+                <Border Classes="g-off" IsVisible="{Binding Game.OnSale}"><TextBlock Text="{Binding Game.Off}" FontSize="18" /></Border>
+                <StackPanel VerticalAlignment="Center">
+                  <TextBlock Classes="g-strike" Text="{Binding Game.Original}" IsVisible="{Binding Game.OnSale}" />
+                  <TextBlock Classes="g-white" Text="{Binding Game.Price}" FontSize="18" FontWeight="Bold" />
+                </StackPanel>
+              </StackPanel>
+              <Button Grid.Column="1" Classes="g-action" Command="{Binding BuyCommand}" IsVisible="{Binding CanBuy}">
+                <StackPanel Orientation="Horizontal" Spacing="8"><a:Icon Kind="shopping-cart" Size="16" VerticalAlignment="Center" /><TextBlock Text="Buy now" /></StackPanel>
+              </Button>
+              <Border Grid.Column="1" CornerRadius="10" Padding="16,10" Background="#2A475E" IsVisible="{Binding Owned}" a:Web.Href="/games/library">
+                <StackPanel Orientation="Horizontal" Spacing="8"><a:Icon Kind="check" Size="16" Foreground="#66C0F4" VerticalAlignment="Center" /><TextBlock Classes="g-white" Text="In your library" FontWeight="SemiBold" /></StackPanel>
+              </Border>
+            </Grid>
+          </Border>
+          <Border CornerRadius="10" Padding="12,9" Background="#25371B" IsVisible="{Binding Bought}">
+            <StackPanel Orientation="Horizontal" Spacing="8">
+              <a:Icon Kind="sparkles" Size="16" Foreground="#BEEE11" VerticalAlignment="Center" />
+              <TextBlock Classes="g-green" Text="Purchase complete: saved in one transaction with an atomic owner count." VerticalAlignment="Center" TextWrapping="Wrap" />
+            </StackPanel>
+          </Border>
+        </StackPanel>
+      </Border>
+    </Grid>
+
+    <Grid ColumnDefinitions="*,*" ColumnSpacing="22" a:Web.StackBelow="900">
+      <Border Classes="g-panel">
+        <StackPanel Spacing="12">
+          <Grid ColumnDefinitions="*,Auto">
+            <TextBlock Classes="g-head" Text="Sales, last 12 months" />
+            <TextBlock Grid.Column="1" Classes="g-muted small" Text="from the purchases table" VerticalAlignment="Center" />
+          </Grid>
+          <a:Chart Title="Sales per month" Height="220" Foreground="#8F98A0" GridLines="#22334A">
+            <a:ChartSeries Kind="Column" ItemsSource="{Binding Sales}" XPath="Month" YPath="Sales" Fill="#66C0F4" />
+          </a:Chart>
+        </StackPanel>
+      </Border>
+      <Border Grid.Column="1" Classes="g-panel">
+        <StackPanel Spacing="12">
+          <Grid ColumnDefinitions="*,Auto">
+            <TextBlock Classes="g-head" Text="Recent reviews" />
+            <TextBlock Grid.Column="1" Classes="g-blue small" Text="{Binding Recommended}" VerticalAlignment="Center" />
+          </Grid>
+          <ProgressBar Value="{Binding Liked}" Maximum="100" Height="6" />
+          <ItemsControl ItemsSource="{Binding Reviews}">
+            <ItemsControl.ItemsPanel><ItemsPanelTemplate><StackPanel Spacing="12" /></ItemsPanelTemplate></ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+              <DataTemplate x:DataType="g:ReviewRow">
+                <Grid ColumnDefinitions="Auto,*" ColumnSpacing="12">
+                  <Border Classes="g-avatar" Background="{Binding Color}">
+                    <TextBlock Text="{Binding Initial}" FontWeight="Bold" Foreground="#FFFFFF" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                  </Border>
+                  <StackPanel Grid.Column="1" Spacing="2">
+                    <StackPanel Orientation="Horizontal" Spacing="8">
+                      <TextBlock Classes="g-white" Text="{Binding Player}" FontWeight="SemiBold" />
+                      <a:Icon Kind="thumbs-up" Size="14" Foreground="#66C0F4" IsVisible="{Binding Recommended}" VerticalAlignment="Center" />
+                      <a:Icon Kind="thumbs-down" Size="14" Foreground="#C35C2C" IsVisible="{Binding !Recommended}" VerticalAlignment="Center" />
+                    </StackPanel>
+                    <TextBlock Classes="wrap small" Text="{Binding Text}" />
+                    <TextBlock Classes="g-muted small" Text="{Binding Detail}" />
+                  </StackPanel>
+                </Grid>
+              </DataTemplate>
+            </ItemsControl.ItemTemplate>
+          </ItemsControl>
+        </StackPanel>
+      </Border>
+    </Grid>
+
+    <StackPanel Spacing="12">
+      <TextBlock Classes="g-head" Text="More like this" />
+      <ItemsControl ItemsSource="{Binding Similar}">
+        <ItemsControl.ItemsPanel><ItemsPanelTemplate><UniformGrid Columns="4" ColumnSpacing="14" a:Web.StackBelow="760" /></ItemsPanelTemplate></ItemsControl.ItemsPanel>
+        <ItemsControl.ItemTemplate>
+          <DataTemplate x:DataType="g:GameCard">
+            <Border Classes="g-card" a:Web.Href="{Binding Href}">
+              <StackPanel>
+                <Border Classes="g-cover" Height="100">
+                  <Image loader:ImageLoader.Source="{Binding Art}" AutomationProperties.Name="{Binding Title}" Stretch="UniformToFill" Height="100" />
+                </Border>
+                <Grid ColumnDefinitions="*,Auto" Margin="12,10">
+                  <TextBlock Classes="g-white" Text="{Binding Title}" FontWeight="SemiBold" TextTrimming="CharacterEllipsis" VerticalAlignment="Center" />
+                  <TextBlock Grid.Column="1" Classes="small" Text="{Binding Price}" Margin="8,0,0,0" VerticalAlignment="Center" />
+                </Grid>
+              </StackPanel>
+            </Border>
+          </DataTemplate>
+        </ItemsControl.ItemTemplate>
+      </ItemsControl>
+    </StackPanel>
+
+    <StackPanel Orientation="Horizontal" Spacing="8">
+      <a:Icon Kind="zap" Size="14" Foreground="#66C0F4" VerticalAlignment="Center" />
+      <TextBlock Classes="g-muted small" Text="{Binding Parallel}" VerticalAlignment="Center" />
+    </StackPanel>
+  </StackPanel>
+</UserControl>

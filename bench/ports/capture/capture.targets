@@ -1,0 +1,18 @@
+<Project>
+  <PropertyGroup Condition="'$(MSBuildProjectName)' == '$(AiorosCaptureProject)'">
+    <StartupObject>AiorosCapture.Capture</StartupObject>
+    <RollForward>Major</RollForward>
+  </PropertyGroup>
+  <ItemGroup Condition="'$(MSBuildProjectName)' == '$(AiorosCaptureProject)'">
+    <Compile Include="$(MSBuildThisFileDirectory)Capture.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)$(AiorosCaptureTarget).cs" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(MSBuildProjectName)' == '$(AiorosCaptureProject)' and '$(ManagePackageVersionsCentrally)' == 'true'">
+    <PackageReference Include="Avalonia.Headless" VersionOverride="$(AiorosAvaloniaVersion)" />
+    <PackageReference Include="Avalonia.Skia" VersionOverride="$(AiorosAvaloniaVersion)" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(MSBuildProjectName)' == '$(AiorosCaptureProject)' and '$(ManagePackageVersionsCentrally)' != 'true'">
+    <PackageReference Include="Avalonia.Headless" Version="$(AiorosAvaloniaVersion)" />
+    <PackageReference Include="Avalonia.Skia" Version="$(AiorosAvaloniaVersion)" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,12 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:a="https://aioros.dev">
+    <DockPanel>
+        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Spacing="4" Margin="8">
+            <HyperlinkButton NavigateUri="/" Content="Hello" />
+            <HyperlinkButton NavigateUri="/dialog" Content="Hello Dialog" />
+            <HyperlinkButton NavigateUri="/navigation" Content="Navigation Controller" />
+            <HyperlinkButton NavigateUri="/tabs" Content="Tab Navigation" />
+        </StackPanel>
+        <a:Outlet Margin="8" />
+    </DockPanel>
+</UserControl>

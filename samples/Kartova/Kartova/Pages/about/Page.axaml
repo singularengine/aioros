@@ -1,0 +1,51 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:a="https://aioros.dev"
+             xmlns:l="using:Kartova.App.Localization"
+             xmlns:s="using:Kartova.App.Services"
+             a:Page.Title="About Kartova"
+             a:Page.Description="Kartova, a disk-usage analyzer by Markus Furtlehner, MIT licensed."
+             Background="{DynamicResource SurfaceBase}">
+
+  <Border Classes="card" Width="470" Margin="0,40"
+          HorizontalAlignment="Center" VerticalAlignment="Top"
+          Background="{DynamicResource SurfaceOverlay}"
+          BorderBrush="{DynamicResource BorderStrong}">
+    <StackPanel Margin="30" Spacing="18">
+      <StackPanel Orientation="Horizontal" Spacing="16">
+        <Image Source="/Assets/kartova-128.png" Width="56" Height="56" VerticalAlignment="Top" />
+        <StackPanel Spacing="4" VerticalAlignment="Center">
+          <TextBlock Text="{x:Static s:AppInfo.Name}" FontSize="25" FontWeight="SemiBold" />
+          <StackPanel Orientation="Horizontal" Spacing="7">
+            <TextBlock Text="{l:T About.Version}" Classes="tertiary" FontSize="12" />
+            <TextBlock Text="{x:Static s:AppInfo.Version}" Classes="secondary" FontSize="12" FontWeight="SemiBold" />
+          </StackPanel>
+        </StackPanel>
+      </StackPanel>
+
+      <TextBlock Text="{l:T About.Tagline}" Classes="secondary" TextWrapping="Wrap" LineHeight="20" />
+
+      <Border Classes="divider" />
+
+      <StackPanel Spacing="5">
+        <TextBlock Text="{l:T About.MadeBy}" Classes="caption" />
+        <TextBlock Text="{x:Static s:AppInfo.Author}" FontSize="15.5" FontWeight="SemiBold"
+                   Foreground="{DynamicResource AccentBase}" />
+      </StackPanel>
+
+      <StackPanel Spacing="9">
+        <Grid ColumnDefinitions="96,*">
+          <TextBlock Grid.Column="0" Text="{l:T About.Licence}" Classes="tertiary" FontSize="12" />
+          <TextBlock Grid.Column="1" Text="{l:T About.LicenceValue}" Classes="secondary" FontSize="12" TextWrapping="Wrap" />
+        </Grid>
+        <Grid ColumnDefinitions="96,*">
+          <TextBlock Grid.Column="0" Text="{l:T About.Project}" Classes="tertiary" FontSize="12" />
+          <HyperlinkButton Grid.Column="1" Padding="0" NavigateUri="https://github.com/markusfurtlehner/kartova"
+                           Content="{x:Static s:AppInfo.RepositoryLabel}" FontSize="12" />
+        </Grid>
+      </StackPanel>
+
+      <TextBlock Text="{l:T About.Thanks}" Classes="tertiary" FontSize="11.5" TextWrapping="Wrap" LineHeight="18" />
+    </StackPanel>
+  </Border>
+</UserControl>

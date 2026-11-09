@@ -1,0 +1,6 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:a="https://aioros.dev"
+             xmlns:pages="using:Stylet.Samples.NavigationController.Pages"
+             a:Page.Title="Page 1 - Navigation Controller sample">
+    <pages:Page1View />
+</UserControl>

@@ -1,0 +1,47 @@
+<div class="topbar">
+  @if (Layout.Static)
+  {
+    <label class="iconbtn hamburger" for="drawer"><Icon Kind="menu" Size="18" /></label>
+    <div class="title"><span class="muted"><Icon Kind="@IconKind" /></span><span class="trim">@Title</span></div>
+    <a class="iconbtn" href="/theme/toggle" data-enhance-nav="false"><Icon Kind="@(Dark ? "sun" : "moon")" /></a>
+    <a class="iconbtn" href="/inbox"><Icon Kind="bell" /></a>
+    <div class="menu-wrap">
+      <button class="iconbtn avatar-btn" popovertarget="menu"><span class="avatar" style="background:#5e6ad2">ED</span></button>
+      <div class="menu" id="menu" popover>
+        <a href="/settings"><Icon Kind="user" /><span>My profile</span></a>
+        <a href="/theme/toggle" data-enhance-nav="false"><Icon Kind="moon" /><span>Toggle theme</span></a>
+        <a href="/settings"><Icon Kind="settings" /><span>Settings</span></a>
+        <hr />
+        <a href="/issues"><Icon Kind="log-out" /><span>Log out</span></a>
+      </div>
+    </div>
+  }
+  else
+  {
+    <button class="iconbtn hamburger" @onclick="() => Layout.ToggleDrawer()"><Icon Kind="menu" Size="18" /></button>
+    <div class="title"><span class="muted"><Icon Kind="@IconKind" /></span><span class="trim">@Title</span></div>
+    <button class="iconbtn" @onclick="() => Layout.ToggleTheme()"><Icon Kind="@(Dark ? "sun" : "moon")" /></button>
+    <a class="iconbtn" href="/inbox"><Icon Kind="bell" /></a>
+    <div class="menu-wrap">
+      <button class="iconbtn" @onclick="() => menu = !menu"><span class="avatar" style="background:#5e6ad2">ED</span></button>
+      @if (menu)
+      {
+        <div class="menu" @onclick="() => menu = false">
+          <a href="/settings"><Icon Kind="user" /><span>My profile</span></a>
+          <a href="" @onclick="() => Layout.ToggleTheme()" @onclick:preventDefault><Icon Kind="moon" /><span>Toggle theme</span></a>
+          <a href="/settings"><Icon Kind="settings" /><span>Settings</span></a>
+          <hr />
+          <a href="/issues"><Icon Kind="log-out" /><span>Log out</span></a>
+        </div>
+      }
+    </div>
+  }
+</div>
+@code {
+    [CascadingParameter] public Layout.MainLayout Layout { get; set; } = null!;
+    [Parameter] public string Title { get; set; } = "";
+    [Parameter] public string IconKind { get; set; } = "issues";
+    [Inject] private IHttpContextAccessor Http { get; set; } = null!;
+    private bool menu;
+    private bool Dark => Http.HttpContext?.Request.Cookies["theme"] == "dark";
+}

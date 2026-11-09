@@ -1,0 +1,7 @@
+<UserControl xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:m="using:Aioros.Avalonia.Tests.Models" x:DataType="m:Profile">
+  <StackPanel>
+    <TextBox Text="{Binding Name}" AutomationProperties.Name="Name" />
+    <PathIcon Width="16" Height="16" Data="{Binding Name, Converter={x:Static m:NameIcons.Instance}}" />
+  </StackPanel>
+</UserControl>

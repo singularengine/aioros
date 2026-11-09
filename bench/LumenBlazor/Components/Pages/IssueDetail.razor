@@ -1,0 +1,61 @@
+@page "/issues/{Id}"
+@inject Store Store
+<PageTitle>@(issue is null ? "Not found" : $"{issue.Id} · {issue.Title}")</PageTitle>
+<TopBar Title="Issue" IconKind="issues" />
+@if (issue is null)
+{
+  <div style="padding:28px">Issue not found.</div>
+}
+else
+{
+  <EditForm Model="form" OnSubmit="Save" class="detail" FormName="issue" Enhance>
+    <div class="left">
+      <div style="display:flex;gap:6px;align-items:center"><a class="nav" style="padding:2px 4px" href="/issues">Issues</a><span class="faint">›</span><span class="muted">@issue.Id</span></div>
+      <InputText class="title-input" @bind-Value="form!.Title" placeholder="Issue title" />
+      <InputTextArea class="textarea" @bind-Value="form!.Description" placeholder="Add a description…" />
+      @if (error.Length > 0) { <div class="error">@error</div> }
+      @if (saved.Length > 0) { <div class="muted">@saved</div> }
+      <div style="display:flex;gap:8px;align-items:center"><button class="btn" type="submit">Save changes</button><a class="nav" href="/issues">Cancel</a></div>
+      <div class="card enter" style="margin-top:10px;display:flex;flex-direction:column;gap:12px">
+        <span class="caption">ACTIVITY</span>
+        <div style="display:flex;gap:10px;align-items:center"><span class="avatar" style="background:@issue.Assignee.Color">@issue.Assignee.Initials</span><span class="muted">Assigned the issue and moved it to this status.</span></div>
+        <div style="display:flex;gap:10px;align-items:center"><span class="avatar" style="background:#5e6ad2">ED</span><span class="muted">Created the issue from the projects view.</span></div>
+      </div>
+    </div>
+    <div class="right">
+      <div class="field"><span class="caption">STATUS</span><InputSelect class="select" @bind-Value="form!.Status">@foreach (var s in Store.Statuses.Values) { <option value="@s.Key">@s.Name</option> }</InputSelect></div>
+      <div class="field"><span class="caption">PRIORITY</span><InputSelect class="select" @bind-Value="form!.Priority">@foreach (var p in Store.Priorities) { <option value="@p.Key">@p.Value</option> }</InputSelect></div>
+      <div class="field"><span class="caption">ASSIGNEE</span><InputSelect class="select" @bind-Value="form!.Assignee">@foreach (var p in Store.People) { <option value="@p.Name">@p.Name</option> }</InputSelect></div>
+      <div class="field"><span class="caption">LABELS</span><div class="labels" style="flex-wrap:wrap">@foreach (var l in issue.Labels) { <span class="pill"><span class="dot" style="background:@l.Color"></span><span class="small muted">@l.Name</span></span> }</div></div>
+      <div class="field"><span class="caption">TEAM</span><span>@issue.Team</span></div>
+      <div class="field"><span class="caption">UPDATED</span><span class="muted">@issue.UpdatedText</span></div>
+    </div>
+  </EditForm>
+}
+@code {
+    [Parameter] public string Id { get; set; } = "";
+    private Issue? issue;
+    [SupplyParameterFromForm(FormName = "issue")] private Form? form { get; set; }
+    private string? loaded;
+    private string error = "", saved = "";
+    public sealed class Form { public string Title { get; set; } = ""; public string Description { get; set; } = ""; public string Status { get; set; } = ""; public string Priority { get; set; } = ""; public string Assignee { get; set; } = ""; }
+
+    protected override void OnParametersSet()
+    {
+        issue = Store.Find(Id);
+        if (issue != null && (form is null || (loaded != null && loaded != Id))) form = new Form { Title = issue.Title, Description = issue.Description, Status = issue.Status, Priority = issue.Priority, Assignee = issue.Assignee.Name };
+        if (loaded != Id) saved = "";
+        loaded = Id;
+    }
+
+    private void Save()
+    {
+        error = string.IsNullOrWhiteSpace(form?.Title) ? "Title is required." : "";
+        saved = "";
+        if (error.Length > 0 || issue is null) return;
+        Store.Update(issue with { Title = form!.Title.Trim(), Description = form.Description, Status = form.Status, Priority = form.Priority,
+            Assignee = Store.People.First(p => p.Name == form.Assignee) });
+        issue = Store.Find(issue.Id);
+        saved = "Changes saved.";
+    }
+}

@@ -1,0 +1,15 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:m="using:Aioros.Avalonia.Tests.Models">
+  <ControlTheme x:Key="{x:Type m:Clearable}" TargetType="m:Clearable">
+    <Setter Property="Template">
+      <ControlTemplate TargetType="m:Clearable">
+        <StackPanel>
+          <TextBlock Text="{TemplateBinding Text}" />
+          <Button Name="ClearButton" Content="Clear" Command="{Binding $parent[m:Clearable].Clear}" />
+          <Button Name="Hidden" Content="Hidden" IsVisible="False" Command="{Binding $parent[m:Clearable].Clear}" />
+          <TextBlock Text="icon" IsVisible="{Binding !#Hidden.IsVisible}" />
+        </StackPanel>
+      </ControlTemplate>
+    </Setter>
+  </ControlTheme>
+</ResourceDictionary>

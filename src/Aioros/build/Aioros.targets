@@ -1,0 +1,94 @@
+<Project>
+  <PropertyGroup>
+    <AvaloniaXamlCreateSourceInfo Condition="'$(AvaloniaXamlCreateSourceInfo)' == ''">true</AvaloniaXamlCreateSourceInfo>
+  </PropertyGroup>
+  <ItemGroup Condition="'$(PublishAot)' == 'true' and '$(AiorosEngineInNativeAot)' != 'true'">
+    <RuntimeHostConfigurationOption Include="Aioros.Avalonia.IsSupported" Value="false" Trim="true" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(AiorosInstalled)' == 'true'">
+    <RuntimeHostConfigurationOption Include="Aioros.Installed" Value="true" />
+  </ItemGroup>
+  <ItemGroup>
+    <CompilerVisibleProperty Include="MSBuildProjectDirectory" />
+    <CompilerVisibleProperty Include="AiorosEmbedSources" />
+    <CompilerVisibleProperty Include="AiorosServer" />
+    <CompilerVisibleProperty Include="AiorosScheme" />
+    <AdditionalFiles Include="$(MSBuildThisFileDirectory)BannedSymbols.Aioros.txt" />
+  </ItemGroup>
+
+  <Target Name="AiorosBannedSymbols" BeforeTargets="CoreCompile">
+    <PropertyGroup>
+      <_AiorosBannedList>$(MSBuildThisFileDirectory)BannedSymbols.Aioros.txt</_AiorosBannedList>
+      <_AiorosBannedListFiltered>$([System.IO.Path]::GetFullPath('$(IntermediateOutputPath)aioros/BannedSymbols.Aioros.txt', '$(MSBuildProjectDirectory)'))</_AiorosBannedListFiltered>
+    </PropertyGroup>
+    <ItemGroup>
+      <_AiorosOtherBannedList Include="@(AdditionalFiles)" Condition="'%(FullPath)' != '$(_AiorosBannedList)' and $([System.Text.RegularExpressions.Regex]::IsMatch('%(Filename)%(Extension)', '^BannedSymbols(\..+)?\.txt$'))" />
+    </ItemGroup>
+    <ReadLinesFromFile File="%(_AiorosOtherBannedList.FullPath)" Condition="'@(_AiorosOtherBannedList)' != ''">
+      <Output TaskParameter="Lines" ItemName="_AiorosOtherBanned" />
+    </ReadLinesFromFile>
+    <ReadLinesFromFile File="$(_AiorosBannedList)">
+      <Output TaskParameter="Lines" ItemName="_AiorosBanned" />
+    </ReadLinesFromFile>
+    <ItemGroup>
+      <_AiorosOtherBanned>
+        <Symbol>$([System.String]::Copy('%(Identity)').Split(';')[0].Trim())</Symbol>
+      </_AiorosOtherBanned>
+      <_AiorosBanned>
+        <Symbol>$([System.String]::Copy('%(Identity)').Split(';')[0].Trim())</Symbol>
+      </_AiorosBanned>
+      <_AiorosBanned Remove="@(_AiorosOtherBanned)" MatchOnMetadata="Symbol" MatchOnMetadataOptions="CaseSensitive" />
+    </ItemGroup>
+    <WriteLinesToFile File="$(_AiorosBannedListFiltered)" Lines="@(_AiorosBanned)" Overwrite="true" WriteOnlyWhenDifferent="true" />
+    <ItemGroup>
+      <AdditionalFiles Remove="$(_AiorosBannedList)" />
+      <AdditionalFiles Include="$(_AiorosBannedListFiltered)" />
+      <FileWrites Include="$(_AiorosBannedListFiltered)" />
+    </ItemGroup>
+  </Target>
+
+  <Target Name="AiorosMacBundle" AfterTargets="Publish" Condition="'$(AiorosScheme)' != '' and $(RuntimeIdentifier.StartsWith('osx'))">
+    <PropertyGroup>
+      <_AiorosBundleId Condition="'$(AiorosBundleId)' != ''">$(AiorosBundleId)</_AiorosBundleId>
+      <_AiorosBundleId Condition="'$(AiorosBundleId)' == ''">$(AssemblyName)</_AiorosBundleId>
+      <_AiorosBundleName Condition="'$(Product)' != ''">$(Product)</_AiorosBundleName>
+      <_AiorosBundleName Condition="'$(Product)' == ''">$(AssemblyName)</_AiorosBundleName>
+      <_AiorosShortVersion>$([System.Text.RegularExpressions.Regex]::Replace('$(Version)', '[-+].*$', ''))</_AiorosShortVersion>
+      <_AiorosPlist><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>CFBundleExecutable</key>
+  <string>$(AssemblyName.Replace('&','&amp;').Replace('<','&lt;').Replace('>','&gt;'))</string>
+  <key>CFBundleName</key>
+  <string>$(_AiorosBundleName.Replace('&','&amp;').Replace('<','&lt;').Replace('>','&gt;'))</string>
+  <key>CFBundleDisplayName</key>
+  <string>$(_AiorosBundleName.Replace('&','&amp;').Replace('<','&lt;').Replace('>','&gt;'))</string>
+  <key>CFBundleIdentifier</key>
+  <string>$(_AiorosBundleId.Replace('&','&amp;').Replace('<','&lt;').Replace('>','&gt;'))</string>
+  <key>CFBundleShortVersionString</key>
+  <string>$(_AiorosShortVersion.Replace('&','&amp;').Replace('<','&lt;').Replace('>','&gt;'))</string>
+  <key>CFBundleVersion</key>
+  <string>$(Version.Replace('&','&amp;').Replace('<','&lt;').Replace('>','&gt;'))</string>
+  <key>CFBundlePackageType</key>
+  <string>APPL</string>
+  <key>NSHighResolutionCapable</key>
+  <true/>
+  <key>CFBundleURLTypes</key>
+  <array>
+    <dict>
+      <key>CFBundleURLName</key>
+      <string>$(_AiorosBundleId.Replace('&','&amp;').Replace('<','&lt;').Replace('>','&gt;'))</string>
+      <key>CFBundleURLSchemes</key>
+      <array>
+        <string>$(AiorosScheme.Replace('&','&amp;').Replace('<','&lt;').Replace('>','&gt;'))</string>
+      </array>
+    </dict>
+  </array>
+</dict>
+</plist>]]></_AiorosPlist>
+    </PropertyGroup>
+    <MakeDir Directories="$(PublishDir)" />
+    <WriteLinesToFile File="$(PublishDir)Info.plist" Lines="$([MSBuild]::Escape($(_AiorosPlist)))" Overwrite="true" WriteOnlyWhenDifferent="true" />
+  </Target>
+</Project>

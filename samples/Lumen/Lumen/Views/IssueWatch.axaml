@@ -1,0 +1,10 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:Lumen.ViewModels"
+             x:Class="Lumen.Views.IssueWatch"
+             x:DataType="vm:IssueWatchViewModel">
+    <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+      <TextBlock Classes="faint small" Text="{Binding Comments}" VerticalAlignment="Center" />
+      <Button Classes="ghost" Content="{Binding Watch}" Command="{Binding ToggleCommand}" VerticalAlignment="Center" />
+    </StackPanel>
+</UserControl>

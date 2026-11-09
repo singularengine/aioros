@@ -1,0 +1,9 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="BenchmarkDotNet" VersionOverride="0.15.8" />
+    <ProjectReference Include="../../src/Aioros.Runtime/Aioros.Runtime.csproj" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <Description>Detects where an Avalonia app runs and applies the settings that make it work well there: Avalonia's Wayland backend on Wayland, with the fixes it needs. One line: AppBuilder.UsePlatformProfile().</Description>
+    <PackageTags>avalonia;wayland;linux;desktop</PackageTags>
+  </PropertyGroup>
+  <ItemGroup>
+    <InternalsVisibleTo Include="Aioros.Platform.Tests" />
+    <PackageReference Include="Avalonia.Desktop" />
+    <PackageReference Include="Avalonia.Wayland" />
+  </ItemGroup>
+</Project>

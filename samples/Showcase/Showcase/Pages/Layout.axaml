@@ -1,0 +1,40 @@
+<UserControl xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:a="https://aioros.dev">
+  <DockPanel>
+    <Border DockPanel.Dock="Top" Padding="24,12" BorderThickness="0,0,0,1" BorderBrush="{DynamicResource Line}"
+            Background="{DynamicResource Surface}" a:Web.Tag="header">
+      <Grid ColumnDefinitions="Auto,*,Auto">
+        <Border Classes="navlink" a:Web.Href="/" Padding="6,4">
+          <StackPanel Orientation="Horizontal" Spacing="10">
+            <Border Width="28" Height="28" CornerRadius="6.3" Background="#0E1626">
+              <Panel>
+                <Path Data="M18.12,8.23 L19.77,9.88 L6.41,21.59 Z" Fill="#FFC24B" />
+                <Path Data="M22.25,5.75 L15.15,7.9 L18.62,9.38 L20.1,12.85 Z" Fill="#FFD983" />
+              </Panel>
+            </Border>
+            <TextBlock Text="Aioros Showcase" FontSize="16" FontWeight="SemiBold" VerticalAlignment="Center" Foreground="{DynamicResource Text}" />
+          </StackPanel>
+        </Border>
+        <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="2" Margin="28,0,0,0" VerticalAlignment="Center"
+                    a:Web.Tag="nav" a:Web.HideBelow="720">
+          <Border Classes="navlink" a:Web.Href="/finance"><TextBlock Text="Finance" /></Border>
+          <Border Classes="navlink" a:Web.Href="/crm"><TextBlock Text="CRM" /></Border>
+          <Border Classes="navlink" a:Web.Href="/music"><TextBlock Text="Music" /></Border>
+          <Border Classes="navlink" a:Web.Href="/kanban"><TextBlock Text="Kanban" /></Border>
+          <Border Classes="navlink" a:Web.Href="/games"><TextBlock Text="Games" /></Border>
+          <Border Classes="navlink" a:Web.Href="/uploads"><TextBlock Text="Uploads" /></Border>
+          <Border Classes="navlink" a:Web.Href="/files"><TextBlock Text="Files" /></Border>
+          <Border Classes="navlink" a:Web.Href="/ports"><TextBlock Text="Ports" /></Border>
+        </StackPanel>
+        <Border Grid.Column="2" Classes="navlink" a:Web.Href="/theme/toggle" AutomationProperties.Name="Switch theme" VerticalAlignment="Center">
+          <a:Icon Kind="{DynamicResource ThemeIcon}" Size="18" />
+        </Border>
+      </Grid>
+    </Border>
+    <ScrollViewer>
+      <Border Padding="32,28" MaxWidth="1200">
+        <a:Outlet />
+      </Border>
+    </ScrollViewer>
+  </DockPanel>
+</UserControl>

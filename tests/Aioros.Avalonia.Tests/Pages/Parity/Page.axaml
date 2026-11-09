@@ -1,0 +1,25 @@
+<UserControl xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:m="using:Aioros.Avalonia.Tests.Models" x:DataType="m:ParityModel">
+  <UserControl.Resources>
+    <m:SizeIs x:Key="Is" />
+  </UserControl.Resources>
+  <StackPanel>
+    <TextBox Text="{Binding Title}" />
+    <CheckBox Content="Agree" IsChecked="{Binding Agree}" />
+    <ComboBox ItemsSource="{Binding Plans}" SelectedItem="{Binding Plan}" />
+    <StackPanel>
+      <RadioButton Content="Small" IsChecked="{Binding Size, Converter={StaticResource Is}, ConverterParameter=Small}" />
+      <RadioButton Content="Medium" IsChecked="{Binding Size, Converter={StaticResource Is}, ConverterParameter=Medium}" />
+      <RadioButton Content="Large" IsChecked="{Binding Size, Converter={StaticResource Is}, ConverterParameter=Large}" />
+    </StackPanel>
+    <CheckBox Content="Large print" IsChecked="{Binding Print, Converter={StaticResource Is}, ConverterParameter=Large}" />
+    <Button Content="Columns">
+      <Button.Flyout>
+        <MenuFlyout>
+          <MenuItem Header="Status" ToggleType="CheckBox" IsChecked="{Binding Columns[1].Shown, Mode=TwoWay}" />
+        </MenuFlyout>
+      </Button.Flyout>
+    </Button>
+    <TextBlock Text="{Binding Summary}" />
+  </StackPanel>
+</UserControl>

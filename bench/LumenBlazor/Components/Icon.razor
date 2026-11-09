@@ -1,0 +1,9 @@
+@using LumenBlazor.Data
+<svg class="icon" viewBox="0 0 24 24" width="@Size" height="@Size" fill="none" stroke="currentColor" stroke-width="@StrokeWidth"
+     stroke-linecap="round" stroke-linejoin="round" style="@(Color is null ? null : "color:" + Color)">@((MarkupString)Icons.Markup(Kind))</svg>
+@code {
+    [Parameter] public string? Kind { get; set; }
+    [Parameter] public double Size { get; set; } = 16;
+    [Parameter] public double StrokeWidth { get; set; } = 2;
+    [Parameter] public string? Color { get; set; }
+}

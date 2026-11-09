@@ -1,0 +1,10 @@
+<UserControl xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:a="https://aioros.dev">
+  <StackPanel Margin="32" Spacing="12" HorizontalAlignment="Left">
+    <TextBlock Classes="h1" Text="Not found" />
+    <TextBlock Classes="muted" Text="This issue or page does not exist." />
+    <Border Classes="btn" a:Web.Href="/issues" HorizontalAlignment="Left">
+      <TextBlock Text="Back to issues" />
+    </Border>
+  </StackPanel>
+</UserControl>

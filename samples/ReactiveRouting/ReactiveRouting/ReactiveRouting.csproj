@@ -1,0 +1,7 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <ItemGroup>
+    <PackageReference Include="ReactiveUI" />
+    <ProjectReference Include="../../../src/Adapters/Aioros.ReactiveUI/Aioros.ReactiveUI.csproj" />
+    <ProjectReference Include="../../../src/Adapters/Aioros.ReactiveUI.Generators/Aioros.ReactiveUI.Generators.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
+  </ItemGroup>
+</Project>

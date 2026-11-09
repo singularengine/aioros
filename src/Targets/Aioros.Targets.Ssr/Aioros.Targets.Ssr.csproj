@@ -1,0 +1,40 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <IsAotCompatible>true</IsAotCompatible>
+    <EnableRequestDelegateGenerator>true</EnableRequestDelegateGenerator>
+    <InterceptorsNamespaces>$(InterceptorsNamespaces);Microsoft.AspNetCore.Http.Generated</InterceptorsNamespaces>
+  </PropertyGroup>
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="OpenIddict.Core" />
+    <PackageReference Include="OpenIddict.Server.AspNetCore" />
+    <PackageReference Include="OpenIddict.Server.DataProtection" />
+    <PackageReference Include="OpenIddict.Validation.AspNetCore" />
+    <PackageReference Include="OpenIddict.Validation.DataProtection" />
+    <PackageReference Include="OpenIddict.Validation.ServerIntegration" />
+    <ProjectReference Include="..\..\Aioros.Abstractions\Aioros.Abstractions.csproj" />
+    <ProjectReference Include="..\..\Aioros.Runtime\Aioros.Runtime.csproj" />
+    <ProjectReference Include="..\..\Aioros.Routing\Aioros.Routing.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="System.IO.Hashing" />
+  </ItemGroup>
+  <ItemGroup>
+    <Scripts Include="Scripts/src/**/*.js" />
+    <None Remove="Scripts/**" />
+  </ItemGroup>
+  <Target Name="BuildScripts" BeforeTargets="AssignTargetPaths;CoreCompile" Inputs="@(Scripts);Scripts/build.mjs;Scripts/package-lock.json" Outputs="$(IntermediateOutputPath)scripts/app.js">
+    <Error Condition="!Exists('Scripts/node_modules/esbuild')" Text="The framework's scripts need esbuild: run eng/install-scripts.sh (npm ci in src/Targets/Aioros.Targets.Ssr/Scripts)." />
+    <Exec Command="node Scripts/build.mjs &quot;$(IntermediateOutputPath)scripts&quot;" />
+  </Target>
+  <Target Name="EmbedScripts" AfterTargets="BuildScripts" BeforeTargets="AssignTargetPaths;CoreCompile">
+    <ItemGroup>
+      <BuiltScript Include="$(IntermediateOutputPath)scripts/*.js" />
+      <EmbeddedResource Include="@(BuiltScript)" LogicalName="Aioros.Targets.Ssr.Scripts.%(BuiltScript.Filename)%(BuiltScript.Extension)" WithCulture="false" Type="Non-Resx" />
+    </ItemGroup>
+  </Target>
+  <ItemGroup>
+    <EmbeddedResource Include="Fonts/*.woff2" LogicalName="Aioros.Targets.Ssr.Fonts.%(Filename)%(Extension)" />
+    <None Include="Fonts/Inter-LICENSE.txt" Pack="true" PackagePath="licenses" />
+  </ItemGroup>
+</Project>

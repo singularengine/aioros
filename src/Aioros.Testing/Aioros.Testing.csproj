@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <Description>Aioros.Testing: checks for a library's or an app's tests that the web render of what a page's plan holds matches the native render, value by value.</Description>
+  </PropertyGroup>
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    <ProjectReference Include="..\Aioros.Abstractions\Aioros.Abstractions.csproj" />
+    <ProjectReference Include="..\Aioros.Runtime\Aioros.Runtime.csproj" />
+    <ProjectReference Include="..\Adapters\Aioros.Avalonia\Aioros.Avalonia.csproj" />
+    <ProjectReference Include="..\Targets\Aioros.Targets.Ssr\Aioros.Targets.Ssr.csproj" />
+  </ItemGroup>
+</Project>

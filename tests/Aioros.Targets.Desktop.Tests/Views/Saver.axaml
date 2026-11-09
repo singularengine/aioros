@@ -1,0 +1,7 @@
+<UserControl xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:m="using:Aioros.Targets.Desktop.Tests.Navigation" x:Class="Aioros.Targets.Desktop.Tests.Views.Saver" x:DataType="m:Saving">
+  <StackPanel>
+    <TextBlock Text="{Binding Label}" />
+    <Button Content="View save" Command="{Binding SaveCommand}" />
+  </StackPanel>
+</UserControl>

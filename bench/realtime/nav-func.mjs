@@ -1,0 +1,23 @@
+import { chromium } from "playwright-core";
+const base = process.argv[2];
+const b = await chromium.launch({ executablePath: "/usr/bin/chromium", args: ["--no-sandbox"] });
+const p = await (await b.newContext({ viewport: { width: 1366, height: 860 } })).newPage();
+let docs = 0; p.on("framenavigated", f => { if (f === p.mainFrame()) docs++; });
+await p.goto(base + "/issues"); await p.waitForTimeout(800);
+await p.locator('summary').nth(1).click(); await p.waitForTimeout(300);           // open FAVORITES
+const favOpen = () => p.evaluate(() => document.querySelectorAll("details")[1].open);
+console.log("favorites open:", await favOpen());
+await p.locator('aside a[href="/dashboard"]').first().click(); await p.waitForFunction(() => location.pathname === "/dashboard");
+const t1 = await p.evaluate(() => [...document.querySelectorAll("div")].find(d => d.childElementCount === 0 && d.textContent.startsWith("Updated"))?.textContent);
+await p.waitForTimeout(2500);
+const t2 = await p.evaluate(() => [...document.querySelectorAll("div")].find(d => d.childElementCount === 0 && d.textContent.startsWith("Updated"))?.textContent);
+console.log("dashboard live after navigating:", t1 !== t2, t1, "->", t2);
+console.log("favorites still open:", await favOpen());
+await p.locator('aside a[href="/projects"]').first().click(); await p.waitForFunction(() => location.pathname === "/projects");
+await p.waitForTimeout(1500);
+const html1 = await p.evaluate(() => document.body.innerText.includes("v2 Launch") && !document.body.innerText.includes("Updated"));
+console.log("left the dashboard (no live morph):", html1);
+await p.goBack(); await p.waitForFunction(() => location.pathname === "/dashboard"); await p.waitForTimeout(500);
+console.log("back -> dashboard:", await p.evaluate(() => document.body.innerText.includes("Real-time sales")), "| title:", await p.title());
+console.log("full document loads:", docs);
+await b.close();

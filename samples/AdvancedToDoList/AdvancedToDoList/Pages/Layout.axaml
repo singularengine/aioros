@@ -1,0 +1,57 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:a="https://aioros.dev"
+             mc:Ignorable="d" d:DesignWidth="690" d:DesignHeight="450"
+             a:Page.Title="AdvancedToDoList" a:Page.TitleTemplate="%s · AdvancedToDoList">
+    <UserControl.Styles>
+        <!-- The HamburgerMenu's items: each is a link to its page, the current one selected -->
+        <Style Selector="Border.nav">
+            <Setter Property="Height" Value="{DynamicResource HamburgerMenuItemHeight}" />
+            <Setter Property="Padding" Value="10,0" />
+            <Setter Property="CornerRadius" Value="{DynamicResource ControlCornerRadius}" />
+            <Setter Property="Background" Value="Transparent" />
+        </Style>
+        <Style Selector="Border.nav:pointerover">
+            <Setter Property="Background" Value="{DynamicResource SystemControlHighlightListLowBrush}" />
+        </Style>
+        <Style Selector="Border.nav:current">
+            <Setter Property="Background" Value="{DynamicResource SystemControlHighlightListAccentLowBrush}" />
+        </Style>
+    </UserControl.Styles>
+
+    <!-- The HamburgerMenu: its items are routes, its content is the outlet -->
+    <SplitView DisplayMode="Inline" IsPaneOpen="True" OpenPaneLength="220"
+               PaneBackground="{DynamicResource HamburgerMenuPaneBrush}"
+               a:Web.Id="menu" a:Web.CollapseBelow="700">
+        <SplitView.Pane>
+            <Grid RowDefinitions="Auto,*,Auto" Margin="6">
+                <TextBlock Text="AdvancedToDoList" Margin="10,12"
+                           FontSize="{DynamicResource HamburgerMenuHeaderFontSize}"
+                           Foreground="{DynamicResource HamburgerMenuHeaderForegroundBrush}" />
+                <StackPanel Grid.Row="1" Spacing="2">
+                    <Border Classes="nav" a:Web.Href="/" a:Web.Exact="True">
+                        <StackPanel Orientation="Horizontal" Spacing="12">
+                            <PathIcon Data="{DynamicResource PhosphorIcons.ListChecksThin}" VerticalAlignment="Center" />
+                            <TextBlock Text="To-Do Items" VerticalAlignment="Center" />
+                        </StackPanel>
+                    </Border>
+                    <Border Classes="nav" a:Web.Href="/categories">
+                        <StackPanel Orientation="Horizontal" Spacing="12">
+                            <PathIcon Data="{DynamicResource PhosphorIcons.CirclesThreePlusThin}" VerticalAlignment="Center" />
+                            <TextBlock Text="Manage Categories" VerticalAlignment="Center" />
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+                <Border Grid.Row="2" Classes="nav" a:Web.Href="/settings">
+                    <StackPanel Orientation="Horizontal" Spacing="12">
+                        <PathIcon Data="{DynamicResource PhosphorIcons.GearLight}" VerticalAlignment="Center" />
+                        <TextBlock Text="Settings" VerticalAlignment="Center" />
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </SplitView.Pane>
+        <a:Outlet />
+    </SplitView>
+</UserControl>

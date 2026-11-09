@@ -1,0 +1,41 @@
+<UserControl xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:a="https://aioros.dev" xmlns:g="using:Showcase.Games" x:DataType="g:LoginModel">
+  <Border Classes="store" HorizontalAlignment="Center" Width="440" Margin="0,20,0,0" Padding="36">
+    <StackPanel Spacing="18">
+      <Border Width="52" Height="52" CornerRadius="14" HorizontalAlignment="Left">
+        <Border.Background>
+          <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
+            <GradientStop Offset="0" Color="#66C0F4" />
+            <GradientStop Offset="1" Color="#2A6FDB" />
+          </LinearGradientBrush>
+        </Border.Background>
+        <a:Icon Kind="gamepad-2" Size="28" Foreground="#FFFFFF" HorizontalAlignment="Center" VerticalAlignment="Center" />
+      </Border>
+      <StackPanel Spacing="6">
+        <TextBlock Classes="g-hero" Text="Sign in" />
+        <TextBlock Classes="g-muted wrap" Text="The games demo stores its data with EF Core and its accounts with ASP.NET Core Identity. The demo account is filled in for you." />
+      </StackPanel>
+      <Border Padding="12,10" CornerRadius="10" Background="#3A1E22" IsVisible="{Binding Failed}">
+        <StackPanel Orientation="Horizontal" Spacing="8">
+          <a:Icon Kind="x" Size="16" Foreground="#FF8A8F" VerticalAlignment="Center" />
+          <TextBlock Text="{Binding Error}" Foreground="#FFB3B6" VerticalAlignment="Center" />
+        </StackPanel>
+      </Border>
+      <StackPanel Spacing="6">
+        <TextBlock Classes="g-muted small" Text="USER NAME" FontWeight="SemiBold" />
+        <TextBox Text="{Binding UserName}" a:Web.InputType="text" />
+      </StackPanel>
+      <StackPanel Spacing="6">
+        <TextBlock Classes="g-muted small" Text="PASSWORD" FontWeight="SemiBold" />
+        <TextBox Text="{Binding Password}" PasswordChar="•" />
+      </StackPanel>
+      <Button Classes="g-action" Command="{Binding SignInCommand}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center">
+        <StackPanel Orientation="Horizontal" Spacing="8"><a:Icon Kind="log-in" Size="16" VerticalAlignment="Center" /><TextBlock Text="Sign in" /></StackPanel>
+      </Button>
+      <StackPanel Orientation="Horizontal" Spacing="8" HorizontalAlignment="Center">
+        <a:Icon Kind="lock" Size="14" Foreground="#8F98A0" VerticalAlignment="Center" />
+        <TextBlock Classes="g-muted small" Text="Demo account: admin / admin" VerticalAlignment="Center" />
+      </StackPanel>
+    </StackPanel>
+  </Border>
+</UserControl>

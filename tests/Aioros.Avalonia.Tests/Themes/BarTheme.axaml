@@ -1,0 +1,137 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:m="using:Aioros.Avalonia.Tests.Models">
+  <StreamGeometry x:Key="BarCheckGeometry">M13.333,4 L6,11.333 L2.667,8</StreamGeometry>
+  <ControlTheme x:Key="{x:Type MenuItem}" TargetType="MenuItem">
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="Foreground" Value="#0a0a0a" />
+    <Setter Property="Padding" Value="8,6" />
+    <Setter Property="CornerRadius" Value="4" />
+    <Setter Property="FontSize" Value="14" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Panel>
+          <Border Name="PART_LayoutRoot" Padding="{TemplateBinding Padding}" Background="{TemplateBinding Background}" CornerRadius="{TemplateBinding CornerRadius}">
+            <Grid ColumnDefinitions="Auto,*">
+              <ContentControl Name="PART_IconPresenter" Width="16" Height="16" Margin="0,0,8,0" IsVisible="False" Content="{TemplateBinding Icon}" />
+              <ContentPresenter Name="PART_HeaderPresenter" Grid.Column="1" Content="{TemplateBinding Header}" TextBlock.LineHeight="20" VerticalAlignment="Center" />
+            </Grid>
+          </Border>
+          <Path Name="PART_Check" Width="16" Height="16" Margin="7,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center"
+                Data="{StaticResource BarCheckGeometry}" Stretch="None" StrokeThickness="1.333" Stroke="{TemplateBinding Foreground}" IsVisible="False" />
+        </Panel>
+      </ControlTemplate>
+    </Setter>
+    <Style Selector="^:toggle">
+      <Setter Property="Padding" Value="32,6,8,6" />
+    </Style>
+    <Style Selector="^:checked:toggle /template/ Path#PART_Check">
+      <Setter Property="IsVisible" Value="True" />
+    </Style>
+    <Style Selector="^:selected">
+      <Setter Property="Background" Value="#f5f5f5" />
+    </Style>
+  </ControlTheme>
+  <ControlTheme x:Key="BarItem" TargetType="MenuItem">
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="Foreground" Value="#0a0a0a" />
+    <Setter Property="CornerRadius" Value="4" />
+    <Setter Property="Padding" Value="8,4" />
+    <Setter Property="FontSize" Value="14" />
+    <Setter Property="FontWeight" Value="Medium" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Panel>
+          <Border Name="PART_LayoutRoot" Background="{TemplateBinding Background}" CornerRadius="{TemplateBinding CornerRadius}" Padding="{TemplateBinding Padding}">
+            <ContentPresenter Name="PART_HeaderPresenter" Content="{TemplateBinding Header}" TextBlock.LineHeight="20" VerticalAlignment="Center" />
+          </Border>
+          <Popup Name="PART_Popup" WindowManagerAddShadowHint="False" Placement="BottomEdgeAlignedLeft" HorizontalOffset="-4" VerticalOffset="8"
+                 IsLightDismissEnabled="True" IsOpen="{TemplateBinding IsSubMenuOpen, Mode=TwoWay}">
+            <Border Background="#ffffff" BorderBrush="#e5e5e5" BorderThickness="1" CornerRadius="8" BoxShadow="0 4 6 -1 #1A000000, 0 2 4 -2 #1A000000" MinWidth="192"
+                    TextElement.FontSize="14" TextElement.FontWeight="Normal" TextElement.Foreground="#0a0a0a">
+              <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+                <ItemsPresenter Name="PART_ItemsPresenter" Margin="4" ItemsPanel="{TemplateBinding ItemsPanel}" Grid.IsSharedSizeScope="True" />
+              </ScrollViewer>
+            </Border>
+          </Popup>
+        </Panel>
+      </ControlTemplate>
+    </Setter>
+    <Style Selector="^:selected">
+      <Setter Property="Background" Value="#f5f5f5" />
+      <Setter Property="Foreground" Value="#171717" />
+    </Style>
+    <Style Selector="^:open">
+      <Setter Property="Background" Value="#f5f5f5" />
+      <Setter Property="Foreground" Value="#171717" />
+    </Style>
+    <Style Selector="^:disabled">
+      <Setter Property="Opacity" Value="0.5" />
+    </Style>
+  </ControlTheme>
+  <ControlTheme x:Key="{x:Type Menu}" TargetType="Menu">
+    <Setter Property="Background" Value="#ffffff" />
+    <Setter Property="Foreground" Value="#0a0a0a" />
+    <Setter Property="BorderBrush" Value="#e5e5e5" />
+    <Setter Property="BorderThickness" Value="1" />
+    <Setter Property="CornerRadius" Value="6" />
+    <Setter Property="Padding" Value="4,0" />
+    <Setter Property="Height" Value="36" />
+    <Setter Property="FontSize" Value="14" />
+    <Setter Property="ItemContainerTheme" Value="{StaticResource BarItem}" />
+    <Setter Property="ItemsPanel">
+      <ItemsPanelTemplate>
+        <StackPanel Orientation="Horizontal" Spacing="4" />
+      </ItemsPanelTemplate>
+    </Setter>
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}"
+                CornerRadius="{TemplateBinding CornerRadius}" Padding="{TemplateBinding Padding}" BoxShadow="0 1 2 0 #0D000000">
+          <ItemsPresenter Name="PART_ItemsPresenter" ItemsPanel="{TemplateBinding ItemsPanel}" VerticalAlignment="Center" />
+        </Border>
+      </ControlTemplate>
+    </Setter>
+  </ControlTheme>
+  <ControlTheme x:Key="FadingItem" TargetType="MenuItem">
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="Padding" Value="8,6" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Panel>
+          <Border Name="PART_LayoutRoot" Padding="{TemplateBinding Padding}" Background="{TemplateBinding Background}">
+            <ContentPresenter Name="PART_HeaderPresenter" Content="{TemplateBinding Header}" />
+          </Border>
+          <Popup Name="PART_Popup" Placement="RightEdgeAlignedTop" IsOpen="{TemplateBinding IsSubMenuOpen, Mode=TwoWay}">
+            <Border Background="#ffffff" RenderTransformOrigin="0%,0%" m:Fade.Enter="True">
+              <Border.Transitions><Transitions><DoubleTransition Property="Opacity" Duration="0:0:0.15" /></Transitions></Border.Transitions>
+              <ItemsPresenter Name="PART_ItemsPresenter" Margin="4" ItemsPanel="{TemplateBinding ItemsPanel}" />
+            </Border>
+          </Popup>
+        </Panel>
+      </ControlTemplate>
+    </Setter>
+  </ControlTheme>
+  <ControlTheme x:Key="FadingBarItem" TargetType="MenuItem">
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="Padding" Value="8,4" />
+    <Setter Property="ItemContainerTheme" Value="{StaticResource FadingItem}" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Panel>
+          <Border Name="PART_LayoutRoot" Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}">
+            <ContentPresenter Name="PART_HeaderPresenter" Content="{TemplateBinding Header}" />
+          </Border>
+          <Popup Name="PART_Popup" Placement="BottomEdgeAlignedLeft" IsOpen="{TemplateBinding IsSubMenuOpen, Mode=TwoWay}">
+            <Border Background="#ffffff" RenderTransformOrigin="0%,0%" m:Fade.Enter="True">
+              <Border.Transitions><Transitions><DoubleTransition Property="Opacity" Duration="0:0:0.15" /></Transitions></Border.Transitions>
+              <ItemsPresenter Name="PART_ItemsPresenter" Margin="4" ItemsPanel="{TemplateBinding ItemsPanel}" />
+            </Border>
+          </Popup>
+        </Panel>
+      </ControlTemplate>
+    </Setter>
+  </ControlTheme>
+  <ControlTheme x:Key="FadingBar" TargetType="Menu" BasedOn="{StaticResource {x:Type Menu}}">
+    <Setter Property="ItemContainerTheme" Value="{StaticResource FadingBarItem}" />
+  </ControlTheme>
+</ResourceDictionary>

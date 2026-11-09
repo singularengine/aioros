@@ -1,0 +1,224 @@
+<UserControl xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:a="https://aioros.dev" xmlns:m="using:Showcase.Models" x:DataType="m:MusicModel">
+  <UserControl.Styles>
+    <!-- The equalizer: five bars whose ScaleTransform.ScaleY is animated at different speeds -->
+    <Style Selector="Border.bar">
+      <Setter Property="Width" Value="5" />
+      <Setter Property="Height" Value="34" />
+      <Setter Property="CornerRadius" Value="3" />
+      <Setter Property="Background" Value="#FFFFFF" />
+      <Setter Property="VerticalAlignment" Value="Bottom" />
+      <Setter Property="RenderTransformOrigin" Value="50%,100%" />
+    </Style>
+    <Style Selector="Border.b1">
+      <Style.Animations>
+        <Animation Duration="0:0:0.8" IterationCount="Infinite" PlaybackDirection="Alternate" Easing="SineEaseInOut">
+          <KeyFrame Cue="0%"><Setter Property="ScaleTransform.ScaleY" Value="0.25" /></KeyFrame>
+          <KeyFrame Cue="100%"><Setter Property="ScaleTransform.ScaleY" Value="1" /></KeyFrame>
+        </Animation>
+      </Style.Animations>
+    </Style>
+    <Style Selector="Border.b2">
+      <Style.Animations>
+        <Animation Duration="0:0:1.1" Delay="0:0:0.15" IterationCount="Infinite" PlaybackDirection="Alternate" Easing="SineEaseInOut">
+          <KeyFrame Cue="0%"><Setter Property="ScaleTransform.ScaleY" Value="0.9" /></KeyFrame>
+          <KeyFrame Cue="100%"><Setter Property="ScaleTransform.ScaleY" Value="0.3" /></KeyFrame>
+        </Animation>
+      </Style.Animations>
+    </Style>
+    <Style Selector="Border.b3">
+      <Style.Animations>
+        <Animation Duration="0:0:0.6" Delay="0:0:0.3" IterationCount="Infinite" PlaybackDirection="Alternate" Easing="SineEaseInOut">
+          <KeyFrame Cue="0%"><Setter Property="ScaleTransform.ScaleY" Value="0.4" /></KeyFrame>
+          <KeyFrame Cue="100%"><Setter Property="ScaleTransform.ScaleY" Value="1" /></KeyFrame>
+        </Animation>
+      </Style.Animations>
+    </Style>
+    <Style Selector="Border.b4">
+      <Style.Animations>
+        <Animation Duration="0:0:0.95" Delay="0:0:0.1" IterationCount="Infinite" PlaybackDirection="Alternate" Easing="SineEaseInOut">
+          <KeyFrame Cue="0%"><Setter Property="ScaleTransform.ScaleY" Value="1" /></KeyFrame>
+          <KeyFrame Cue="100%"><Setter Property="ScaleTransform.ScaleY" Value="0.35" /></KeyFrame>
+        </Animation>
+      </Style.Animations>
+    </Style>
+    <Style Selector="Border.b5">
+      <Style.Animations>
+        <Animation Duration="0:0:0.7" Delay="0:0:0.25" IterationCount="Infinite" PlaybackDirection="Alternate" Easing="SineEaseInOut">
+          <KeyFrame Cue="0%"><Setter Property="ScaleTransform.ScaleY" Value="0.3" /></KeyFrame>
+          <KeyFrame Cue="100%"><Setter Property="ScaleTransform.ScaleY" Value="0.85" /></KeyFrame>
+        </Animation>
+      </Style.Animations>
+    </Style>
+
+    <Style Selector="Border.control">
+      <Setter Property="Width" Value="44" />
+      <Setter Property="Height" Value="44" />
+      <Setter Property="CornerRadius" Value="22" />
+      <Setter Property="Background" Value="Transparent" />
+    </Style>
+    <Style Selector="Border.control:pointerover"><Setter Property="Background" Value="#26FFFFFF" /></Style>
+    <Style Selector="Border.control a|Icon"><Setter Property="Foreground" Value="#FFFFFF" /></Style>
+    <Style Selector="Border.play">
+      <Setter Property="Width" Value="64" />
+      <Setter Property="Height" Value="64" />
+      <Setter Property="CornerRadius" Value="32" />
+      <Setter Property="Background" Value="#FFFFFF" />
+      <Setter Property="RenderTransform" Value="scale(1)" />
+      <Setter Property="Transitions">
+        <Transitions><TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.15" /></Transitions>
+      </Setter>
+    </Style>
+    <Style Selector="Border.play:pointerover"><Setter Property="RenderTransform" Value="scale(1.08)" /></Style>
+    <Style Selector="Border.play a|Icon"><Setter Property="Foreground" Value="#111111" /></Style>
+
+    <Style Selector="Border.song">
+      <Setter Property="Padding" Value="12,9" />
+      <Setter Property="CornerRadius" Value="10" />
+      <Setter Property="Background" Value="Transparent" />
+    </Style>
+    <Style Selector="Border.song:pointerover"><Setter Property="Background" Value="{DynamicResource Hover}" /></Style>
+    <Style Selector="Border.song.now"><Setter Property="Background" Value="{DynamicResource AccentSoft}" /></Style>
+    <Style Selector="Border.song.now TextBlock.title"><Setter Property="Foreground" Value="{DynamicResource Accent}" /></Style>
+
+    <Style Selector="ProgressBar.track">
+      <Setter Property="Height" Value="6" />
+      <Setter Property="MinHeight" Value="6" />
+      <Setter Property="Foreground" Value="#FFFFFF" />
+      <Setter Property="Background" Value="#40FFFFFF" />
+    </Style>
+  </UserControl.Styles>
+
+  <StackPanel Spacing="24">
+    <Grid ColumnDefinitions="3*,2*" ColumnSpacing="20" a:Web.StackBelow="900">
+      <Border CornerRadius="22" Padding="28" Background="{Binding Shade}" ClipToBounds="True" VerticalAlignment="Top">
+        <StackPanel Spacing="22">
+          <Grid ColumnDefinitions="Auto,*" ColumnSpacing="24" a:Web.StackBelow="640">
+            <Border Width="220" Height="220" CornerRadius="18" Background="{Binding Color}" a:Web.TransitionName="cover">
+              <Panel>
+                <Border CornerRadius="18">
+                  <Border.Background>
+                    <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
+                      <GradientStop Offset="0" Color="#33FFFFFF" />
+                      <GradientStop Offset="1" Color="#66000000" />
+                    </LinearGradientBrush>
+                  </Border.Background>
+                </Border>
+                <TextBlock Text="{Binding Initial}" FontSize="96" FontWeight="Bold" Foreground="#E6FFFFFF" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                <StackPanel Orientation="Horizontal" Spacing="4" Margin="18" HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="34" IsVisible="{Binding Playing}">
+                  <Border Classes="bar b1"><Border.RenderTransform><ScaleTransform /></Border.RenderTransform></Border>
+                  <Border Classes="bar b2"><Border.RenderTransform><ScaleTransform /></Border.RenderTransform></Border>
+                  <Border Classes="bar b3"><Border.RenderTransform><ScaleTransform /></Border.RenderTransform></Border>
+                  <Border Classes="bar b4"><Border.RenderTransform><ScaleTransform /></Border.RenderTransform></Border>
+                  <Border Classes="bar b5"><Border.RenderTransform><ScaleTransform /></Border.RenderTransform></Border>
+                </StackPanel>
+              </Panel>
+            </Border>
+            <StackPanel Grid.Column="1" Spacing="8" VerticalAlignment="Bottom">
+              <TextBlock Text="NOW PLAYING" FontSize="12" FontWeight="SemiBold" Foreground="#B3FFFFFF" />
+              <TextBlock Text="{Binding Song}" FontSize="36" FontWeight="Bold" Foreground="#FFFFFF" TextWrapping="Wrap" />
+              <TextBlock Foreground="#CCFFFFFF" FontSize="16">
+                <Run Text="{Binding Artist}" />
+                <Run Text=" · " />
+                <Run Text="{Binding AlbumTitle}" />
+              </TextBlock>
+            </StackPanel>
+          </Grid>
+
+          <StackPanel Spacing="6">
+            <ProgressBar Classes="track" Minimum="0" Maximum="100" Value="{Binding Progress}" />
+            <Grid ColumnDefinitions="*,Auto">
+              <TextBlock Text="{Binding Elapsed}" FontSize="12" Foreground="#B3FFFFFF" />
+              <TextBlock Grid.Column="1" Text="{Binding Length}" FontSize="12" Foreground="#B3FFFFFF" />
+            </Grid>
+          </StackPanel>
+
+          <StackPanel Orientation="Horizontal" Spacing="14" HorizontalAlignment="Center">
+            <Border Classes="control" AutomationProperties.Name="Shuffle"><a:Icon Kind="shuffle" Size="20" HorizontalAlignment="Center" VerticalAlignment="Center" /></Border>
+            <Border Classes="control" a:Web.Href="{Binding PreviousHref}" AutomationProperties.Name="Previous"><a:Icon Kind="skip-back" Size="22" HorizontalAlignment="Center" VerticalAlignment="Center" /></Border>
+            <Border Classes="play" a:Web.Href="{Binding PlayHref}" AutomationProperties.Name="Play or pause">
+              <Panel>
+                <a:Icon Kind="play" Size="26" HorizontalAlignment="Center" VerticalAlignment="Center" IsVisible="{Binding Paused}" />
+                <a:Icon Kind="pause" Size="26" HorizontalAlignment="Center" VerticalAlignment="Center" IsVisible="{Binding Playing}" />
+              </Panel>
+            </Border>
+            <Border Classes="control" a:Web.Href="{Binding NextHref}" AutomationProperties.Name="Next"><a:Icon Kind="skip-forward" Size="22" HorizontalAlignment="Center" VerticalAlignment="Center" /></Border>
+            <Border Classes="control" AutomationProperties.Name="Repeat"><a:Icon Kind="repeat" Size="20" HorizontalAlignment="Center" VerticalAlignment="Center" /></Border>
+          </StackPanel>
+
+          <Grid ColumnDefinitions="Auto,*" ColumnSpacing="12" MaxWidth="260" HorizontalAlignment="Center">
+            <a:Icon Kind="volume" Size="18" Foreground="#B3FFFFFF" VerticalAlignment="Center" />
+            <ProgressBar Grid.Column="1" Classes="track" Minimum="0" Maximum="100" Value="72" VerticalAlignment="Center" />
+          </Grid>
+        </StackPanel>
+      </Border>
+
+      <Border Grid.Column="1" Classes="card" Padding="12">
+        <StackPanel Spacing="2">
+          <TextBlock Classes="h2" Text="Up next" Margin="12,6,0,10" />
+          <ItemsControl ItemsSource="{Binding Queue}">
+            <ItemsControl.ItemTemplate>
+              <DataTemplate x:DataType="m:SongRow">
+                <Panel>
+                  <Border Classes="song now" a:Web.Href="{Binding Href}" IsVisible="{Binding Current}">
+                    <Grid ColumnDefinitions="32,*,Auto">
+                      <a:Icon Kind="volume" Size="16" Foreground="{DynamicResource Accent}" VerticalAlignment="Center" />
+                      <StackPanel Grid.Column="1" Spacing="1">
+                        <TextBlock Classes="title" Text="{Binding Title}" FontWeight="SemiBold" />
+                        <TextBlock Classes="muted small" Text="{Binding Artist}" />
+                      </StackPanel>
+                      <TextBlock Grid.Column="2" Classes="muted small" Text="{Binding Length}" VerticalAlignment="Center" />
+                    </Grid>
+                  </Border>
+                  <Border Classes="song" a:Web.Href="{Binding Href}" IsVisible="{Binding Other}">
+                    <Grid ColumnDefinitions="32,*,Auto">
+                      <TextBlock Classes="muted small" Text="{Binding Number}" VerticalAlignment="Center" />
+                      <StackPanel Grid.Column="1" Spacing="1">
+                        <TextBlock Classes="title" Text="{Binding Title}" FontWeight="SemiBold" />
+                        <TextBlock Classes="muted small" Text="{Binding Artist}" />
+                      </StackPanel>
+                      <TextBlock Grid.Column="2" Classes="muted small" Text="{Binding Length}" VerticalAlignment="Center" />
+                    </Grid>
+                  </Border>
+                </Panel>
+              </DataTemplate>
+            </ItemsControl.ItemTemplate>
+          </ItemsControl>
+        </StackPanel>
+      </Border>
+    </Grid>
+
+    <StackPanel Spacing="12">
+      <TextBlock Classes="h2" Text="Albums for you" />
+      <ItemsControl ItemsSource="{Binding Recommended}">
+        <ItemsControl.ItemsPanel><ItemsPanelTemplate><WrapPanel ItemSpacing="16" LineSpacing="16" /></ItemsPanelTemplate></ItemsControl.ItemsPanel>
+        <ItemsControl.ItemTemplate>
+          <DataTemplate x:DataType="m:AlbumCard">
+            <Border Classes="tile" Padding="14" Width="248" a:Web.Href="{Binding Href}">
+              <StackPanel Spacing="10">
+                <Border Height="140" CornerRadius="12" Background="{Binding Color}">
+                  <Border CornerRadius="12">
+                    <Border.Background>
+                      <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
+                        <GradientStop Offset="0" Color="#33FFFFFF" />
+                        <GradientStop Offset="1" Color="#66000000" />
+                      </LinearGradientBrush>
+                    </Border.Background>
+                  </Border>
+                </Border>
+                <StackPanel Spacing="2">
+                  <TextBlock Text="{Binding Title}" FontWeight="SemiBold" />
+                  <TextBlock Classes="muted small" Text="{Binding Artist}" />
+                </StackPanel>
+              </StackPanel>
+            </Border>
+          </DataTemplate>
+        </ItemsControl.ItemTemplate>
+      </ItemsControl>
+    </StackPanel>
+
+    <Expander Classes="source" Header="View the XAML of this page">
+      <Border Classes="code"><SelectableTextBlock Classes="source" Text="{Binding Xaml}" /></Border>
+    </Expander>
+  </StackPanel>
+</UserControl>

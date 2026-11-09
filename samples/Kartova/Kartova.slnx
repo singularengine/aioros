@@ -1,0 +1,15 @@
+<Solution>
+  <Project Path="Kartova/Kartova.csproj" />
+  <Project Path="Kartova.Core/Kartova.Core.csproj" />
+  <Folder Name="/Aioros/">
+    <Project Path="../../src/Adapters/Aioros.Avalonia/Aioros.Avalonia.csproj" />
+    <Project Path="../../src/Aioros.Abstractions/Aioros.Abstractions.csproj" />
+    <Project Path="../../src/Aioros.Generators/Aioros.Generators.csproj" />
+    <Project Path="../../src/Aioros.Markup/Aioros.Markup.csproj" />
+    <Project Path="../../src/Aioros.Routing/Aioros.Routing.csproj" />
+    <Project Path="../../src/Aioros.Runtime/Aioros.Runtime.csproj" />
+    <Project Path="../../src/Aioros/Aioros.csproj" />
+    <Project Path="../../src/Targets/Aioros.Targets.Desktop/Aioros.Targets.Desktop.csproj" />
+    <Project Path="../../src/Targets/Aioros.Targets.Ssr/Aioros.Targets.Ssr.csproj" />
+  </Folder>
+</Solution>
